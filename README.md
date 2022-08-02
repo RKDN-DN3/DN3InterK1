@@ -18,8 +18,8 @@ TODO: Guide users through getting your code up and running on their own system. 
 TODO: Describe and show how to build your code and run the tests. 
 
 # 5. Create Brand
-New feature: /feature/ID_task
-Fixbug: /fixbug/ID_task
+1.	New feature: /feature/ID_task
+2.	Fixbug: /fixbug/ID_task
 
 # 6. Format PR
 Format Pull request sample below
