@@ -1,6 +1,6 @@
 ﻿namespace Quiz.Entities
 {
-    public class Question:BaseEntity
+    public class Question : BaseEntity
     {
 
     }

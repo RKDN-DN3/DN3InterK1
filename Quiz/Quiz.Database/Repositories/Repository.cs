@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Quiz.Database.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Quiz.Database.Repositories
 {
@@ -38,13 +33,13 @@ namespace Quiz.Database.Repositories
         public IEnumerable<T> GetAll(Expression<Func<T, bool>>? predicate = null, string? includeProperties = null)
         {
             IQueryable<T> query = _dbSet;
-            if(predicate != null)
+            if (predicate != null)
             {
                 query = query.Where(predicate);
             }
-            if(includeProperties != null)
+            if (includeProperties != null)
             {
-                foreach(var property in includeProperties.Split(new char[] {','}, StringSplitOptions.RemoveEmptyEntries))
+                foreach (var property in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     query = query.Include(property);
                 }
@@ -56,7 +51,7 @@ namespace Quiz.Database.Repositories
         {
             IQueryable<T> query = _dbSet;
             query = query.Where(predicate);
-            
+
             if (includeProperties != null)
             {
                 foreach (var property in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))

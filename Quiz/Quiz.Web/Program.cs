@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Quiz.Database.Data;
+using Quiz.Database.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +11,7 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("QuizConnect"));
 });
-
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
