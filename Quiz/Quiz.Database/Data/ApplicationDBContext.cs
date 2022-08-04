@@ -13,6 +13,6 @@ namespace Quiz.Database.Data
         }
 
         public DbSet<Accounts> Accounts { get; set; }
-        public DbSet<Questions> Questions { get; set; }
+        public DbSet<Question> Questions { get; set; }
     }
 }
