@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Quiz.Entities
 {
-    public class Questions : BaseEntity
+    public class Question:BaseEntity
     {
 
         public string Content { get; set; }
