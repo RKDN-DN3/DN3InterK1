@@ -68,6 +68,23 @@ namespace Quiz.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Question_Banks",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    IsDelete = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserCreate = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserUpdate = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Question_Banks", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Questions",
                 columns: table => new
                 {
@@ -248,6 +265,9 @@ namespace Quiz.Database.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Question_Banks");
 
             migrationBuilder.DropTable(
                 name: "Questions");
