@@ -18,7 +18,7 @@ namespace Quiz.Web.Models
                 }
 
                 context.Questions.AddRange(
-                    new Entities.Questions
+                    new Entities.Question
                     {
                         Id = Guid.NewGuid(),
                         Content = "Kích thước của kiểu Decimal là ?",
@@ -26,13 +26,13 @@ namespace Quiz.Web.Models
                         Type = "Lập trình C#",
                         Explaint = "Có thể nghiên cứu trên mạng",
                         IsDelete = "0",
-                        
+                        ImageUrl = ""
                         //CreateDate = DateTime.Now,
                         //Id = Guid.NewGuid(),
                         //UserCreate = Guid.NewGuid()
                     },
 
-                    new Entities.Questions
+                    new Entities.Question
                     {
                         Id = Guid.NewGuid(),
                         Content = "Mô hình MVC, đâu là tầng tương tác với user ?",
@@ -40,13 +40,13 @@ namespace Quiz.Web.Models
                         Type = "Lập trình Asp.net",
                         Explaint = "Có thể nghiên cứu trên mạng",
                         IsDelete = "0",
-
+                        ImageUrl = ""
                         //CreateDate = DateTime.Now,
                         //Id = Guid.NewGuid(),
                         //UserCreate = Guid.NewGuid()
                     },
 
-                    new Entities.Questions
+                    new Entities.Question
                     {
                         Id = Guid.NewGuid(),
                         Content = "25*4 = ",
@@ -54,13 +54,13 @@ namespace Quiz.Web.Models
                         Type = "Toán logic",
                         Explaint = "Có thể nghiên cứu trên mạng",
                         IsDelete = "0",
-                        
+                        ImageUrl = ""
                         //CreateDate = DateTime.Now,
                         //Id = Guid.NewGuid(),
                         //UserCreate = Guid.NewGuid()
                     },
 
-                    new Entities.Questions
+                    new Entities.Question
                     {
                         Id = Guid.NewGuid(),
                         Content = "Thời gian Intern vào Rikkei là ?",
@@ -68,6 +68,7 @@ namespace Quiz.Web.Models
                         Type = "Kiến thức chung",
                         Explaint = "Có thể nghiên cứu trên mạng",
                         IsDelete = "0",
+                        ImageUrl = ""
                         //Id_ = Guid.NewGuid()
                         //CreateDate = DateTime.Now,
                         //Id = Guid.NewGuid(),

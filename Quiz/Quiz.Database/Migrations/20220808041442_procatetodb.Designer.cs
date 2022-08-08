@@ -12,7 +12,7 @@ using Quiz.Database.Data;
 namespace Quiz.Database.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20220803233105_procatetodb")]
+    [Migration("20220808041442_procatetodb")]
     partial class procatetodb
     {
         /// <inheritdoc />
@@ -255,14 +255,39 @@ namespace Quiz.Database.Migrations
                     b.ToTable("Accounts");
                 });
 
-            modelBuilder.Entity("Quiz.Entities.Questions", b =>
+            modelBuilder.Entity("Quiz.Entities.Question", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Explaint")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IsDelete")
+                        .IsRequired()
+                        .HasMaxLength(1)
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("Level")
+                        .IsRequired()
+                        .HasMaxLength(1)
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("Type")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");
