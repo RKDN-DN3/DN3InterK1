@@ -9,6 +9,7 @@ namespace Quiz.Entities
         [EmailAddress]
         public string Email_User { get; set; }
 
+
         [Required]
         [StringLength(100)]
         [Display(Name = "Password")]
@@ -24,6 +25,7 @@ namespace Quiz.Entities
         [StringLength(100)]
         [Display(Name = "Name Of User")]
         public string Name { get; set; }
+
 
         [DataType(DataType.Date)]
         [Display(Name = "Date Of Birth")]

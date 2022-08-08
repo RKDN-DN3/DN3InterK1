@@ -30,7 +30,7 @@ namespace Quiz.Web.Models
                         CreateDate = DateTime.Now,
                         UserCreate = Guid.NewGuid(),
                         UpdateDate = DateTime.Now,
-                        UserUpdate = Guid.NewGuid(),
+                        UserUpdate = Guid.NewGuid()
                     },
                     new Entities.Accounts
                     {
@@ -44,8 +44,7 @@ namespace Quiz.Web.Models
                         CreateDate = DateTime.Now,
                         UserCreate = Guid.NewGuid(),
                         UpdateDate = DateTime.Now,
-                        UserUpdate = Guid.NewGuid(),
-
+                        UserUpdate = Guid.NewGuid()
                     },
                     new Entities.Accounts
                     {
@@ -59,7 +58,7 @@ namespace Quiz.Web.Models
                         CreateDate = DateTime.Now,
                         UserCreate = Guid.NewGuid(),
                         UpdateDate = DateTime.Now,
-                        UserUpdate = Guid.NewGuid(),
+                        UserUpdate = Guid.NewGuid()
                     }
                     );
                 context.SaveChanges();
