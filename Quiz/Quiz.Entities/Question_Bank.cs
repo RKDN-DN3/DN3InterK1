@@ -20,6 +20,7 @@ namespace Quiz.Entities
         public string Name { get; set; }
 
 
+
         [Required]
         [StringLength(1)]
         [Display(Name = "Flag IsDelete")]
