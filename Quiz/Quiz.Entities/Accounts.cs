@@ -4,6 +4,7 @@ namespace Quiz.Entities
 {
     public class Accounts : BaseEntity
     {
+        [Key]
         [StringLength(100)]
         [EmailAddress]
         public string Email_User { get; set; }
@@ -38,6 +39,5 @@ namespace Quiz.Entities
         [StringLength(1)]
         [Display(Name = "Flag IsDelete")]
         public string IsDelete { get; set; }
-
     }
 }
