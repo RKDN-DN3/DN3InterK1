@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Quiz.Database.Data;
-using Quiz.Entities;
 
 namespace Quiz.Web.Models
 {
@@ -12,7 +11,7 @@ namespace Quiz.Web.Models
             using (var context = new ApplicationDBContext(serviceProvider.GetRequiredService<
                 DbContextOptions<ApplicationDBContext>>()))
             {
-                if(context.Questions.Any())
+                if (context.Questions.Any())
                 {
                     return;
                 }

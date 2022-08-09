@@ -4,7 +4,7 @@ namespace Quiz.Entities
 {
     public class Accounts : BaseEntity
     {
-        
+
         [StringLength(100)]
         [EmailAddress]
         public string Email_User { get; set; }

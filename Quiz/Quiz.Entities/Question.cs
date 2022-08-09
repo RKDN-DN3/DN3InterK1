@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Quiz.Entities
 {
-    public class Question:BaseEntity
+    public class Question : BaseEntity
     {
 
         public string Content { get; set; }
