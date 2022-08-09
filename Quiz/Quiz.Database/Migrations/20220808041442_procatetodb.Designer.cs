@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Quiz.Database.Data;
 
@@ -11,9 +12,15 @@ using Quiz.Database.Data;
 namespace Quiz.Database.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+<<<<<<<< HEAD:Quiz/Quiz.Database/Migrations/20220808064103_procatetodb.Designer.cs
+    [Migration("20220808064103_procatetodb")]
+========
+    [Migration("20220808041442_procatetodb")]
+>>>>>>>> 23c92c7560284ada983ca7c6fe1576831a3feaa3:Quiz/Quiz.Database/Migrations/20220808041442_procatetodb.Designer.cs
+    partial class procatetodb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -250,7 +257,18 @@ namespace Quiz.Database.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");
@@ -263,10 +281,10 @@ namespace Quiz.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Examinations");
+                    b.ToTable("Accounts");
                 });
 
-            modelBuilder.Entity("Quiz.Entities.Questions", b =>
+            modelBuilder.Entity("Quiz.Entities.Question", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
