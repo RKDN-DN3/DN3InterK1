@@ -25,5 +25,4 @@
     <Folder Include="Areas\Member\Controllers\" />
     <Folder Include="Areas\Member\Views\" />
   </ItemGroup>
-
 </Project>
