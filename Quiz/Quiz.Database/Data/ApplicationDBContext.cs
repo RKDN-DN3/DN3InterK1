@@ -15,6 +15,6 @@ namespace Quiz.Database.Data
         public DbSet<Accounts> Accounts { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Question_Bank> Question_Banks { get; set; }
-
+        public DbSet<Examination> Examinations { get; set; }
     }
 }

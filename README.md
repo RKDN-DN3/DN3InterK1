@@ -18,6 +18,7 @@ TODO: Guide users through getting your code up and running on their own system. 
 TODO: Describe and show how to build your code and run the tests. 
 
 # 5. Create Brand
+Clone from "development" brand and creat new brand from syntax below.
 1.	New feature: /feature/ID_task
 2.	Fixbug: /fixbug/ID_task
 

@@ -9,6 +9,8 @@ namespace Quiz.Entities
 {
     public class Question_Bank : BaseEntity
     {
+        [Key]
+        public Guid Id { get; set; }
 
         [Required]
         [StringLength(100)]

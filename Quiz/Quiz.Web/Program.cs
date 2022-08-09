@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Quiz.Database.Data;
 using Quiz.Database.Migrations;
+using Quiz.Database.Models;
+using Quiz.Database.Repositories;
+using Quiz.Web.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,14 +12,20 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("QuizConnect"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("QuizConnect"), b => b.MigrationsAssembly("Quiz.Database"));
 });
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
+
+    //SeedData__Account.Initialize(services);
+    SeedData_Question.Initialize(services);
+    SeedData_Examination.Initialize(services);
     SeedData_Question_Bank.Initialize(services);
 }
 

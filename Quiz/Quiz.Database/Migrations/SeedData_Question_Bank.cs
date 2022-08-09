@@ -46,7 +46,6 @@ namespace Quiz.Database.Migrations
                         Name = "Bo cau hoi Sinh hoc",
                         IsDelete = "0"
                     }
-
                 );
                 context.SaveChanges();
 
