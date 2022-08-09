@@ -14,6 +14,13 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 });
 
 var app = builder.Build();
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    SeedData__Account.Initialize(services);
+}
+
 
 using (var scope = app.Services.CreateScope())
 {
