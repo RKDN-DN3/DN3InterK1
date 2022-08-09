@@ -4,6 +4,8 @@ namespace Quiz.Entities
 {
     public class Accounts : BaseEntity
     {
+        [Key]
+        public Guid Id { get; set; }
 
         [StringLength(100)]
         [EmailAddress]

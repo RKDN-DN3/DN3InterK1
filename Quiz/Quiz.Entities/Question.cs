@@ -4,7 +4,8 @@ namespace Quiz.Entities
 {
     public class Question : BaseEntity
     {
-
+        [Key]
+        public Guid Id { get; set; }
         public string Content { get; set; }
 
         [Display(Name = "Image Of Question")]
