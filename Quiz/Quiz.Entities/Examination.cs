@@ -4,6 +4,8 @@ namespace Quiz.Entities
 {
     public class Examination : BaseEntity
     {
+        [Key]
+        public Guid Id { get; set; }
 
         [Required]
         [StringLength(100)]
