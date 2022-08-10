@@ -26,9 +26,6 @@ namespace Quiz.Web.Models
                         Explaint = "Có thể nghiên cứu trên mạng",
                         IsDelete = "0",
                         ImageUrl = ""
-                        //CreateDate = DateTime.Now,
-                        //Id = Guid.NewGuid(),
-                        //UserCreate = Guid.NewGuid()
                     },
 
                     new Entities.Question
@@ -40,9 +37,6 @@ namespace Quiz.Web.Models
                         Explaint = "Có thể nghiên cứu trên mạng",
                         IsDelete = "0",
                         ImageUrl = ""
-                        //CreateDate = DateTime.Now,
-                        //Id = Guid.NewGuid(),
-                        //UserCreate = Guid.NewGuid()
                     },
 
                     new Entities.Question
@@ -54,9 +48,6 @@ namespace Quiz.Web.Models
                         Explaint = "Có thể nghiên cứu trên mạng",
                         IsDelete = "0",
                         ImageUrl = ""
-                        //CreateDate = DateTime.Now,
-                        //Id = Guid.NewGuid(),
-                        //UserCreate = Guid.NewGuid()
                     },
 
                     new Entities.Question
@@ -68,10 +59,6 @@ namespace Quiz.Web.Models
                         Explaint = "Có thể nghiên cứu trên mạng",
                         IsDelete = "0",
                         ImageUrl = ""
-                        //Id_ = Guid.NewGuid()
-                        //CreateDate = DateTime.Now,
-                        //Id = Guid.NewGuid(),
-                        //UserCreate = Guid.NewGuid()
                     }
                 );
                 context.SaveChanges();
