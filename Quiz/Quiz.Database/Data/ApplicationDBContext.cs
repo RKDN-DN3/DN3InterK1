@@ -21,15 +21,41 @@ namespace Quiz.Database.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             base.OnModelCreating(modelBuilder);
 
+            //Cau hinh mapping Table Examination_Detail - Table Examination
             modelBuilder.Entity<Examination_Detail>().HasKey(c => new { c.Id_Exam, c.Id_Question_Bank});
             modelBuilder.Entity<Examination>()
                 .HasMany(p => p.Examination_Details)
                 .WithOne(p => p.Examination)
                 .HasForeignKey(c => c.Id_Exam);
 
-            modelBuilder.Entity<Answer>().HasKey(c => new { c.SEQ, c.ID_Question });
+            //Cau hinh mapping Table Answer - Table Question
+            modelBuilder.Entity<Answer>().HasKey(c => new { c.SEQ, c.Id_Question });
+            modelBuilder.Entity<Question>()
+                .HasMany(p => p.Answers)
+                .WithOne(p => p.Question)
+                .HasForeignKey(c => c.Id_Question);
+
+            //Cau hinh Table List_Question_In_Exam
+            modelBuilder.Entity<List_Question_In_Exam>().HasKey(c => new { c.Id_Exam, c.Id_Question});
+
+            modelBuilder.Entity<List_Question_In_Exam>()
+                .HasOne(p => p.Examination)
+                .WithMany(p => p.List_Question_In_Exams)
+                .HasForeignKey(p => p.Id_Exam);
+
+            modelBuilder.Entity<List_Question_In_Exam>()
+                .HasOne(p => p.Question)
+                .WithMany(p => p.List_Question_In_Exams)
+                .HasForeignKey(p => p.Id_Question);
+
+            //Cau hinh Table Question
+            modelBuilder.Entity<Question_Bank>()
+                .HasMany(p => p.Questions)
+                .WithOne(p => p.Question_Bank)
+                .HasForeignKey(c => c.Id_Question_Bank);
         }
     }
 }

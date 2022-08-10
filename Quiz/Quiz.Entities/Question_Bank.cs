@@ -9,6 +9,11 @@ namespace Quiz.Entities
 {
     public class Question_Bank : BaseEntity
     {
+        public Question_Bank()
+        {
+            this.Questions = new HashSet<Question>();
+        }
+
         [Key]
         public Guid Id { get; set; }
 
@@ -22,5 +27,7 @@ namespace Quiz.Entities
         [StringLength(1)]
         [Display(Name = "Flag IsDelete")]
         public string IsDelete { get; set; }
+
+        public virtual ICollection<Question> Questions { get; set; }
     }
 }

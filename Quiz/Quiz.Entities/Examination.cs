@@ -49,6 +49,8 @@ namespace Quiz.Entities
         public string IsDelete { get; set; }
 
         public virtual ICollection<Examination_Detail> Examination_Details { get; set; }
+        public virtual ICollection<List_Question_In_Exam> List_Question_In_Exams { get; set; }
+
 
     }
 }
