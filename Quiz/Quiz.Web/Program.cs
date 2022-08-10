@@ -23,7 +23,7 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
 
-    //SeedData__Account.Initialize(services);
+    SeedData__Account.Initialize(services);
     SeedData_Question.Initialize(services);
     SeedData_Examination.Initialize(services);
     SeedData_Question_Bank.Initialize(services);
