@@ -4,6 +4,11 @@ namespace Quiz.Entities
 {
     public class Examination : BaseEntity
     {
+        public Examination()
+        {
+            this.Examination_Details = new HashSet<Examination_Detail>();
+        }
+
         [Key]
         public Guid Id { get; set; }
 
@@ -42,6 +47,8 @@ namespace Quiz.Entities
         [StringLength(1)]
         [Display(Name = "Flag Delete")]
         public string IsDelete { get; set; }
+
+        public virtual ICollection<Examination_Detail> Examination_Details { get; set; }
 
     }
 }
