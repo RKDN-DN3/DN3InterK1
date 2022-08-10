@@ -1,10 +1,9 @@
-﻿namespace Quiz.Entities
-{
-    public class Question:BaseEntity
-    {
-<<<<<<< HEAD
+using System.ComponentModel.DataAnnotations;
 
-=======
+namespace Quiz.Entities
+{
+    public class Question : BaseEntity
+    {
         [Key]
         public Guid Id { get; set; }
         public string Content { get; set; }
@@ -27,6 +26,5 @@
         [StringLength(1)]
         [Display(Name = "Flag Delete")]
         public string IsDelete { get; set; }
->>>>>>> f94785ee11c8189997317e72cbf10a5a4f3f033d
     }
 }
