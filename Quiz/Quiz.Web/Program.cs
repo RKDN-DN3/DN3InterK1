@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Quiz.Database.Data;
+using Quiz.Database.Migrations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,12 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 });
 
 var app = builder.Build();
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    SeedData_Answer.Initialize(services);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

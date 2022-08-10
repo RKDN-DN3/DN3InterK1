@@ -4,23 +4,40 @@ namespace Quiz.Entities
 {
     public class Accounts : BaseEntity
     {
-<<<<<<< HEAD
-=======
         [Key]
-        public Guid Id { get; set; }
-
         [StringLength(100)]
         [EmailAddress]
         public string Email_User { get; set; }
 
-
->>>>>>> f94785ee11c8189997317e72cbf10a5a4f3f033d
         [Required]
         public string Name { get; set; }
 
+
+        [Required]
+        [StringLength(1)]
+        [Display(Name = "Authority")]
+        public string Authority { get; set; }
+
         [Required]
         [StringLength(100)]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+
+        [DataType(DataType.Date)]
+        [Display(Name = "Date Of Birth")]
+        public string DOB { get; set; }
+
+
+        [StringLength(100)]
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; }
+
+
+        [Required]
+        [StringLength(1)]
+        [Display(Name = "Flag IsDelete")]
+        public string IsDelete { get; set; }
+
     }
 }

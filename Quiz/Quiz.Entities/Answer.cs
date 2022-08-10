@@ -11,13 +11,12 @@ namespace Quiz.Entities
     public class Answer : BaseEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
         [Column(Order = 0)]
         public int SEQ { get; set; }
 
 
         
-        [Key]
+        
         [Column(Order = 1)]
         [Display(Name = "ID Of Question ")]
         [StringLength(10)]
