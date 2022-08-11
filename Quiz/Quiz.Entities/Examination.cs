@@ -50,5 +50,7 @@ namespace Quiz.Entities
 
         public virtual ICollection<Examination_Detail> Examination_Details { get; set; }
 
+        public virtual ICollection<Exam_History> Exam_Historys { get; set; }
+
     }
 }

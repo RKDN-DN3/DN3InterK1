@@ -4,12 +4,12 @@ namespace Quiz.Entities
 {
     public class Accounts : BaseEntity
     {
-        [Key]
-        public Guid Id { get; set; }
-
+        [Key]       
         [StringLength(100)]
         [EmailAddress]
+
         public string Email_User { get; set; }
+       
 
 
         [Required]
@@ -43,5 +43,7 @@ namespace Quiz.Entities
         [StringLength(1)]
         [Display(Name = "Flag IsDelete")]
         public string IsDelete { get; set; }
+        
+        public virtual ICollection<Exam_History> Exam_Historys { get; set; }
     }
 }
