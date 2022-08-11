@@ -11,15 +11,9 @@ namespace Quiz.Entities
     public class Answer : BaseEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column(Order = 0)]
         public int SEQ { get; set; }
 
-
-        [Column(Order = 1)]
-        [Display(Name = "ID Of Question ")]
-        [StringLength(10)]
-        public string ID_Question { get; set; }
-
+        public Guid Id_Question { get; set; }
 
         [Required]
         [StringLength(1)]
@@ -35,6 +29,8 @@ namespace Quiz.Entities
         [StringLength(1)]
         [Display(Name = "Flag IsDelete")]
         public string IsDelete { get; set; }
+
+        public virtual Question Question { get; set; }
 
     }
 }

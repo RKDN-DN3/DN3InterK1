@@ -25,28 +25,28 @@ namespace Quiz.Database.Migrations
                 context.Answers.AddRange(
                     new Entities.Answer
                     {
-                        ID_Question = "1",
+                        Id_Question = Guid.NewGuid(),
                         IsCorrect = "1",
                         Content = "1234",
                         IsDelete = "0",
                     },
                     new Entities.Answer
                     {
-                        ID_Question = "1",
+                        Id_Question = Guid.NewGuid(),
                         IsCorrect = "0",
                         Content = "23894",
                         IsDelete = "0",
                     },
                     new Entities.Answer
                     {
-                        ID_Question = "2",
+                        Id_Question = Guid.NewGuid(),
                         IsCorrect = "1",
                         Content = "abcd",
                         IsDelete = "0",
                     },
                     new Entities.Answer
                     {
-                        ID_Question = "2",
+                        Id_Question = Guid.NewGuid(),
                         IsCorrect = "1",
                         Content = "123",
                         IsDelete = "0",
