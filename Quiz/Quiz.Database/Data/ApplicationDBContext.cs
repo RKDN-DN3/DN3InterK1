@@ -27,21 +27,21 @@ namespace Quiz.Database.Data
 
             base.OnModelCreating(modelBuilder);
 
-            //Cau hinh mapping Table Examination_Detail - Table Examination
+            //Code mapping Table Examination_Detail - Table Examination
             modelBuilder.Entity<Examination_Detail>().HasKey(c => new { c.Id_Exam, c.Id_Question_Bank});
             modelBuilder.Entity<Examination>()
                 .HasMany(p => p.Examination_Details)
                 .WithOne(p => p.Examination)
                 .HasForeignKey(c => c.Id_Exam);
 
-            //Cau hinh mapping Table Answer - Table Question
+            //Code mapping Table Answer - Table Question
             modelBuilder.Entity<Answer>().HasKey(c => new { c.SEQ, c.Id_Question });
             modelBuilder.Entity<Question>()
                 .HasMany(p => p.Answers)
                 .WithOne(p => p.Question)
                 .HasForeignKey(c => c.Id_Question);
 
-            //Cau hinh Table List_Question_In_Exam
+            //Code Table List_Question_In_Exam - Mapping Table Examination with Question by table List_Question_In_Exam
             modelBuilder.Entity<List_Question_In_Exam>().HasKey(c => new { c.Id_Exam, c.Id_Question});
 
             modelBuilder.Entity<List_Question_In_Exam>()
@@ -54,16 +54,15 @@ namespace Quiz.Database.Data
                 .WithMany(p => p.List_Question_In_Exams)
                 .HasForeignKey(p => p.Id_Question);
 
-            //Cau hinh Table Question
+            //Code Mapping Table Question - Question Bank
             modelBuilder.Entity<Question_Bank>()
                 .HasMany(p => p.Questions)
                 .WithOne(p => p.Question_Bank)
                 .HasForeignKey(c => c.Id_Question_Bank);
-            
 
 
 
-            //cau hinh table Exam_History
+            //Code Table Exam_History - Mapping Table Accounts with Examinations by table Exam_History
             modelBuilder.Entity<Exam_History>().HasKey(c => new { c.ID_Exam, c.Email_User, c.DateDoExam });
             modelBuilder.Entity<Exam_History>()
                 .HasOne(p => p.Accounts)
@@ -74,7 +73,7 @@ namespace Quiz.Database.Data
                 .WithMany(p => p.Exam_Historys)
                 .HasForeignKey(c => c.ID_Exam);
 
-            //cau hinh table Exam_History_Detail - TABLE Exam History
+            //Code table Exam_History_Detail - Mapping table Exam_History_Detail with Table Exam_History
             modelBuilder.Entity<Exam_History_Detail>().HasKey(c => new { c.ID_Exam, c.Email_User, c.Date_Do_Exam, c.ID_Question });
             modelBuilder.Entity<Exam_History>()
                 .HasMany(p => p.Exam_History_Details)
