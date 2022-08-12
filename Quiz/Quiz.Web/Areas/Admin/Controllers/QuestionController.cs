@@ -21,7 +21,7 @@ namespace Quiz.Web.Controllers
         public IActionResult Index()
         {
             QuestionsVM questionsVM = new QuestionsVM();
-            questionsVM.questions = _unitoWork.Question.GetAll();
+            questionsVM.questions = _unitoWork.Question.GetAll(includeProperties: "Question_Bank");
             return View(questionsVM);
         }
 
