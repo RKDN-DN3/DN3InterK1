@@ -8,6 +8,7 @@ namespace Quiz.Entities
         {
             this.Answers = new HashSet<Answer>();
         }
+
         [Key]
         public Guid Id { get; set; }
 
@@ -17,16 +18,14 @@ namespace Quiz.Entities
         [Display(Name = "Image Of Question")]
         public string ImageUrl { get; set; }
 
-
         [Required]
         [StringLength(1)]
         public string Level { get; set; }
 
-
         [StringLength(100)]
         public string? Type { get; set; }
-        public string? Explaint { get; set; }
 
+        public string? Explaint { get; set; }
 
         [Required]
         [StringLength(1)]

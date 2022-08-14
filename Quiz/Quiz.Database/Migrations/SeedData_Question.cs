@@ -62,7 +62,6 @@ namespace Quiz.Web.Models
                     }
                 );
                 context.SaveChanges();
-
             }
         }
     }

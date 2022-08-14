@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Quiz.Entities
+﻿namespace Quiz.Entities
 {
     public class BaseEntity
     {

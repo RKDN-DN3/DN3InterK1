@@ -1,8 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Quiz.Database.Data;
-
-namespace Quiz.Database.Migrations
+﻿namespace Quiz.Database.Migrations
 {
     public class SeedData_List_Question_In_Exam
     {

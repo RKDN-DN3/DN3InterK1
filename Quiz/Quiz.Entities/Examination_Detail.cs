@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Quiz.Entities
 {
@@ -11,13 +6,10 @@ namespace Quiz.Entities
     {
         public Guid Id_Exam { get; set; }
 
-
         public Guid Id_Question_Bank { get; set; }
-
 
         [Required]
         public int Count { get; set; }
-
 
         [Required]
         [StringLength(1)]

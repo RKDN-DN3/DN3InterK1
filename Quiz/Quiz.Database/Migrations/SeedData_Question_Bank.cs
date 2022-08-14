@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Quiz.Database.Data;
-using Quiz.Entities;
-
 
 namespace Quiz.Database.Migrations
 {
@@ -48,9 +46,7 @@ namespace Quiz.Database.Migrations
                     }
                 );
                 context.SaveChanges();
-
             }
         }
     }
 }
-

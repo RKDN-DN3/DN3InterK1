@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Quiz.Database.Data;
 
-
 namespace Quiz.Database.Models
 {
     public class SeedData_Examination
@@ -55,9 +54,7 @@ namespace Quiz.Database.Models
                     }
                 );
                 context.SaveChanges();
-
             }
         }
     }
 }
-

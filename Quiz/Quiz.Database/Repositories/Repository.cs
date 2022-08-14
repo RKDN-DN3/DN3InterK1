@@ -8,11 +8,11 @@ namespace Quiz.Database.Repositories
     {
         private readonly ApplicationDBContext _context;
         private DbSet<T> _dbSet;
+
         public Repository(ApplicationDBContext context)
         {
             _context = context;
             _dbSet = _context.Set<T>();
-
         }
 
         public void Add(T entity)
