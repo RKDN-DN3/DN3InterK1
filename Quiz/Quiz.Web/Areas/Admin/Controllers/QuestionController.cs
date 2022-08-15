@@ -26,6 +26,14 @@ namespace Quiz.Web.Controllers
         }
 
         [HttpGet]
+        public IActionResult Create()
+        {
+            QuestionsVM vM = new QuestionsVM();
+            vM.question_Banks = _unitoWork.Question_Bank.GetAll();
+            return View(vM);
+        }
+
+        [HttpGet]
         public IActionResult UpSert(Guid? guid)
         {
             QuestionsVM vM = new QuestionsVM();
