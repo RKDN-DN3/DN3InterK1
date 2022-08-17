@@ -1,31 +1,62 @@
 ﻿@model Quiz.Database.ViewModels.QuestionsVM
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="~/StaticFiles/css/site.css" asp-append-version="true" />
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+
+<h1>List Question</h1>
 
 <a class="btn btn-link" asp-action="Create">Create</a>
 <table class="table table-hover">
     <thead>
         <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">HA</th>
+            <th scope="col">No.</th>
+            <th scope="col">Content</th>
+            <th scope="col">Image of question</th>
+            <th scope="col">Question Bank</th>
+            <th scope="col">Level</th>
+            <th scope="col">Type</th>
+            <th scope="col">Explaint</th>
+            <th scope="col">Date Create</th>
+            <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.questions) {
-        <tr>
-            <td>@item.Id</td>
-            <td>@item.UserCreate</td>
+
+        @{
+            string Level(String a)
+            {
+                return (a == "0") ? "Easy" : ((a == "1") ? "Normal" : "Difficult");
+            }
+            string ContentLimitLength(string a)
+            {
+                if(a != null)
+                    return (a.Length >= 50) ? (a.Substring(0,49)+"...") : a;
+                return "";
+            }
+            int i = 0;
+        @foreach (var item in Model.questions) {
+        i++;
+        <tr style="">
+            <td>@i</td>
+            <td>@ContentLimitLength(@item.Content)</td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                <img src="@item.ImageUrl" height="80" width="80"   
+                     asp-append-version="true">
+            </td>
+            <td>@item.Question_Bank.Name</td>
+            <td>@Level(item.Level)</td>
+            <td>@item.Type</td>
+            <td>@item.Explaint</td>
+            <td>@item.CreateDate</td>
+            <td>
+            <a class="bi bi-pencil-square" href="/Admin/Question/Edit"> |</a>
+            <a class="bi bi-trash" href=""></a>
             </td>
         </tr>
-}
+        }
+    }
     </tbody>
-</table>

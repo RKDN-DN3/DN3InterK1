@@ -35,3 +35,7 @@ body {
 .form-group-select {
     display: grid
 }
+
+.bi-pencil-square {
+    text-decoration: none;
+}
