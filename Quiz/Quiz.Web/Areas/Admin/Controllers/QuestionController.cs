@@ -86,17 +86,28 @@ namespace Quiz.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet]
-        public IActionResult Delete(Guid? guid)
+        [HttpGet("{id:guid}")]
+        public IActionResult Delete(Guid? id)
         {
-            if (!guid.HasValue)
+            QuestionsVM vM = new QuestionsVM();
+            vM.questions = _unitoWork.Question.GetAll(includeProperties: "Question_Bank");
+
+            if (!id.HasValue)
+            //if (guid == null)
             {
                 return NotFound();
             }
-            var question = _unitoWork.Question.GetT(x=> x.Id == guid.Value);
-            if(question != null)
+            vM.question = _unitoWork.Question.GetT(x => x.Id == id.Value);
+            foreach (var item in vM.questions)
             {
-                return View(question);
+                if (vM.question.Id_Question_Bank == item.Id_Question_Bank)
+                {
+                    vM.question.Question_Bank.Name = item.Question_Bank.Name;
+                }
+            }
+            if (vM.question != null)
+            {
+                return View(vM);
             }
             else
             {
@@ -104,15 +115,16 @@ namespace Quiz.Web.Controllers
             }
         }
 
-        [HttpPost,ActionName("Delete")]
-        public IActionResult DeleteData(Guid? guid)
+        [HttpPost("{id:guid}"), ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteData(Guid? id)
         {
-            var question = _unitoWork.Question.GetT(x => x.Id == guid.Value);
+            var question = _unitoWork.Question.GetT(x => x.Id == id.Value);
             if (question == null)
             {
                 return NotFound();
             }
-            
+
             _unitoWork.Question.Delete(question);
             _unitoWork.Save();
             TempData["success"] = "Question delete done!";

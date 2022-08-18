@@ -39,3 +39,9 @@ body {
 .bi-pencil-square {
     text-decoration: none;
 }
+
+
+
+.table-hover > tbody > tr > td{
+    cursor:pointer; 
+}
