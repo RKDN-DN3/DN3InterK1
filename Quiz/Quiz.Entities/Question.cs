@@ -12,10 +12,10 @@ namespace Quiz.Entities
         public Guid Id { get; set; }
 
         public Guid Id_Question_Bank { get; set; }
-        public string Content { get; set; }
+        public string? Content { get; set; }
 
         [Display(Name = "Image Of Question")]
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
 
 
         [Required]

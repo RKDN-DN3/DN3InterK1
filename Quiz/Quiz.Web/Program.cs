@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Quiz.Database.Data;
 using Quiz.Database.Migrations;
 using Quiz.Database.Models;
@@ -44,6 +45,16 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.UseHttpsRedirection();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+Path.Combine("D:/Git/DN3InterK1/Quiz/Quiz.Web/wwwroot/")),
+    RequestPath = "/StaticFiles"
+});
+
+app.UseRouting();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

@@ -16,3 +16,32 @@ html {
 body {
   margin-bottom: 60px;
 }
+.form-group {
+    margin-bottom: 10px
+}
+.form-control {
+    padding: 16px 0 10px 0
+}
+
+/*File create*/
+.select_option {
+    text-align: center;
+}
+
+.control-label-select {
+    margin: 0 0 10px 0;
+}
+
+.form-group-select {
+    display: grid
+}
+
+.bi-pencil-square {
+    text-decoration: none;
+}
+
+
+
+.table-hover > tbody > tr > td{
+    cursor:pointer; 
+}
