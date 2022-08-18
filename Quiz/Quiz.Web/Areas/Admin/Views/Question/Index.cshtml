@@ -53,8 +53,8 @@
             <td>@item.Explaint</td>
             <td>@item.CreateDate</td>
             <td>
-            <a class="bi bi-pencil-square" href="/Admin/Question/Edit"> |</a>
-            <a class="bi bi-trash" href=""></a>
+            <a asp-action="Edit" asp-route-id="@item.Id"class="bi bi-pencil-square"> |</a>
+            <a asp-action="Delete" asp-route-id="@item.Id" class="bi bi-trash"></a>
             </td>
         </tr>
         }
