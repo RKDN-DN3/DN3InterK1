@@ -22,7 +22,7 @@
             //            Duration = 30,
             //            NumberOfQuestions = 15,
             //            IsTimeRetricted = "1",
-            //            IsDelete = "0"
+            //            IsDelete = "0",
             //        },
 
             //        new Entities.Examination
@@ -34,7 +34,7 @@
             //            Duration = 40,
             //            NumberOfQuestions = 30,
             //            IsTimeRetricted = "1",
-            //            IsDelete = "0"
+            //            IsDelete = "0",
             //        },
 
             //        new Entities.Examination
@@ -46,7 +46,7 @@
             //            Duration = 20,
             //            NumberOfQuestions = 10,
             //            IsTimeRetricted = "1",
-            //            IsDelete = "0"
+            //            IsDelete = "0",
             //        }
             //    );
             //    context.SaveChanges();

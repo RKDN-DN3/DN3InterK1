@@ -1,0 +1,72 @@
+﻿@model Quiz.Database.ViewModels.QuestionsVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+<h4>Questions</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" asp-controller="Question" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="question.IsDelete" value="0" class="form-control" />
+            <div class="form-group form-group-select">
+                <label asp-for="question.Question_Bank.Name" class="control-label-select"> </label>
+                <select asp-for="question.Id_Question_Bank">
+                    <option class="select_option" value="">--Please choose an option--</option>
+                    @foreach(var item in Model.question_Banks)
+                    {
+                        <option class="select_option_fromDB" value="@item.Id">@item.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="question.Id_Question_Bank" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="question.Content" class="control-label"></label>
+                <input asp-for="question.Content" class="form-control" />
+                <span asp-validation-for="question.Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="question.ImageUrl" class="control-label"></label>
+                <input type="file" asp-for="question.ImageUrl" class="form-control" />
+                <span asp-validation-for="question.ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="question.Level" class="control-label"></label>
+                <input asp-for="question.Level" class="form-control" />
+                <span asp-validation-for="question.Level" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="question.Type" class="control-label"></label>
+                <input asp-for="question.Type" class="form-control" />
+                <span asp-validation-for="question.Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="question.Explaint" class="control-label"></label>
+                <input asp-for="question.Explaint" class="form-control" />
+                <span asp-validation-for="question.Explaint" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </div>
+                <div class="col-6">
+                    <a asp-action="Index" asp-controller="Question" class="btn btn-primary">Back to List</a>
+                </div>
+
+            </div>
+            
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @*@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}*@
+}
+
+
+

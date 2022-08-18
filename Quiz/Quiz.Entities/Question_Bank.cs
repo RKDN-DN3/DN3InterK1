@@ -16,12 +16,6 @@ namespace Quiz.Entities
         [StringLength(100)]
         [Display(Name = "Name of bank")]
         public string Name { get; set; }
-
-        [Required]
-        [StringLength(1)]
-        [Display(Name = "Flag IsDelete")]
-        public string IsDelete { get; set; }
-
         public virtual ICollection<Question> Questions { get; set; }
     }
 }

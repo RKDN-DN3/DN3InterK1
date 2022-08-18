@@ -20,11 +20,6 @@ namespace Quiz.Entities
         [Display(Name = "Content Of Question")]
         public string Content { get; set; }
 
-        [Required]
-        [StringLength(1)]
-        [Display(Name = "Flag IsDelete")]
-        public string IsDelete { get; set; }
-
         public virtual Question Question { get; set; }
     }
 }

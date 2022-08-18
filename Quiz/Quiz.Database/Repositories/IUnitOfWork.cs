@@ -4,7 +4,7 @@
     {
         IQuestionRepository Question { get; }
 
-        //IAccountRepository Account { get; }
+        IQuestionBankRepository QuestionBank { get; }
         void Save();
     }
 }

@@ -11,11 +11,6 @@ namespace Quiz.Entities
         [Required]
         public int Count { get; set; }
 
-        [Required]
-        [StringLength(1)]
-        [Display(Name = "Flag Delete")]
-        public string IsDelete { get; set; }
-
         public virtual Examination Examination { get; set; }
     }
 }

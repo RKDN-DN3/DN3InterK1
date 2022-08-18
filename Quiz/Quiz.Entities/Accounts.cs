@@ -31,11 +31,6 @@ namespace Quiz.Entities
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
 
-        [Required]
-        [StringLength(1)]
-        [Display(Name = "Flag IsDelete")]
-        public string IsDelete { get; set; }
-
         public virtual ICollection<Exam_History> Exam_Historys { get; set; }
     }
 }

@@ -25,11 +25,6 @@ namespace Quiz.Entities
         [Display(Name = "ID Answer Chose")]
         public string ID_Answer_Chose { get; set; }
 
-        [Required]
-        [StringLength(1)]
-        [Display(Name = "Flag Delete")]
-        public string IsDelete { get; set; }
-
         public virtual Exam_History Exam_History { get; set; }
     }
 }

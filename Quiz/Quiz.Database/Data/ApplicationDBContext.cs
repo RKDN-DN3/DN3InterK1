@@ -20,6 +20,27 @@ namespace Quiz.Database.Data
         public DbSet<Exam_History> Exam_Historys { get; set; }
         public DbSet<Exam_History_Detail> Exam_History_Details { get; set; }
 
+        public override int SaveChanges()
+        {
+            var entries = ChangeTracker
+        .Entries()
+        .Where(e => e.Entity is BaseEntity && (
+                e.State == EntityState.Added
+                || e.State == EntityState.Modified));
+
+            foreach (var entityEntry in entries)
+            {
+                ((BaseEntity)entityEntry.Entity).UpdateDate = DateTime.Now;
+
+                if (entityEntry.State == EntityState.Added)
+                {
+                    ((BaseEntity)entityEntry.Entity).CreateDate = DateTime.Now;
+                }
+            }
+
+            return base.SaveChanges();
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -37,6 +58,8 @@ namespace Quiz.Database.Data
                 .HasMany(p => p.Answers)
                 .WithOne(p => p.Question)
                 .HasForeignKey(c => c.Id_Question);
+            modelBuilder.Entity<Question>()
+                .Property(b => b.IsDelete).HasDefaultValue(0);
 
             //Code Table List_Question_In_Exam - Mapping Table Examination with Question by table List_Question_In_Exam
             modelBuilder.Entity<List_Question_In_Exam>().HasKey(c => new { c.Id_Exam, c.Id_Question });
@@ -75,5 +98,7 @@ namespace Quiz.Database.Data
                 .WithOne(p => p.Exam_History)
                 .HasForeignKey(c => new { c.ID_Exam, c.Email_User, c.Date_Do_Exam });
         }
+    
+        
     }
 }

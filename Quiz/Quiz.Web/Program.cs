@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Quiz.Database.Data;
 using Quiz.Database.Migrations;
-using Quiz.Database.Models;
 using Quiz.Database.Repositories;
 using Quiz.Web.Models;
 
@@ -23,10 +22,10 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
 
-    SeedData__Account.Initialize(services);
-    SeedData_Question.Initialize(services);
-    SeedData_Examination.Initialize(services);
+    //SeedData__Account.Initialize(services);
     SeedData_Question_Bank.Initialize(services);
+    SeedData_Question.Initialize(services);
+    //SeedData_Examination.Initialize(services);
 }
 
 // Configure the HTTP request pipeline.

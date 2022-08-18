@@ -21,5 +21,16 @@ namespace Quiz.Database.Repositories
                 entity.UpdateDate = DateTime.Now;
             }
         }
+
+        //public void Add(Question question)
+        //{
+        //    if(question != null)
+        //    {
+        //        question.Id = new Guid();
+        //        question.IsDelete = "0";
+        //        question.CreateDate = DateTime.Now;
+        //        //question.UserCreate = new Guid();
+        //    }
+        //}
     }
 }
