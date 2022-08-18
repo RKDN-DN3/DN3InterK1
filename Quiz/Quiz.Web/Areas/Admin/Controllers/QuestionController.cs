@@ -21,7 +21,7 @@ namespace Quiz.Web.Controllers
         public IActionResult Index()
         {
             QuestionsVM questionsVM = new QuestionsVM();
-            questionsVM.questions = _unitoWork.Question.GetAll(includeProperties: "Question_Bank");
+            questionsVM.questions = _unitoWork.Question.GetAll();
             return View(questionsVM);
         }
 
@@ -49,28 +49,17 @@ namespace Quiz.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet("{id:guid}")]
-        public IActionResult Delete(Guid? id)
+        [HttpGet]
+        public IActionResult Delete(Guid? guid)
         {
-            QuestionsVM vM = new QuestionsVM();
-            vM.questions = _unitoWork.Question.GetAll(includeProperties: "Question_Bank");
-
-            if (!id.HasValue)
-            //if (guid == null)
+            if (!guid.HasValue)
             {
                 return NotFound();
             }
-            vM.question = _unitoWork.Question.GetT(x => x.Id == id.Value);
-            foreach (var item in vM.questions)
+            var question = _unitoWork.Question.GetT(x=> x.Id == guid.Value);
+            if(question != null)
             {
-                if (vM.question.Id_Question_Bank == item.Id_Question_Bank)
-                {
-                    vM.question.Question_Bank.Name = item.Question_Bank.Name;
-                }
-            }
-            if (vM.question != null)
-            {
-                return View(vM);
+                return View(question);
             }
             else
             {
@@ -78,11 +67,10 @@ namespace Quiz.Web.Controllers
             }
         }
 
-        [HttpPost("{id:guid}"), ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteData(Guid? id)
+        [HttpPost,ActionName("Delete")]
+        public IActionResult DeleteData(Guid? guid)
         {
-            var question = _unitoWork.Question.GetT(x => x.Id == id.Value);
+            var question = _unitoWork.Question.GetT(x => x.Id == guid.Value);
             if (question == null)
             {
                 return NotFound();
