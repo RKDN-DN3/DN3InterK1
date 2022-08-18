@@ -6,11 +6,11 @@ namespace Quiz.Entities
     {
         //[Key]
         //public Guid Id { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
 
-        public Guid UserCreate { get; set; }
-        public DateTime UpdateDate { get; set; }
+        public string? UserCreate { get; set; }
+        public DateTime? UpdateDate { get; set; }
 
-        public Guid UserUpdate { get; set; }
+        public string? UserUpdate { get; set; }
     }
 }

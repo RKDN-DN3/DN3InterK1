@@ -25,32 +25,32 @@ namespace Quiz.Database.Migrations
                 context.Exam_History_Details.AddRange(
                     new Entities.Exam_History_Detail
                     {
-                        ID_Exam = Guid.NewGuid(),
+                        ID_Exam = new Guid("786c93d8-43c2-41b1-b681-82b69c055335"),
                         Email_User = "thanhnq@gmail.com",
-                        Date_Do_Exam = DateTime.Now,
-                        ID_Question = new Guid("86bb6ed2-e395-4cb0-a0ef-0423b19c09bf"),
+                        Date_Do_Exam = DateTime.Parse("1989-2-12"),
+                        ID_Question = new Guid("883d469c-561d-4d9a-81c6-af5ce70ce3b3"),
                         ID_Answer_Chose = "123",
                         IsDelete = "0"
                     },
                     new Entities.Exam_History_Detail
                     {
-                        ID_Exam = Guid.NewGuid(),
+                        ID_Exam = new Guid("571cc92f-1abe-4856-8b69-be876bf0a5e5"),
                         Email_User = "trieu@gmail.com",
-                        Date_Do_Exam = DateTime.Now,
-                        ID_Question = new Guid("f8bcc8ea-001c-4011-a213-fb9e1e20785a"),
+                        Date_Do_Exam = DateTime.Parse("1984-3-13"),
+                        ID_Question = new Guid("e859e5f3-a823-4656-927b-22240a759e7c"),
                         ID_Answer_Chose = "456",
                         IsDelete = "0"
                     },
                     new Entities.Exam_History_Detail
                     {
-                        ID_Exam = Guid.NewGuid(),
+                        ID_Exam = new Guid("b78c0f1d-60c3-4760-9241-c0fe443d02d5"),
                         Email_User = "huyln@gmail.com",
-                        Date_Do_Exam = DateTime.Now,
-                        ID_Question = new Guid("d5d25730-9353-4a57-952e-0c39d2614b7c"),
+                        Date_Do_Exam = DateTime.Parse("1986-2-23"),
+                        ID_Question = new Guid("b8b4048b-42b3-4fa7-8be9-e1ad4b6d4f70"),
                         ID_Answer_Chose = "789",
                         IsDelete = "0"
                     });
-                    
+                context.SaveChanges();
             }
         }
     }

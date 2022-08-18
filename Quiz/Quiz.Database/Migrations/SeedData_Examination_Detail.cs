@@ -23,40 +23,27 @@ namespace Quiz.Database.Migrations
                 context.Examination_Details.AddRange(
                      new Entities.Examination_Detail
                      {
-                         Id_Exam = Guid.NewGuid(),
-                         Id_Question_Bank = new Guid("585a7bea-bfdc-4cb8-a933-a733856a8a95"),
+                         Id_Exam = new Guid("786c93d8-43c2-41b1-b681-82b69c055335"),
+                         Id_Question_Bank = new Guid("5e25eaa8-569b-412b-af15-652e6adf8bf5"),
                          Count = 30,
                          IsDelete = "0"
                      },
                 new Entities.Examination_Detail
                 {
-                    Id_Exam = Guid.NewGuid(),
-                    Id_Question_Bank = new Guid("8c523d03-21e1-4582-a923-426bd7336e77"),
+                    Id_Exam = new Guid("571cc92f-1abe-4856-8b69-be876bf0a5e5"),
+                    Id_Question_Bank = new Guid("30a80941-7acb-421e-9504-3f2d6c1cccca"),
                     Count = 30,
                     IsDelete = "0"
                 },
                 new Entities.Examination_Detail
                 {
-                    Id_Exam = Guid.NewGuid(),
-                    Id_Question_Bank = new Guid("f040d249-8914-4095-94ff-1747cb16770d"),
+                    Id_Exam = new Guid("b78c0f1d-60c3-4760-9241-c0fe443d02d5"),
+                    Id_Question_Bank = new Guid("55ec968f-4971-487a-92cc-3452938610c7"),
                     Count = 30,
                     IsDelete = "0"
-                },
-                 new Entities.Examination_Detail
-                 {
-                     Id_Exam = Guid.NewGuid(),
-                     Id_Question_Bank = new Guid("426a6aa4-6818-497d-8ad2-3ec94d9e8a6f"),
-                     Count = 30,
-                     IsDelete = "0"
-                 },
-                  new Entities.Examination_Detail
-                  {
-                      Id_Exam = Guid.NewGuid(),
-                      Id_Question_Bank = new Guid("3f26465a-8950-4bb8-8d1a-b0d28ce77cb7"),
-                      Count = 30,
-                      IsDelete = "0"
-                  });
-                context.SaveChanges();
+                }
+            );
+            context.SaveChanges();
                    
 
             }
