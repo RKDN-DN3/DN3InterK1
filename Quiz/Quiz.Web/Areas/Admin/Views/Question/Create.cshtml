@@ -30,8 +30,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="question.ImageUrl" class="control-label"></label>
-                <input type="file" asp-for="question.ImageUrl" class="form-control" />
-                <span asp-validation-for="question.ImageUrl" class="text-danger"></span>
+                <input type="file" asp-for="@Model.FileUpload" class="form-control" />
+                <span asp-validation-for="@Model.FileUpload" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="question.Level" class="control-label"></label>

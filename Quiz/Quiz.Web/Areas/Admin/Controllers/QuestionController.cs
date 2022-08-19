@@ -61,6 +61,21 @@ namespace Quiz.Web.Controllers
             }
             if (vM.question != null)
             {
+                string wwwPath = this._webHostEnvironment.WebRootPath;
+
+                string path = Path.Combine(wwwPath, "uploads");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                string fileName = Path.GetFileNameWithoutExtension(vM.FileUpload.FileName) 
+                    + "_" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + Path.GetExtension(vM.FileUpload.FileName);
+                using (FileStream stream = new FileStream(Path.Combine(path, fileName), FileMode.Create))
+                {
+                    vM.FileUpload.CopyTo(stream);
+                    vM.question.ImageUrl = "/uploads/" + fileName;
+                }
                 vM.question.Id = new Guid();
                 vM.question.IsDelete = "0";
                 _unitoWork.Question.Add(vM.question);
