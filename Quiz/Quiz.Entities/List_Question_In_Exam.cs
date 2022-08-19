@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Quiz.Entities
 {
-    public class List_Question_In_Exam
+    public class List_Question_In_Exam : BaseEntity
     {
         public Guid Id_Exam { get; set; }
 
@@ -16,11 +10,6 @@ namespace Quiz.Entities
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int index { get; set; }
-
-        [Required]
-        [StringLength(1)]
-        [Display(Name = "Flag Delete")]
-        public string IsDelete { get; set; }
 
         public virtual Examination Examination { get; set; }
         public virtual Question Question { get; set; }

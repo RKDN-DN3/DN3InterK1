@@ -31,7 +31,7 @@ namespace Quiz.Web.Models
 
                     new Entities.Question
                     {
-                        Id  =new Guid("e859e5f3-a823-4656-927b-22240a759e7c"),
+                        Id = new Guid("e859e5f3-a823-4656-927b-22240a759e7c"),
                         Id_Question_Bank = new Guid("c00bce49-1899-45b6-9f17-b104b52a7889"),
                         Content = "Mô hình MVC, đâu là tầng tương tác với user ?",
                         Level = "0",
@@ -114,7 +114,6 @@ namespace Quiz.Web.Models
                         }
                     );
                 context.SaveChanges();
-
             }
         }
     }

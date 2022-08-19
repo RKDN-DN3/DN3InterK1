@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Quiz.Database.Data;
-using Quiz.Entities;
-
 
 namespace Quiz.Database.Migrations
 {
@@ -23,21 +21,21 @@ namespace Quiz.Database.Migrations
                     {
                         Id = new Guid("5e25eaa8-569b-412b-af15-652e6adf8bf5"),
                         Name = "Bo cau hoi Toan hoc",
-                        IsDelete = "0"
+                        IsDelete = "0",
                     },
 
                     new Entities.Question_Bank
                     {
                         Id = new Guid("30a80941-7acb-421e-9504-3f2d6c1cccca"),
                         Name = "Bo cau hoi VatLy",
-                        IsDelete = "0"
+                        IsDelete = "0",
                     },
 
                     new Entities.Question_Bank
                     {
                         Id = new Guid("55ec968f-4971-487a-92cc-3452938610c7"),
                         Name = "Bo cau hoi Logic",
-                        IsDelete = "0"
+                        IsDelete = "0",
                     },
 
                     new Entities.Question_Bank
@@ -54,7 +52,6 @@ namespace Quiz.Database.Migrations
                     }
                 );
                 context.SaveChanges();
-
             }
         }
     }

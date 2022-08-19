@@ -3,15 +3,15 @@
 @{
     ViewData["Title"] = "Create";
 }
-@Html.AntiForgeryToken()  
-<h1>Create</h1>
 
+<h1>Create</h1>
 <h4>Questions</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form enctype="multipart/form-data" asp-controller="Question" asp-action="Create">
+        <form asp-action="Create" asp-controller="Question" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="question.IsDelete" value="0" class="form-control" />
             <div class="form-group form-group-select">
                 <label asp-for="question.Question_Bank.Name" class="control-label-select"> </label>
                 <select asp-for="question.Id_Question_Bank">
@@ -23,48 +23,50 @@
                 </select>
                 <span asp-validation-for="question.Id_Question_Bank" class="text-danger"></span>
             </div>
-
             <div class="form-group">
                 <label asp-for="question.Content" class="control-label"></label>
-                <input asp-for="question.Content" class="form-control" placeholder="Content">
+                <input asp-for="question.Content" class="form-control" />
                 <span asp-validation-for="question.Content" class="text-danger"></span>
             </div>
-
             <div class="form-group">
                 <label asp-for="question.ImageUrl" class="control-label"></label>
-                 <input asp-for="File" name="file" />
-                <span asp-validation-for="question.ImageUrl" class="text-danger"></span>
+                <input type="file" asp-for="@Model.FileUpload" class="form-control" />
+                <span asp-validation-for="@Model.FileUpload" class="text-danger"></span>
             </div>
-
             <div class="form-group">
                 <label asp-for="question.Level" class="control-label"></label>
-                <input asp-for="question.Level" class="form-control" placeholder="Level" />
+                <input asp-for="question.Level" class="form-control" />
                 <span asp-validation-for="question.Level" class="text-danger"></span>
             </div>
-
             <div class="form-group">
                 <label asp-for="question.Type" class="control-label"></label>
-                <input asp-for="question.Type" class="form-control" placeholder="Type" />
+                <input asp-for="question.Type" class="form-control" />
                 <span asp-validation-for="question.Type" class="text-danger"></span>
             </div>
-
             <div class="form-group">
                 <label asp-for="question.Explaint" class="control-label"></label>
-                <input asp-for="question.Explaint" class="form-control" placeholder="Explaint" />
+                <input asp-for="question.Explaint" class="form-control" />
                 <span asp-validation-for="question.Explaint" class="text-danger"></span>
             </div>
+            <br />
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </div>
+                <div class="col-6">
+                    <a asp-action="Index" asp-controller="Question" class="btn btn-primary">Back to List</a>
+                </div>
 
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
+            
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @*@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}*@
 }
+
+
+
