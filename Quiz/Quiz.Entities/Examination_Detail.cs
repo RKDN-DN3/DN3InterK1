@@ -2,7 +2,7 @@
 
 namespace Quiz.Entities
 {
-    public class Examination_Detail
+    public class Examination_Detail : BaseEntity
     {
         public Guid Id_Exam { get; set; }
 

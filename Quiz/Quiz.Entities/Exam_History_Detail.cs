@@ -18,7 +18,7 @@ namespace Quiz.Entities
 
         [StringLength(10)]
         [Display(Name = "ID Question")]
-        public string ID_Question { get; set; }
+        public Guid ID_Question { get; set; }
 
         [Required]
         [StringLength(10)]

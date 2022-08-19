@@ -19,6 +19,7 @@ namespace Quiz.Database.Data
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Exam_History> Exam_Historys { get; set; }
         public DbSet<Exam_History_Detail> Exam_History_Details { get; set; }
+        public DbSet<List_Question_In_Exam> List_Question_In_Exams { get; set; }
 
         public override int SaveChanges()
         {
@@ -97,8 +98,16 @@ namespace Quiz.Database.Data
                 .HasMany(p => p.Exam_History_Details)
                 .WithOne(p => p.Exam_History)
                 .HasForeignKey(c => new { c.ID_Exam, c.Email_User, c.Date_Do_Exam });
+
+            //Code table List_Question_In_Exam   -Mapping table Question   with table  Examination
+            modelBuilder.Entity<List_Question_In_Exam>().HasKey(c => new { c.Id_Exam, c.Id_Question });
+            modelBuilder.Entity<Question>()
+                .HasMany(p => p.List_Question_In_Exams)
+                .WithOne(p => p.Question)
+                .HasForeignKey(c => new { c.Id_Question });
+            modelBuilder.Entity<Examination>()
+                .HasMany(p => p.List_Question_In_Exams)
+                .WithOne(p => p.Examination);
         }
-    
-        
     }
 }

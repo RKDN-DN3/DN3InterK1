@@ -27,10 +27,6 @@ namespace Quiz.Web.Models
                         DOB = "02/12/2001",
                         PhoneNumber = "0325880124",
                         IsDelete = "0",
-                        CreateDate = DateTime.Now,
-                        UserCreate = Guid.NewGuid(),
-                        UpdateDate = DateTime.Now,
-                        UserUpdate = Guid.NewGuid()
                     },
                     new Entities.Accounts
                     {

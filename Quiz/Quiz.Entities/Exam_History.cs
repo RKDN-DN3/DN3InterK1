@@ -2,7 +2,7 @@
 
 namespace Quiz.Entities
 {
-    public class Exam_History
+    public class Exam_History : BaseEntity
     {
         [StringLength(10)]
         [Display(Name = "ID Exam")]

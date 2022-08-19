@@ -24,6 +24,7 @@ namespace Quiz.Web.Controllers
         public IActionResult Index()
         {
             QuestionsVM questionsVM = new QuestionsVM();
+
             questionsVM.questions = _unitoWork.Question.GetAll(includeProperties: "Question_Bank").OrderBy(p => p.CreateDate);
             return View(questionsVM);
         }
@@ -32,7 +33,8 @@ namespace Quiz.Web.Controllers
         public IActionResult Create()
         {
             QuestionsVM vM = new QuestionsVM();
-            vM.question_Banks = _unitoWork.QuestionBank.GetAll().OrderBy(p => p.Name);
+            vM.question_Banks = _unitoWork.QuestionBank.GetAll();
+
             return View(vM);
         }
 
@@ -51,7 +53,6 @@ namespace Quiz.Web.Controllers
             }
         }
 
-
         [HttpPost]
         public IActionResult Create(QuestionsVM vM)
         {
@@ -69,7 +70,7 @@ namespace Quiz.Web.Controllers
                     Directory.CreateDirectory(path);
                 }
 
-                string fileName = Path.GetFileNameWithoutExtension(vM.FileUpload.FileName) 
+                string fileName = Path.GetFileNameWithoutExtension(vM.FileUpload.FileName)
                     + "_" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + Path.GetExtension(vM.FileUpload.FileName);
                 using (FileStream stream = new FileStream(Path.Combine(path, fileName), FileMode.Create))
                 {
@@ -84,17 +85,27 @@ namespace Quiz.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet]
-        public IActionResult Delete(Guid? guid)
+        [HttpGet("{id:guid}")]
+        public IActionResult Delete(Guid? id)
         {
-            if (!guid.HasValue)
+            QuestionsVM vM = new QuestionsVM();
+            vM.questions = _unitoWork.Question.GetAll(includeProperties: "Question_Bank");
+
+            if (!id.HasValue)
             {
                 return NotFound();
             }
-            var question = _unitoWork.Question.GetT(x => x.Id == guid.Value);
-            if (question != null)
+            vM.question = _unitoWork.Question.GetT(x => x.Id == id.Value);
+            foreach (var item in vM.questions)
             {
-                return View(question);
+                if (vM.question.Id_Question_Bank == item.Id_Question_Bank)
+                {
+                    vM.question.Question_Bank.Name = item.Question_Bank.Name;
+                }
+            }
+            if (vM.question != null)
+            {
+                return View(vM);
             }
             else
             {
@@ -102,10 +113,11 @@ namespace Quiz.Web.Controllers
             }
         }
 
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteData(Guid? guid)
+        [HttpPost("{id:guid}"), ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteData(Guid? id)
         {
-            var question = _unitoWork.Question.GetT(x => x.Id == guid.Value);
+            var question = _unitoWork.Question.GetT(x => x.Id == id.Value);
             if (question == null)
             {
                 return NotFound();
@@ -124,12 +136,14 @@ namespace Quiz.Web.Controllers
         }
 
         #region API
+
         public IActionResult AllQuestions()
         {
             var questions = _unitoWork.Question.GetAll(includeProperties: "Question_Bank");
 
             return Json(new { data = questions });
         }
-        #endregion
+
+        #endregion API
     }
 }

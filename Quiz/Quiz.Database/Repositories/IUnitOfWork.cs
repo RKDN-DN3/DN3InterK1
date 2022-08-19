@@ -5,6 +5,7 @@
         IQuestionRepository Question { get; }
 
         IQuestionBankRepository QuestionBank { get; }
+
         void Save();
     }
 }

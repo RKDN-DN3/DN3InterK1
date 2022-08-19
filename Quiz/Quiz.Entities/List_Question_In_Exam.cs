@@ -1,9 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Quiz.Entities
 {
-    public class List_Question_In_Exam
+    public class List_Question_In_Exam : BaseEntity
     {
         public Guid Id_Exam { get; set; }
 

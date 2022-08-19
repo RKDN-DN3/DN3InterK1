@@ -16,6 +16,7 @@ namespace Quiz.Entities
         [StringLength(100)]
         [Display(Name = "Name of bank")]
         public string Name { get; set; }
+
         public virtual ICollection<Question> Questions { get; set; }
     }
 }

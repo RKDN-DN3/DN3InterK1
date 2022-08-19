@@ -42,13 +42,13 @@ namespace Quiz.Database.Migrations
                     {
                         Id = new Guid("65884b6a-a20f-4884-b742-616e13072d6d"),
                         Name = "Bo cau hoi Sinh hoc",
-                        IsDelete = "0",
+                        IsDelete = "0"
                     },
                     new Entities.Question_Bank
                     {
                         Id = new Guid("c00bce49-1899-45b6-9f17-b104b52a7889"),
                         Name = "Bo cau hoi IT",
-                        IsDelete = "0",
+                        IsDelete = "0"
                     }
                 );
                 context.SaveChanges();
