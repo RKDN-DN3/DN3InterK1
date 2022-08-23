@@ -1,0 +1,83 @@
+﻿@model Quiz.Database.ViewModels.QuestionsVM
+
+@{
+    ViewData["Title"] = "Edit";
+}
+@Html.AntiForgeryToken()  
+<h1>Edit</h1>
+
+<h4>Questions</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form enctype="multipart/form-data" asp-controller="Question" asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="question.Id" />
+             <div class="form-group form-group-select">
+                <label asp-for="question.Question_Bank.Name" class="control-label-select"> </label>
+                <select asp-for="question.Id_Question_Bank">
+                    <option class="select_option" value="">--Please choose an option--</option>
+                    @foreach(var item in Model.question_Banks)
+                    {
+                        <option class="select_option_fromDB" value="@item.Id">@item.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="question.Id_Question_Bank" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="question.Content" class="control-label"></label>
+                <input asp-for="question.Content" class="form-control" placeholder="Content">
+                <span asp-validation-for="question.Content" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="hidden" asp-for="ExistingImage" />
+                <label asp-for="question.ImageUrl" class="control-label"></label>
+                <input asp-for="File" name="file" class="custom-file-input custom-file-input-margin" />
+                <span asp-validation-for="question.ImageUrl" class="text-danger"></span>
+                <img class="a" src="@Url.Content("~/Images/" + @Model.ExistingImage)" height="200" width="200"   
+                     asp-append-version="true">
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="question.Level" class="control-label"></label>
+                <input asp-for="question.Level" class="form-control" placeholder="Level" />
+                <span asp-validation-for="question.Level" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="question.Type" class="control-label"></label>
+                <input asp-for="question.Type" class="form-control" placeholder="Type" />
+                <span asp-validation-for="question.Type" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="question.Explaint" class="control-label"></label>
+                <input asp-for="question.Explaint" class="form-control" placeholder="Explaint" />
+                <span asp-validation-for="question.Explaint" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="question.CreateDate" />
+            <input type="hidden" asp-for="question.UserCreate" />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script>
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input-margin").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
