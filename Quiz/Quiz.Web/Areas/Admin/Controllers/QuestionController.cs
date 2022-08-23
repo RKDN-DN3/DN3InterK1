@@ -11,14 +11,13 @@ namespace Quiz.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private IUnitOfWork _unitoWork;
-        private IWebHostEnvironment _webHostEnvironment;
+        private Microsoft.AspNetCore.Hosting.IHostingEnvironment _HostingEnvironment { get; set; }
 
-        public QuestionController(IUnitOfWork unitoWork, ILogger<HomeController> logger,
-            IWebHostEnvironment webHostEnvironment)
+        public QuestionController(IUnitOfWork unitoWork, ILogger<HomeController> logger, Microsoft.AspNetCore.Hosting.IHostingEnvironment hostingEnvironment)
         {
             _logger = logger;
             _unitoWork = unitoWork;
-            _webHostEnvironment = webHostEnvironment;
+            _HostingEnvironment = hostingEnvironment;
         }
 
         public IActionResult Index()
@@ -37,55 +36,71 @@ namespace Quiz.Web.Controllers
 
             return View(vM);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create( QuestionsVM vM)
+        {
+            vM.question.ImageUrl = ProcessUploadedFile(vM);
+            vM.question.IsDelete = "0";
+            vM.question.Id = Guid.NewGuid();
+            vM.question.CreateDate = DateTime.Now;
+            _unitoWork.Question.Add(vM.question);
+            _unitoWork.Save();
+            return RedirectToAction("Index");
+        }
 
-        [HttpGet]
-        public IActionResult Edit(Guid? guid)
+        [HttpGet("Edit/{id:guid}")]
+        public IActionResult Edit(Guid? id)
         {
             QuestionsVM vM = new QuestionsVM();
-            if (guid.HasValue)
+            if (id.HasValue && vM.question != null)
             {
-                vM.question = _unitoWork.Question.GetT(x => x.Id == guid.Value);
+                vM.question = _unitoWork.Question.GetT(x => x.Id == id.Value);
+                vM.question_Banks = _unitoWork.QuestionBank.GetAll();
+                if (vM.question.ImageUrl != null)
+                    vM.ExistingImage = vM.question.ImageUrl;
+                else
+                    vM.ExistingImage = null;
                 return View(vM);
             }
             else
             {
                 return NotFound();
             }
+
+            if (id.Value == null) { return View(vM); }
         }
 
-        [HttpPost]
-        public IActionResult Create(QuestionsVM vM)
+        [HttpPost("Edit/{id:guid}")]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Guid? id, QuestionsVM vM)
         {
-            if (!ModelState.IsValid)
+            if (id != vM.question.Id)
             {
-                return BadRequest(ModelState);
+                return NotFound();
             }
-            if (vM.question != null)
+                if (vM.File != null)
             {
-                string wwwPath = this._webHostEnvironment.WebRootPath;
-
-                string path = Path.Combine(wwwPath, "uploads");
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
-
-                string fileName = Path.GetFileNameWithoutExtension(vM.FileUpload.FileName)
-                    + "_" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + Path.GetExtension(vM.FileUpload.FileName);
-                using (FileStream stream = new FileStream(Path.Combine(path, fileName), FileMode.Create))
-                {
-                    vM.FileUpload.CopyTo(stream);
-                    vM.question.ImageUrl = "/uploads/" + fileName;
-                }
-                vM.question.Id = new Guid();
-                vM.question.IsDelete = "0";
-                _unitoWork.Question.Add(vM.question);
-                _unitoWork.Save();
+                //if (vM.ExistingImage != null)
+                //{
+                //    string filePath = Path.Combine(_HostingEnvironment.WebRootPath, "Images", vM.ExistingImage);
+                //    System.IO.File.Delete(filePath);
+                //}
+                vM.question.ImageUrl = ProcessUploadedFile(vM);
             }
+            else
+            {
+                vM.question.ImageUrl = vM.ExistingImage;
+            }
+            vM.question.IsDelete = "0";
+            vM.question.UpdateDate = DateTime.Now;
+            vM.question.UserUpdate = "";
+            _unitoWork.Question.Update(vM.question);
+            _unitoWork.Save();
             return RedirectToAction("Index");
         }
 
-        [HttpGet("{id:guid}")]
+        [HttpGet("Delete/{id:guid}")]
         public IActionResult Delete(Guid? id)
         {
             QuestionsVM vM = new QuestionsVM();
@@ -113,7 +128,7 @@ namespace Quiz.Web.Controllers
             }
         }
 
-        [HttpPost("{id:guid}"), ActionName("Delete")]
+        [HttpPost("Delete/{id:guid}"), ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteData(Guid? id)
         {
@@ -133,6 +148,23 @@ namespace Quiz.Web.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        private string ProcessUploadedFile(QuestionsVM vM)
+        {
+            string uniqueFileName = null;
+
+            if (vM.File != null)
+            {
+                string path = Path.Combine(_HostingEnvironment.WebRootPath, "Images");
+                uniqueFileName = vM.File.FileName;
+                string filePath = Path.Combine(path, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    vM.File.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
         }
 
         #region API

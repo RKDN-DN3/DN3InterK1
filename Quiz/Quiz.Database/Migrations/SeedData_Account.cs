@@ -27,6 +27,7 @@ namespace Quiz.Web.Models
                         DOB = "02/12/2001",
                         PhoneNumber = "0325880124",
                         IsDelete = "0",
+                       
                     },
                     new Entities.Accounts
                     {
@@ -36,11 +37,8 @@ namespace Quiz.Web.Models
                         Name = "thanh",
                         DOB = "14/6/2002",
                         PhoneNumber = "0325880125",
-                        IsDelete = "0",
-                        CreateDate = DateTime.Now,
-                        UserCreate = Guid.NewGuid(),
-                        UpdateDate = DateTime.Now,
-                        UserUpdate = Guid.NewGuid()
+                        IsDelete = "1",
+                        
                     },
                     new Entities.Accounts
                     {
@@ -50,11 +48,8 @@ namespace Quiz.Web.Models
                         Name = "trieu",
                         DOB = "30/9/2001",
                         PhoneNumber = "0325880125",
-                        IsDelete = "0",
-                        CreateDate = DateTime.Now,
-                        UserCreate = Guid.NewGuid(),
-                        UpdateDate = DateTime.Now,
-                        UserUpdate = Guid.NewGuid()
+                        IsDelete = "1",
+                        
                     }
                     );
                 context.SaveChanges();

@@ -12,15 +12,14 @@ namespace Quiz.Database.Repositories
             _context = context;
         }
 
-        public void Update(Question question)
-        {
-            var entity = _context.Questions.FirstOrDefault(x => x.Id == question.Id);
-            if (entity != null)
-            {
-                entity.UserUpdate = question.UserUpdate;
-                entity.UpdateDate = DateTime.Now;
-            }
-        }
+        //public void Update(Question question)
+        //{
+        //    var entity = _context.Questions.FirstOrDefault(x => x.Id == question.Id);
+        //    if (entity != null)
+        //    {
+        //        entity.UserUpdate = question.UserUpdate;
+        //        entity.UpdateDate = DateTime.Now;
+        //    }
 
         //public void Add(Question question)
         //{

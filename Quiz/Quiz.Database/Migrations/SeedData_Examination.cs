@@ -2,7 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Quiz.Database.Data;
 
-namespace Quiz.Database.Migrations
+
+namespace Quiz.Database.Models
 {
     public class SeedData_Examination
     {
@@ -26,7 +27,7 @@ namespace Quiz.Database.Migrations
                         Duration = 30,
                         NumberOfQuestions = 15,
                         IsTimeRetricted = "1",
-                        IsDelete = "0"
+                        UserCreate = "thanhnq@gmail.com"
                     },
 
                     new Entities.Examination
@@ -38,7 +39,8 @@ namespace Quiz.Database.Migrations
                         Duration = 40,
                         NumberOfQuestions = 30,
                         IsTimeRetricted = "1",
-                        IsDelete = "0"
+                        UserCreate = "thanhnq@gmail.com"
+
                     },
 
                     new Entities.Examination
@@ -50,11 +52,14 @@ namespace Quiz.Database.Migrations
                         Duration = 20,
                         NumberOfQuestions = 10,
                         IsTimeRetricted = "1",
-                        IsDelete = "0"
+                        UserCreate = "thanhnq@gmail.com"
+
                     }
                 );
                 context.SaveChanges();
+
             }
         }
     }
 }
+
