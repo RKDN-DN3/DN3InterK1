@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Quiz.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace Quiz.Database.ViewModels
 {
@@ -11,6 +13,7 @@ namespace Quiz.Database.ViewModels
         public IEnumerable<Question> questions { get; set; } = new List<Question>();
 
         public IEnumerable<Question_Bank> question_Banks { get; set; } = new List<Question_Bank>();
+
         public string? ExistingImage { get; set; }
     }
 }

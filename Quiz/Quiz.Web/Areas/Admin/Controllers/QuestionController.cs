@@ -3,7 +3,6 @@ using Quiz.Database.Repositories;
 using Quiz.Database.ViewModels;
 using Quiz.Web.Models;
 using System.Diagnostics;
-using Microsoft.AspNetCore.Hosting;
 
 namespace Quiz.Web.Controllers
 {
@@ -24,7 +23,8 @@ namespace Quiz.Web.Controllers
         public IActionResult Index()
         {
             QuestionsVM questionsVM = new QuestionsVM();
-            questionsVM.questions = _unitoWork.Question.GetAll(includeProperties: "Question_Bank").OrderBy(p=>p.CreateDate);
+
+            questionsVM.questions = _unitoWork.Question.GetAll(includeProperties: "Question_Bank").OrderBy(p => p.CreateDate);
             return View(questionsVM);
         }
 
@@ -32,7 +32,7 @@ namespace Quiz.Web.Controllers
         public IActionResult Create()
         {
             QuestionsVM vM = new QuestionsVM();
-            vM.question_Banks = _unitoWork.Question_Bank.GetAll();
+            vM.question_Banks = _unitoWork.QuestionBank.GetAll();
 
             return View(vM);
         }
@@ -56,7 +56,7 @@ namespace Quiz.Web.Controllers
             if (id.HasValue && vM.question != null)
             {
                 vM.question = _unitoWork.Question.GetT(x => x.Id == id.Value);
-                vM.question_Banks = _unitoWork.Question_Bank.GetAll();
+                vM.question_Banks = _unitoWork.QuestionBank.GetAll();
                 if (vM.question.ImageUrl != null)
                     vM.ExistingImage = vM.question.ImageUrl;
                 else
@@ -107,7 +107,6 @@ namespace Quiz.Web.Controllers
             vM.questions = _unitoWork.Question.GetAll(includeProperties: "Question_Bank");
 
             if (!id.HasValue)
-            //if (guid == null)
             {
                 return NotFound();
             }
@@ -143,7 +142,6 @@ namespace Quiz.Web.Controllers
             _unitoWork.Save();
             TempData["success"] = "Question delete done!";
             return RedirectToAction("Index");
-
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -168,5 +166,16 @@ namespace Quiz.Web.Controllers
             }
             return uniqueFileName;
         }
+
+        #region API
+
+        public IActionResult AllQuestions()
+        {
+            var questions = _unitoWork.Question.GetAll(includeProperties: "Question_Bank");
+
+            return Json(new { data = questions });
+        }
+
+        #endregion API
     }
 }

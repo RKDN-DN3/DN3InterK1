@@ -7,9 +7,7 @@
 }
 
 
-<h1>List Question</h1>
-
-<a class="btn btn-link" asp-action="Create">Create</a>
+<a class="btn btn-link" asp-action="Create" asp-controller="Question"><i class="bi bi-plus-square"></i>Create new question</a>
 <table class="table table-hover">
     <thead>
         <tr>
@@ -33,15 +31,12 @@
             }
             string ContentLimitLength(string a)
             {
-                if(a != null)
-                    return (a.Length >= 50) ? (a.Substring(0,49)+"...") : a;
-                return "";
+                return (a.Length >= 50) ? (a.Substring(0,49)+"...") : a;
             }
             int i = 0;
         @foreach (var item in Model.questions) {
-        i++;
         <tr style="">
-            <td>@i</td>
+            <td>@(++i)</td>
             <td>@ContentLimitLength(@item.Content)</td>
             <td>
                 <img src="@Url.Content("~/Images/" + @item.ImageUrl)" height="80" width="80"   
@@ -53,10 +48,21 @@
             <td>@item.Explaint</td>
             <td>@item.CreateDate</td>
             <td>
-            <a asp-action="Edit" asp-route-id="@item.Id"class="bi bi-pencil-square"> |</a>
-            <a asp-action="Delete" asp-route-id="@item.Id" class="bi bi-trash"></a>
+                <form asp-action="Delete" asp-controller="Question" asp-route-id="@item.Id">
+                    <div class="btn-group btn-group-sm">
+                        <a asp-action="Edit" asp-controller="Question" asp-route-id="@item.Id" class="btn btn-warning">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <button type="submit" class="btn btn-danger"
+                            onclick="return confirm('Are you sure to delete this record?')">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                </form>
             </td>
         </tr>
         }
     }
     </tbody>
+    
+</table>
