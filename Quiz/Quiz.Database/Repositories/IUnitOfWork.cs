@@ -6,6 +6,8 @@
 
         IQuestionBankRepository QuestionBank { get; }
 
+        IAccountRepository Account { get; }
+
         void Save();
     }
 }

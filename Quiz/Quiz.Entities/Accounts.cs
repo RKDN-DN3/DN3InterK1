@@ -21,16 +21,16 @@ namespace Quiz.Entities
 
         [StringLength(100)]
         [Display(Name = "Name Of User")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Date Of Birth")]
-        public string DOB { get; set; }
+        public string? DOB { get; set; }
 
         [StringLength(100)]
         [Display(Name = "Phone Number")]
-        public string PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
 
-        public virtual ICollection<Exam_History> Exam_Historys { get; set; }
+        public virtual ICollection<Exam_History>? Exam_Historys { get; set; }
     }
 }
