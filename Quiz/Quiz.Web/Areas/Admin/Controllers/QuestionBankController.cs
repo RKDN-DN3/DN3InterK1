@@ -71,7 +71,6 @@ namespace Quiz.Web.Controllers
             {
                 return NotFound();
             }
-            string a = vM.questionbank.Name;
             vM.questionbank.UpdateDate = DateTime.Now;
             _unitoWork.QuestionBank.Update(vM.questionbank);
             _unitoWork.Save();
