@@ -1,0 +1,41 @@
+﻿@model Quiz.Database.ViewModels.QuestionBanksVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+<h4>Question bank</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" asp-controller="QuestionBank" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="questionbank.IsDelete" value="0" class="form-control" />
+            <div class="form-group">
+                <label asp-for="questionbank.Name" class="control-label"></label>
+                <input asp-for="questionbank.Name" class="form-control" placeholder="Content"/>
+                <span asp-validation-for="questionbank.Name" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </div>
+                <div class="col-6">
+                    <a asp-action="Index" asp-controller="QuestionBank" class="btn btn-primary">Back to List</a>
+                </div>
+
+            </div>
+            
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+

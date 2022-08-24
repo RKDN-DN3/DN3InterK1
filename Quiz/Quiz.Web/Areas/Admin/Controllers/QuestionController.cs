@@ -49,7 +49,7 @@ namespace Quiz.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet("Edit/{id:guid}")]
+        [HttpGet("Admin/Question/Edit/{id:guid}")]
         public IActionResult Edit(Guid? id)
         {
             QuestionsVM vM = new QuestionsVM();
@@ -71,7 +71,7 @@ namespace Quiz.Web.Controllers
             if (id.Value == null) { return View(vM); }
         }
 
-        [HttpPost("Edit/{id:guid}")]
+        [HttpPost("Admin/Question/Edit/{id:guid}")]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Guid? id, QuestionsVM vM)
         {
@@ -81,11 +81,6 @@ namespace Quiz.Web.Controllers
             }
                 if (vM.File != null)
             {
-                //if (vM.ExistingImage != null)
-                //{
-                //    string filePath = Path.Combine(_HostingEnvironment.WebRootPath, "Images", vM.ExistingImage);
-                //    System.IO.File.Delete(filePath);
-                //}
                 vM.question.ImageUrl = ProcessUploadedFile(vM);
             }
             else
