@@ -9,11 +9,14 @@ namespace Quiz.Database.Repositories
 
         public IQuestionBankRepository QuestionBank { get; private set; }
 
+        public IAccountRepository Account { get; private set; }
+
         public UnitOfWork(ApplicationDBContext context)
         {
             _context = context;
             Question = new QuestionRepository(context);
             QuestionBank = new QuestionBankRepository(context);
+            Account = new AccountRepository(context);
         }
 
         public void Save()

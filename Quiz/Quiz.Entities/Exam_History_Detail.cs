@@ -4,7 +4,6 @@ namespace Quiz.Entities
 {
     public class Exam_History_Detail : BaseEntity
     {
-        [StringLength(10)]
         [Display(Name = "ID Exam")]
         public Guid ID_Exam { get; set; }
 
@@ -16,7 +15,6 @@ namespace Quiz.Entities
         [Display(Name = "Date_Do_Exam")]
         public DateTime Date_Do_Exam { get; set; }
 
-        [StringLength(10)]
         [Display(Name = "ID Question")]
         public Guid ID_Question { get; set; }
 
