@@ -38,6 +38,41 @@ namespace Quiz.Web.Controllers
             return BadRequest(ModelState);
         }
 
+
+
+        [HttpGet]
+        public IActionResult Edit(string? id)
+        {
+            AccountsVM vM = new AccountsVM();
+            if (id != null && vM.account != null)
+            {
+                vM.account = _unitoWork.Account.GetT(x => x.Email_User == id);
+                return View(vM);
+            }
+            else
+            {
+                return NotFound();
+            }
+
+            if (id == null) { return View(vM); }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(string? id, AccountsVM vM)
+        {
+            if (id != vM.account.Email_User)
+            {
+                return NotFound();
+            }
+            string a = vM.account.Password;
+            string b = vM.account.Name;
+            vM.account.UpdateDate = DateTime.Now;
+            _unitoWork.Account.Update(vM.account);
+            _unitoWork.Save();
+            return RedirectToAction("Index");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
