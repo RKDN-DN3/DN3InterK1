@@ -24,6 +24,13 @@ namespace Quiz.Web.Controllers
             return View(accountsVM);
         }
 
+        public IActionResult Index()
+        {
+            AccountVM accountsVM = new AccountVM();
+            accountsVM.accounts = _unitoWork.Account.GetAll().OrderBy(p => p.CreateDate);
+            return View(accountsVM);
+        }
+
         [HttpGet]
         public IActionResult Create()
         {
@@ -42,6 +49,41 @@ namespace Quiz.Web.Controllers
                 return RedirectToAction("Index");
             }
             return BadRequest(ModelState);
+        }
+
+
+
+        [HttpGet]
+        public IActionResult Edit(string? id)
+        {
+            AccountsVM vM = new AccountsVM();
+            if (id != null && vM.account != null)
+            {
+                vM.account = _unitoWork.Account.GetT(x => x.Email_User == id);
+                return View(vM);
+            }
+            else
+            {
+                return NotFound();
+            }
+
+            if (id == null) { return View(vM); }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(string? id, AccountsVM vM)
+        {
+            if (id != vM.account.Email_User)
+            {
+                return NotFound();
+            }
+            string a = vM.account.Password;
+            string b = vM.account.Name;
+            vM.account.UpdateDate = DateTime.Now;
+            _unitoWork.Account.Update(vM.account);
+            _unitoWork.Save();
+            return RedirectToAction("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
