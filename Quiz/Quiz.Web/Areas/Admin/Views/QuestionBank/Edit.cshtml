@@ -1,0 +1,46 @@
+﻿@model Quiz.Database.ViewModels.QuestionBanksVM
+
+@{
+    ViewData["Title"] = "Edit";
+}
+@Html.AntiForgeryToken()  
+<h1>Edit</h1>
+
+<h4>Questions</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" asp-controller="QuestionBank" enctype="multipart/form-data" >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="questionbank.IsDelete" value="0" class="form-control" />
+            <input type="hidden" asp-for="questionbank.Id" />
+
+            <div class="form-group">
+                <label asp-for="questionbank.Name" class="control-label"></label>
+                <input asp-for="questionbank.Name" class="form-control" placeholder="Content">
+                <span asp-validation-for="questionbank.Name" class="text-danger"></span>
+            </div>
+
+            <input type="hidden" asp-for="questionbank.CreateDate" />
+            <input type="hidden" asp-for="questionbank.UserCreate" />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script>
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input-margin").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

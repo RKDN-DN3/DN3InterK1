@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Quiz.Database.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Quiz.Database.Migrations
 {
@@ -17,7 +12,6 @@ namespace Quiz.Database.Migrations
                 serviceProvider.GetRequiredService<
                     DbContextOptions<ApplicationDBContext>>()))
             {
-
                 if (context.Exam_Historys.Any())
                 {
                     return;
@@ -50,7 +44,7 @@ namespace Quiz.Database.Migrations
                         ID_Exam = new Guid("b78c0f1d-60c3-4760-9241-c0fe443d02d5"),
                         Email_User = "huyln@gmail.com",
                         DateDoExam = DateTime.Parse("1986-2-23"),
-                        Mark = 8, 
+                        Mark = 8,
                         TimeDoExam = 30,
                         StartTime = DateTime.Now,
                         EndTime = DateTime.Now,
@@ -61,6 +55,5 @@ namespace Quiz.Database.Migrations
                 context.SaveChanges();
             }
         }
-
     }
 }

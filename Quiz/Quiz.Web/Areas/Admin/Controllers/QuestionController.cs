@@ -3,7 +3,6 @@ using Quiz.Database.Repositories;
 using Quiz.Database.ViewModels;
 using Quiz.Web.Models;
 using System.Diagnostics;
-using Microsoft.AspNetCore.Hosting;
 
 namespace Quiz.Web.Controllers
 {
@@ -12,19 +11,20 @@ namespace Quiz.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private IUnitOfWork _unitoWork;
-        private Microsoft.AspNetCore.Hosting.IHostingEnvironment mxHostingEnvironment { get; set; }
+        private Microsoft.AspNetCore.Hosting.IHostingEnvironment _HostingEnvironment { get; set; }
 
         public QuestionController(IUnitOfWork unitoWork, ILogger<HomeController> logger, Microsoft.AspNetCore.Hosting.IHostingEnvironment hostingEnvironment)
         {
             _logger = logger;
             _unitoWork = unitoWork;
-            mxHostingEnvironment = hostingEnvironment;
+            _HostingEnvironment = hostingEnvironment;
         }
 
         public IActionResult Index()
         {
             QuestionsVM questionsVM = new QuestionsVM();
-            questionsVM.questions = _unitoWork.Question.GetAll(includeProperties: "Question_Bank").OrderBy(p=>p.CreateDate);
+
+            questionsVM.questions = _unitoWork.Question.GetAll(includeProperties: "Question_Bank").OrderBy(p => p.CreateDate);
             return View(questionsVM);
         }
 
@@ -32,7 +32,7 @@ namespace Quiz.Web.Controllers
         public IActionResult Create()
         {
             QuestionsVM vM = new QuestionsVM();
-            vM.question_Banks = _unitoWork.Question_Bank.GetAll();
+            vM.question_Banks = _unitoWork.QuestionBank.GetAll();
 
             return View(vM);
         }
@@ -40,20 +40,7 @@ namespace Quiz.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create( QuestionsVM vM)
         {
-
-            if (vM.File != null)  //handle iformfile
-            {
-                //upload files to wwwroot
-                var fileName = Path.GetFileName(vM.File.FileName);
-                var filePath = mxHostingEnvironment.ContentRootPath + "wwwroot\\Images";
-                string fileNameWithPath = Path.Combine(filePath, fileName);
-
-                using (var fileSteam = new FileStream(fileNameWithPath, FileMode.Create))
-                {
-                    vM.File.CopyToAsync(fileSteam);
-                }
-                vM.question.ImageUrl = fileNameWithPath;
-            }
+            vM.question.ImageUrl = ProcessUploadedFile(vM);
             vM.question.IsDelete = "0";
             vM.question.Id = Guid.NewGuid();
             vM.question.CreateDate = DateTime.Now;
@@ -62,13 +49,18 @@ namespace Quiz.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet]
-        public IActionResult UpSert(Guid? guid)
+        [HttpGet("Admin/Question/Edit/{id:guid}")]
+        public IActionResult Edit(Guid? id)
         {
             QuestionsVM vM = new QuestionsVM();
-            if (guid.HasValue && vM.question != null)
+            if (id.HasValue && vM.question != null)
             {
-                vM.question = _unitoWork.Question.GetT(x => x.Id == guid.Value);
+                vM.question = _unitoWork.Question.GetT(x => x.Id == id.Value);
+                vM.question_Banks = _unitoWork.QuestionBank.GetAll();
+                if (vM.question.ImageUrl != null)
+                    vM.ExistingImage = vM.question.ImageUrl;
+                else
+                    vM.ExistingImage = null;
                 return View(vM);
             }
             else
@@ -76,24 +68,40 @@ namespace Quiz.Web.Controllers
                 return NotFound();
             }
 
-            if (guid.Value == null) { return View(vM); }
+            if (id.Value == null) { return View(vM); }
         }
 
-        [HttpPost]
-        public IActionResult UpSert(QuestionsVM vM)
+        [HttpPost("Admin/Question/Edit/{id:guid}")]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Guid? id, QuestionsVM vM)
         {
-            
+            if (id != vM.question.Id)
+            {
+                return NotFound();
+            }
+                if (vM.File != null)
+            {
+                vM.question.ImageUrl = ProcessUploadedFile(vM);
+            }
+            else
+            {
+                vM.question.ImageUrl = vM.ExistingImage;
+            }
+            vM.question.IsDelete = "0";
+            vM.question.UpdateDate = DateTime.Now;
+            vM.question.UserUpdate = "";
+            _unitoWork.Question.Update(vM.question);
+            _unitoWork.Save();
             return RedirectToAction("Index");
         }
 
-        [HttpGet("{id:guid}")]
+        [HttpGet("Delete/{id:guid}")]
         public IActionResult Delete(Guid? id)
         {
             QuestionsVM vM = new QuestionsVM();
             vM.questions = _unitoWork.Question.GetAll(includeProperties: "Question_Bank");
 
             if (!id.HasValue)
-            //if (guid == null)
             {
                 return NotFound();
             }
@@ -115,7 +123,7 @@ namespace Quiz.Web.Controllers
             }
         }
 
-        [HttpPost("{id:guid}"), ActionName("Delete")]
+        [HttpPost("Delete/{id:guid}"), ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteData(Guid? id)
         {
@@ -129,7 +137,6 @@ namespace Quiz.Web.Controllers
             _unitoWork.Save();
             TempData["success"] = "Question delete done!";
             return RedirectToAction("Index");
-
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -137,5 +144,33 @@ namespace Quiz.Web.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        private string ProcessUploadedFile(QuestionsVM vM)
+        {
+            string uniqueFileName = null;
+
+            if (vM.File != null)
+            {
+                string path = Path.Combine(_HostingEnvironment.WebRootPath, "Images");
+                uniqueFileName = vM.File.FileName;
+                string filePath = Path.Combine(path, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    vM.File.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
+        }
+
+        #region API
+
+        public IActionResult AllQuestions()
+        {
+            var questions = _unitoWork.Question.GetAll(includeProperties: "Question_Bank");
+
+            return Json(new { data = questions });
+        }
+
+        #endregion API
     }
 }
