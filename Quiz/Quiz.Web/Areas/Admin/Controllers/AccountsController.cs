@@ -17,6 +17,12 @@ namespace Quiz.Web.Controllers
             _logger = logger;
             _unitoWork = unitoWork;
         }
+        public IActionResult Index()
+        {
+            AccountsVM accountsVM = new AccountsVM();
+            accountsVM.accounts = _unitoWork.Account.GetAll().OrderBy(p => p.CreateDate);
+            return View(accountsVM);
+        }
 
         [HttpGet]
         public IActionResult Create()
