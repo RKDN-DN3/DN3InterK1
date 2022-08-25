@@ -18,6 +18,13 @@ namespace Quiz.Web.Controllers
             _unitoWork = unitoWork;
         }
 
+        public IActionResult Index()
+        {
+            AccountVM accountsVM = new AccountVM();
+            accountsVM.accounts = _unitoWork.Account.GetAll().OrderBy(p => p.CreateDate);
+            return View(accountsVM);
+        }
+
         [HttpGet]
         public IActionResult Create()
         {
