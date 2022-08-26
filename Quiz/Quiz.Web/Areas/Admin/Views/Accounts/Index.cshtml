@@ -19,6 +19,8 @@
             <th scope="col">Name</th>
             <th scope="col">DOB</th>
             <th scope="col">PhoneNumber</th>
+            <th scope="col">Date Create</th>
+            <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody>
@@ -39,6 +41,8 @@
             <td>@item.Name</td>
             <td>@item.DOB</td>
             <td>@item.PhoneNumber</td>
+            <td>@item.CreateDate</td>
+
             <td>
                 <form asp-action="Delete" asp-controller="Accounts" asp-route-id="@item.Email_User">
                     <div class="btn-group btn-group-sm">
