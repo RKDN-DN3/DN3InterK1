@@ -17,6 +17,12 @@ namespace Quiz.Web.Controllers
             _logger = logger;
             _unitoWork = unitoWork;
         }
+        public IActionResult Index()
+        {
+            AccountsVM accountsVM = new AccountsVM();
+            accountsVM.accounts = _unitoWork.Account.GetAll().Where(p=>p.IsDelete == "0");
+            return View(accountsVM);
+        }
 
         [HttpGet]
         public IActionResult Create()
@@ -36,6 +42,44 @@ namespace Quiz.Web.Controllers
                 return RedirectToAction("Index");
             }
             return BadRequest(ModelState);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(string? id)
+        {
+            AccountsVM vM = new AccountsVM();
+            if (id == null)
+            {
+                return NotFound();
+            }
+            vM.account = _unitoWork.Account.GetT(x => x.Email_User == id);
+            if (vM.account != null)
+            {
+                return View(vM);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost ]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteData(string? id)
+        {
+            AccountsVM vM = new AccountsVM();
+            vM.account = _unitoWork.Account.GetT(x => x.Email_User == id);
+            if (vM.account == null)
+            {
+                return NotFound();
+            }
+            vM.account.IsDelete = "1";
+
+            _unitoWork.Account.Update(vM.account);
+            _unitoWork.Save();
+            TempData["success"] = "Account delete done!";
+            return RedirectToAction("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
