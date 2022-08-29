@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Quiz.Database.Enum;
 using Quiz.Database.Repositories;
 using Quiz.Database.ViewModels;
 using Quiz.Web.Models;
@@ -22,14 +23,7 @@ namespace Quiz.Web.Controllers
             AccountsVM accountsVM = new AccountsVM();
             accountsVM.accounts = _unitoWork.Account.GetAll().Where(p=>p.IsDelete == "0");
             return View(accountsVM);
-        }
-
-        public IActionResult Index()
-        {
-            AccountVM accountsVM = new AccountVM();
-            accountsVM.accounts = _unitoWork.Account.GetAll().OrderBy(p => p.CreateDate);
-            return View(accountsVM);
-        }
+        }        
 
         [HttpGet]
         public IActionResult Create()
@@ -116,7 +110,7 @@ namespace Quiz.Web.Controllers
             {
                 return NotFound();
             }
-            vM.account.IsDelete = "1";
+            vM.account.IsDelete =Convert.ToString(EnumDelFlag.delete);
 
             _unitoWork.Account.Update(vM.account);
             _unitoWork.Save();
