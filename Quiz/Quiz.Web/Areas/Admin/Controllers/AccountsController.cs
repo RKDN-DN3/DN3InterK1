@@ -24,13 +24,6 @@ namespace Quiz.Web.Controllers
             return View(accountsVM);
         }
 
-        public IActionResult Index()
-        {
-            AccountVM accountsVM = new AccountVM();
-            accountsVM.accounts = _unitoWork.Account.GetAll().OrderBy(p => p.CreateDate);
-            return View(accountsVM);
-        }
-
         [HttpGet]
         public IActionResult Create()
         {

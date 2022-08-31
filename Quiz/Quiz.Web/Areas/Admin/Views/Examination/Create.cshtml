@@ -1,0 +1,136 @@
+﻿@model Quiz.Database.ViewModels.ExaminationVM
+
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+<h4>Examination</h4>
+<hr />
+<div class="row">
+    <div>
+        <form asp-action="Create" asp-controller="Examination" enctype="multipart/form-data" form-group-category>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="examination.IsDelete" value="0" class="form-control" />
+
+            <div class="form-group form-group-category">
+                <div class="div-category-left">
+                    <div class="form-group form-group-select">
+                    <label class="control-label-select"> Choose the question bank : </label>
+                    <select id="id-qsb" onchange="updateNumOfQuestion()">
+                        <option class="select_option" value="">--Please choose an option--</option>
+                        @{
+                            int SumofQues(Guid id)
+                            {
+                                int a=0;
+                                foreach(var item in Model.questions)
+                                {
+                                    if(item.Id_Question_Bank == id) a++;
+                                }
+                                return a;
+                            }
+                            foreach(var item in Model.question_Banks)
+                            {
+                                        <option class="select_option_fromDB" value="@item.Id">@item.Name (@SumofQues(@item.Id) câu)
+
+                                        </option>
+                            }
+                        }
+                    </select>
+                    </div>
+                </div>
+
+                <div class="div-category-right">
+                    <div class="form-group form-group-number-input">
+                        <label class="control-label">Input Number of questions</label>
+                        <input asp-for="examination_Detail.Count" id="input_num" class="form-control" placeholder="Number of questions" />
+                        <span asp-validation-for="examination_Detail.Count" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Add" class="btn btn-primary" id="btn-add" onclick="return validate()" />
+                        <script>
+                            function validate(){
+                                var category = document.getElementById("id-qsb").value;
+                                var input = document.getElementById("input_num").value;
+                                if (category == "") {
+                                    alert('Please choose the question bank !');
+                                    return false;
+                                }
+                                else 
+                                {
+                                    if(input <= 0)
+                                    {
+                                        alert('Number of questions Invalid !!!');
+                                        return false;
+                                    }
+                                }
+
+
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div>
+            
+            <table class="table table-hover">
+                <thead class="title-list">
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">Question Bank</th>
+                        <th scope="col">Number of questions</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @{
+                        int i = 0;
+                                                            @foreach (var item in Model.questions) {
+                                                            <tr style="">
+                                                                <td>@(++i)</td>
+                                                                <td>@item.Question_Bank.Name</td>
+                                                                <td></td>
+                                                                <td>
+                                                                    <form asp-action="Delete" asp-controller="Question" asp-route-id="@item.Id">
+                                                                        <div class="btn-group btn-group-sm">
+                                                                            <button type="submit" class="btn btn-danger btn-danger-inlist"
+                                                                                onclick="return confirm('Are you sure to delete this record?')">
+                                                                                <i class="bi bi-trash"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                    </form>
+                                                                </td>
+                                                            </tr>
+                    }
+                }
+                </tbody>
+    
+            </table>
+
+            <br />
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group form-group-center">
+                        @*<input type="submit" value="Create" class="btn btn-primary" onclick="return alert('Create Examination Success!!!')"> />*@
+                        <input type="submit" class="btn btn-primary" onclick="return alert('Create Examination Success!!!')">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group form-group-center">
+                        <a asp-action="Index" asp-controller="Examination" class="btn btn-primary">Back to List</a>
+                    </div>
+                </div>
+
+            </div>
+
+            
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+

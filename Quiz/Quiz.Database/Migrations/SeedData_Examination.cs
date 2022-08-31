@@ -27,7 +27,8 @@ namespace Quiz.Database.Models
                         Duration = 30,
                         NumberOfQuestions = 15,
                         IsTimeRetricted = "1",
-                        UserCreate = "thanhnq@gmail.com"
+                        UserCreate = "thanhnq@gmail.com",
+                        IsDelete = "0"
                     },
 
                     new Entities.Examination
@@ -39,7 +40,8 @@ namespace Quiz.Database.Models
                         Duration = 40,
                         NumberOfQuestions = 30,
                         IsTimeRetricted = "1",
-                        UserCreate = "thanhnq@gmail.com"
+                        UserCreate = "thanhnq@gmail.com",
+                        IsDelete = "0"
 
                     },
 
@@ -52,7 +54,8 @@ namespace Quiz.Database.Models
                         Duration = 20,
                         NumberOfQuestions = 10,
                         IsTimeRetricted = "1",
-                        UserCreate = "thanhnq@gmail.com"
+                        UserCreate = "thanhnq@gmail.com",
+                        IsDelete = "0"
 
                     }
                 );

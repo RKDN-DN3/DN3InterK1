@@ -49,3 +49,45 @@ body {
 .custom-file-input-margin {
     margin-bottom: 10px;
 }
+
+.form-group-category {
+    display: flex;
+}
+
+.div-category-left {
+    width: 70%;
+    display: flex;
+}
+
+.div-category-right {
+    width: 50%;
+    display: flex;
+    padding-left: 200px
+}
+
+.form-group-select {
+    width: 50%
+}
+
+.form-group-number {
+    width: 25%;
+    margin-left: 20px;
+}
+
+.form-group-number-input {
+    width: 90%;
+}
+
+.form-group-btn-add {
+    margin-left: 20px;
+}
+.btn-danger-inlist {
+    margin-left: 8px
+}
+.title-list {
+    background-color: #bfd3c1;
+}
+.form-group-center {
+    display: flex;
+    justify-content: center;
+}

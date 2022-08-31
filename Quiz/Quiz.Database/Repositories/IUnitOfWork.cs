@@ -8,6 +8,8 @@
 
         IAccountRepository Account { get; }
 
+        IExaminationRepository Examination{ get; }
+
         void Save();
     }
 }
