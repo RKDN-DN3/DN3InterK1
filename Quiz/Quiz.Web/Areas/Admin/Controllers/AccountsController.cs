@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Quiz.Database.Enum;
 using Quiz.Database.Repositories;
 using Quiz.Database.ViewModels;
 using Quiz.Web.Models;
@@ -20,9 +21,9 @@ namespace Quiz.Web.Controllers
         public IActionResult Index()
         {
             AccountsVM accountsVM = new AccountsVM();
-            accountsVM.accounts = _unitoWork.Account.GetAll().OrderBy(p => p.CreateDate);
+            accountsVM.accounts = _unitoWork.Account.GetAll().Where(p=>p.IsDelete == "0").OrderBy(p => p.CreateDate);
             return View(accountsVM);
-        }
+        }        
 
         [HttpGet]
         public IActionResult Create()
@@ -76,6 +77,44 @@ namespace Quiz.Web.Controllers
             vM.account.UpdateDate = DateTime.Now;
             _unitoWork.Account.Update(vM.account);
             _unitoWork.Save();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Delete(string? id)
+        {
+            AccountsVM vM = new AccountsVM();
+            if (id == null)
+            {
+                return NotFound();
+            }
+            vM.account = _unitoWork.Account.GetT(x => x.Email_User == id);
+            if (vM.account != null)
+            {
+                return View(vM);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost ]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteData(string? id)
+        {
+            AccountsVM vM = new AccountsVM();
+            vM.account = _unitoWork.Account.GetT(x => x.Email_User == id);
+            if (vM.account == null)
+            {
+                return NotFound();
+            }
+            vM.account.IsDelete =Convert.ToString(EnumDelFlag.delete);
+
+            _unitoWork.Account.Update(vM.account);
+            _unitoWork.Save();
+            TempData["success"] = "Account delete done!";
             return RedirectToAction("Index");
         }
 

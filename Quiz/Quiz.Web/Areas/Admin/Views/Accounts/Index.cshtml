@@ -44,8 +44,17 @@
             <td>@item.CreateDate</td>
 
             <td>
-            <a asp-action="Edit" asp-route-id="@item.Email_User"class="bi bi-pencil-square"> |</a>
-            <a asp-action="Delete" asp-route-id="@item.Email_User" class="bi bi-trash"></a>
+                <form asp-action="Delete" asp-controller="Accounts" asp-route-id="@item.Email_User">
+                    <div class="btn-group btn-group-sm">
+                        <a asp-action="Edit" asp-controller="Accounts" asp-route-id="@item.Email_User" class="btn btn-warning">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <button type="submit" class="btn btn-danger"
+                            onclick="return confirm('Are you sure to delete this record?')">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                </form>
             </td>
         </tr>
         }
