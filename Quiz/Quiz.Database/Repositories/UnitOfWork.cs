@@ -13,6 +13,8 @@ namespace Quiz.Database.Repositories
 
         public IExaminationRepository Examination { get; private set; }
 
+        public IExamination_CategoryVMRepository Examination_CategoryVM { get; }
+
         public UnitOfWork(ApplicationDBContext context)
         {
             _context = context;
@@ -20,6 +22,7 @@ namespace Quiz.Database.Repositories
             QuestionBank = new QuestionBankRepository(context);
             Account = new AccountRepository(context);
             Examination = new ExaminationRepository(context);
+            Examination_CategoryVM = new Examination_CategoryVMRepository(context);
         }
 
         public void Save()

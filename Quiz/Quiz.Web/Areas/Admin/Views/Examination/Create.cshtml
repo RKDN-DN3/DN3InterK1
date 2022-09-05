@@ -30,9 +30,15 @@
                                 }
                                 return a;
                             }
-                            foreach(var item in Model.question_Banks)
+                            //foreach(var item in Model.question_Banks)
+                            //{
+                            //            <option class="select_option_fromDB" value="@item.Id">@item.Name (@SumofQues(@item.Id) câu)
+
+                            //            </option>
+                            //}
+                            foreach(var item in Model.Examination_CategoryVMs)
                             {
-                                        <option class="select_option_fromDB" value="@item.Id">@item.Name (@SumofQues(@item.Id) câu)
+                                        <option class="select_option_fromDB" value="@item.questionbank.Id">@item.questionbank.Name (@SumofQues(@item.questionbank.Id) câu)
 
                                         </option>
                             }

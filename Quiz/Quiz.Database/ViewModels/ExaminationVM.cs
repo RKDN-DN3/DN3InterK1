@@ -4,7 +4,8 @@ namespace Quiz.Database.ViewModels
 {
     public class ExaminationVM
     {
-        public int[]? count { get; set; }
+        public IEnumerable<Examination_CategoryVM> Examination_CategoryVMs { get; set; }
+
         public Examination examination { get; set; } = new Examination();
         public Examination_Detail examination_Detail { get; set; } = new Examination_Detail();
 
