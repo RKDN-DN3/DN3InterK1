@@ -38,9 +38,9 @@
                             //}
                             foreach(var item in Model.Examination_CategoryVMs)
                             {
-                                        <option class="select_option_fromDB" value="@item.questionbank.Id">@item.questionbank.Name (@SumofQues(@item.questionbank.Id) câu)
+                                            <option class="select_option_fromDB" value="@item.questionbank.Id">@item.questionbank.Name (@SumofQues(@item.questionbank.Id) ; @item.count câu)
 
-                                        </option>
+                                            </option>
                             }
                         }
                     </select>
@@ -92,22 +92,22 @@
 
                     @{
                         int i = 0;
-                                                            @foreach (var item in Model.questions) {
-                                                            <tr style="">
-                                                                <td>@(++i)</td>
-                                                                <td>@item.Question_Bank.Name</td>
-                                                                <td></td>
-                                                                <td>
-                                                                    <form asp-action="Delete" asp-controller="Question" asp-route-id="@item.Id">
-                                                                        <div class="btn-group btn-group-sm">
-                                                                            <button type="submit" class="btn btn-danger btn-danger-inlist"
-                                                                                onclick="return confirm('Are you sure to delete this record?')">
-                                                                                <i class="bi bi-trash"></i>
-                                                                            </button>
-                                                                        </div>
-                                                                    </form>
-                                                                </td>
-                                                            </tr>
+                                                                @foreach (var item in Model.questions) {
+                                                                <tr style="">
+                                                                    <td>@(++i)</td>
+                                                                    <td>@item.Question_Bank.Name</td>
+                                                                    <td></td>
+                                                                    <td>
+                                                                        <form asp-action="Delete" asp-controller="Question" asp-route-id="@item.Id">
+                                                                            <div class="btn-group btn-group-sm">
+                                                                                <button type="submit" class="btn btn-danger btn-danger-inlist"
+                                                                                    onclick="return confirm('Are you sure to delete this record?')">
+                                                                                    <i class="bi bi-trash"></i>
+                                                                                </button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </td>
+                                                                </tr>
                     }
                 }
                 </tbody>
