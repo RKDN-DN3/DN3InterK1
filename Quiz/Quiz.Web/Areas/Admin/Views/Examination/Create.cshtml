@@ -18,27 +18,21 @@
                 <div class="div-category-left">
                     <div class="form-group form-group-select">
                     <label class="control-label-select"> Choose the question bank : </label>
-                    <select id="id-qsb" onchange="updateNumOfQuestion()">
+                    <select id="id-qsb">
                         <option class="select_option" value="">--Please choose an option--</option>
                         @{
-                            int SumofQues(Guid id)
-                            {
-                                int a=0;
-                                foreach(var item in Model.questions)
-                                {
-                                    if(item.Id_Question_Bank == id) a++;
-                                }
-                                return a;
-                            }
-                            //foreach(var item in Model.question_Banks)
+                            //int SumofQues(Guid id)
                             //{
-                            //            <option class="select_option_fromDB" value="@item.Id">@item.Name (@SumofQues(@item.Id) câu)
-
-                            //            </option>
+                            //    int a=0;
+                            //    foreach(var item in Model.questions)
+                            //    {
+                            //        if(item.Id_Question_Bank == id) a++;
+                            //    }
+                            //    return a;
                             //}
                             foreach(var item in Model.Examination_CategoryVMs)
                             {
-                                            <option class="select_option_fromDB" value="@item.questionbank.Id">@item.questionbank.Name (@SumofQues(@item.questionbank.Id) ; @item.count câu)
+                                            <option class="select_option_fromDB" value="@item.questionbank.Id">@item.questionbank.Name ; @item.count câu)
 
                                             </option>
                             }

@@ -13,16 +13,21 @@ namespace Quiz.Database.Repositories
         }
         IEnumerable<Examination_CategoryVM> IExamination_CategoryVMRepository.GetAll()
         {
-            var v = (from questionbank in _context.Question_Banks.Where(p => p.IsDelete == "0")
-                     join question in _context.Questions.Where(q=>q.IsDelete == "0")
-                     on questionbank.Id equals question.Id_Question_Bank into questionsInQuestionBank
-                     from que in questionsInQuestionBank.DefaultIfEmpty()
-                     select new Examination_CategoryVM
+            var v = (from questionbank in _context.Question_Banks
+                     join question in _context.Questions
+                     on questionbank.Id equals question.Id_Question_Bank into data_1 //Bug Group
+                     from que in data_1.DefaultIfEmpty()
+                     select new
                      {
                          questionbank = questionbank,
-                         count = questionsInQuestionBank.Count()
+                         count = data_1.Count()
                      }).AsEnumerable();
-            return v;
+            foreach(var item in v)                                       
+            {
+                Console.WriteLine(item.questionbank.Name + item.count);
+            }
+
+            return (IEnumerable<Examination_CategoryVM>)v.ToList();
         }
     }
 }
