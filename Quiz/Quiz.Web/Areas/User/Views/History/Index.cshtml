@@ -6,10 +6,13 @@
     ViewData["Title"] = "Index";
 }
 
-<div class="form-group">
-    <label class="control-label">User </label>
-    <input asp-for="account.Email_User" class="form-control" placeholder="User" disabled/>
+<div class="form-group forn-group-info">
+    <label class="control-label">User :  </label>
+    <label class="control-label form-control-user-email">@Model.account.Email_User </label>
 </div>
+
+<h2 class="title">History Of Doing Examination</h2>
+
 <table class="table table-hover">
     <thead>
         <tr>
