@@ -20,7 +20,8 @@ namespace Quiz.Web.Areas.User.Controllers
         public IActionResult Index()
         {
             ExamHistoryVM examHistoryVM = new ExamHistoryVM();
-            examHistoryVM.exam_Histories = _unitoWork.ExamHistory.GetAll(includeProperties: "Examination").OrderBy(p => p.DateDoExam);
+            examHistoryVM.account = _unitoWork.Account.GetAll().FirstOrDefault();
+            examHistoryVM.exam_Histories = _unitoWork.ExamHistory.GetAll(includeProperties: "Examination").Where(p=>p.Email_User == examHistoryVM.account.Email_User).OrderBy(p => p.DateDoExam);
             return View(examHistoryVM);
         }
     }
