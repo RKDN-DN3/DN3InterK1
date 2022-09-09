@@ -49,3 +49,21 @@ body {
 .custom-file-input-margin {
     margin-bottom: 10px;
 }
+.form-control-user-email {
+    color: #f0a437;
+    font-weight: 800
+}
+.forn-group-info{
+    margin: 10px;
+    width:100%;
+}
+.title {
+    /*margin: 10px;*/
+    padding: 10px 10px 15px 10px;
+    display: flex;
+    justify-content: center;
+    /*background-color: #ADC9DF;*/
+}
+.table-hover-text-center {
+    text-align: center;
+}

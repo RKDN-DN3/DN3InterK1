@@ -34,8 +34,8 @@ namespace Quiz.Entities
         [Display(Name = "End Time")]
         public DateTime EndTime { get; set; }
 
-        public Accounts Accounts { get; set; }
-        public Examination Examinations { get; set; }
+        public Accounts Account { get; set; }
+        public Examination Examination { get; set; }
         public virtual ICollection<Exam_History_Detail> Exam_History_Details { get; set; }
     }
 }

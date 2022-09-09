@@ -20,26 +20,25 @@ namespace Quiz.Web.Models
                 context.Accounts.AddRange(
                     new Entities.Accounts
                     {
-                        Email_User = "huyln@gmail.com",
-                        Password = "huy123",
-                        Authority = "0",
-                        Name = "huy",
-                        DOB = "02/12/2001",
-                        PhoneNumber = "0325880124",
-                        IsDelete = "0",
-                       
-                    },
-                    new Entities.Accounts
-                    {
                         Email_User = "thanhnq@gmail.com",
                         Password = "thanh123",
                         Authority = "0",
                         Name = "thanh",
                         DOB = "14/6/2002",
                         PhoneNumber = "0325880125",
-                        IsDelete = "1",
-                        
+                        IsDelete = "0"
                     },
+                    new Entities.Accounts
+                    {
+                        Email_User = "huyln@gmail.com",
+                        Password = "huy123",
+                        Authority = "0",
+                        Name = "huy",
+                        DOB = "02/12/2001",
+                        PhoneNumber = "0325880124",
+                        IsDelete = "0"
+                    },
+
                     new Entities.Accounts
                     {
                         Email_User = "trieu@gmail.com",
@@ -48,10 +47,9 @@ namespace Quiz.Web.Models
                         Name = "trieu",
                         DOB = "30/9/2001",
                         PhoneNumber = "0325880125",
-                        IsDelete = "1",
-                        
+                        IsDelete = "0",
                     }
-                    );
+                );
                 context.SaveChanges();
             }
         }
