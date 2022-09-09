@@ -222,6 +222,7 @@ namespace Quiz.Database.Migrations
                     }
                 );
                 context.SaveChanges();
+                //test 12345
             }
         }
     }
