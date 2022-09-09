@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Quiz.Database.Data;
 using Quiz.Database.Migrations;
+using Quiz.Database.Models;
 using Quiz.Database.Repositories;
 using Quiz.Web.Models;
 

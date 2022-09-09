@@ -50,7 +50,8 @@ body {
     margin-bottom: 10px;
 }
 .form-control-user-email {
-    color: #00DEFF;
+    color: #f0a437;
+    font-weight: 800
 }
 .forn-group-info{
     margin: 10px;
@@ -62,4 +63,7 @@ body {
     display: flex;
     justify-content: center;
     /*background-color: #ADC9DF;*/
+}
+.table-hover-text-center {
+    text-align: center;
 }
