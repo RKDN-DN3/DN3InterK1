@@ -84,11 +84,11 @@ namespace Quiz.Database.Data
             //Code Table Exam_History - Mapping Table Accounts with Examinations by table Exam_History
             modelBuilder.Entity<Exam_History>().HasKey(c => new { c.ID_Exam, c.Email_User, c.DateDoExam });
             modelBuilder.Entity<Exam_History>()
-                .HasOne(p => p.Accounts)
+                .HasOne(p => p.Account)
                 .WithMany(p => p.Exam_Historys)
                 .HasForeignKey(c => c.Email_User);
             modelBuilder.Entity<Exam_History>()
-                .HasOne(p => p.Examinations)
+                .HasOne(p => p.Examination)
                 .WithMany(p => p.Exam_Historys)
                 .HasForeignKey(c => c.ID_Exam);
 

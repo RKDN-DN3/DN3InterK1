@@ -8,6 +8,8 @@
 
         IAccountRepository Account { get; }
 
+        IExamHistoryRepository ExamHistory { get; }
+
         void Save();
     }
 }
