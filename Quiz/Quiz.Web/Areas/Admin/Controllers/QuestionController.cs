@@ -24,9 +24,32 @@ namespace Quiz.Web.Controllers
         {
             QuestionsVM questionsVM = new QuestionsVM();
 
-            questionsVM.questions = _unitoWork.Question.GetAll(includeProperties: "Question_Bank").OrderBy(p => p.CreateDate);
+            questionsVM.questions = _unitoWork.Question.GetAll(includeProperties: "Question_Bank").Where(p=>p.IsDelete =="0").OrderBy(p => p.CreateDate);
             return View(questionsVM);
         }
+
+        [HttpGet("Admin/Question/Detail/{id:guid}")]
+        public IActionResult Detail(Guid? id)
+        {
+            QuestionsVM vM = new QuestionsVM();
+            vM.questions = _unitoWork.Question.GetAll(includeProperties: "Question_Bank");
+            vM.answers = _unitoWork.Answer.GetAll(includeProperties: "Question").Where(x => x.Question.Id == id.Value && x.IsDelete == "0");
+            foreach (var item in vM.questions)
+            {
+                if (vM.question.Id_Question_Bank == item.Id_Question_Bank)
+                {
+                    vM.question.Question_Bank.Name = item.Question_Bank.Name;
+                }
+            }
+            vM.question = _unitoWork.Question.GetT(x => x.Id == id.Value);
+            if (vM.question == null)
+            {
+                return NotFound();
+            }
+            string a = vM.question.ImageUrl;
+            return View(vM);
+        }
+
 
         [HttpGet]
         public IActionResult Create()
@@ -95,34 +118,6 @@ namespace Quiz.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet("Delete/{id:guid}")]
-        public IActionResult Delete(Guid? id)
-        {
-            QuestionsVM vM = new QuestionsVM();
-            vM.questions = _unitoWork.Question.GetAll(includeProperties: "Question_Bank");
-
-            if (!id.HasValue)
-            {
-                return NotFound();
-            }
-            vM.question = _unitoWork.Question.GetT(x => x.Id == id.Value);
-            foreach (var item in vM.questions)
-            {
-                if (vM.question.Id_Question_Bank == item.Id_Question_Bank)
-                {
-                    vM.question.Question_Bank.Name = item.Question_Bank.Name;
-                }
-            }
-            if (vM.question != null)
-            {
-                return View(vM);
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
-
         [HttpPost("Delete/{id:guid}"), ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteData(Guid? id)
@@ -132,11 +127,13 @@ namespace Quiz.Web.Controllers
             {
                 return NotFound();
             }
-
-            _unitoWork.Question.Delete(question);
+            question.IsDelete = "1";
+            _unitoWork.Question.Update(question);
             _unitoWork.Save();
             TempData["success"] = "Question delete done!";
             return RedirectToAction("Index");
+
+
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

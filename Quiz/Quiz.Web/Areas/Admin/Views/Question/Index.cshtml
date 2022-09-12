@@ -23,24 +23,23 @@
         </tr>
     </thead>
     <tbody>
-
-        @{
-            string Level(String a)
-            {
-                return (a == "0") ? "Easy" : ((a == "1") ? "Normal" : "Difficult");
-            }
-            string ContentLimitLength(string a)
-            {
-                return (a.Length >= 50) ? (a.Substring(0,49)+"...") : a;
-            }
-            int i = 0;
+    @{
+        string Level(String a)
+        {
+            return (a == "0") ? "Easy" : ((a == "1") ? "Normal" : "Difficult");
+        }
+        string ContentLimitLength(string a)
+        {
+            return (a.Length >= 50) ? (a.Substring(0,49)+"...") : a;
+        }
+        int i = 0;
         @foreach (var item in Model.questions) {
-        <tr style="">
+        <tr onclick="location.href = '@Url.Action("Detail", "Question", new { id=item.Id})'">
             <td>@(++i)</td>
             <td>@ContentLimitLength(@item.Content)</td>
             <td>
                 <img src="@Url.Content("~/Images/" + @item.ImageUrl)" height="80" width="80"   
-                     asp-append-version="true">
+                         asp-append-version="true">
             </td>
             <td>@item.Question_Bank.Name</td>
             <td>@Level(item.Level)</td>
@@ -64,5 +63,4 @@
         }
     }
     </tbody>
-    
 </table>
