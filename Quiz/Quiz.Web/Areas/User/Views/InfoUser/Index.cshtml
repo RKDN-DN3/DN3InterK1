@@ -1,20 +1,22 @@
 ﻿@model Quiz.Database.ViewModels.AccountsVM
 
 @{
-    ViewData["Title"] = "Info-user";
+    ViewData["Title"] = "Index";
 }
-
+<div class="title-name">
 <h1>Info-user</h1>
-<h4>Acounts</h4>
+   <label class="control-label">User :  </label>
+<label class="control-label form-control-user-email">@Model.account.Name </label>
+</div>
 <hr/>
 <div class="row">
-      <dl class="row-1">
+   
         <dt class = "col-sm-2">
              @Html.DisplayNameFor(model => model.account.Email_User)
         </dt>
-        <d class = "col-sm-10">
+        <dd class = "col-sm-10">
            @Html.DisplayFor(model => model.account.Email_User)
-        </d>
+        </dd>
         <dt class = "col-sm-2">
              @Html.DisplayNameFor(model => model.account.Password)
         </dt>
@@ -51,10 +53,8 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.account.CreateDate)
         </dd>
-    </dl>
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+       
+ </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     

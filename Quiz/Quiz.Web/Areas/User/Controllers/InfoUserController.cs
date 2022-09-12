@@ -19,11 +19,8 @@ namespace Quiz.Web.Areas.User.Controllers
         public IActionResult Index()
         {
             AccountsVM vM = new AccountsVM();
-            vM.account = _unitoWork.Account.GetAll().Where(p => p.Email_User == "huyln@gmail.com").FirstOrDefault();
-            if (vM.account == null)
-            {
-                return NotFound();
-            }
+            vM.account = _unitoWork.Account.GetAll().Where(p => p.Email_User == "lengochuy@gmail.com").FirstOrDefault();
+            
             return View(vM);
         }
     }
