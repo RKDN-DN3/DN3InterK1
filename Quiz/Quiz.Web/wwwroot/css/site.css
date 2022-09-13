@@ -78,3 +78,7 @@ body {
     text-align:center; 
     
 }
+.text-center {
+    height: 50px;
+    line-height: 50px;
+}
