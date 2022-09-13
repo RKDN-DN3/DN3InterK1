@@ -90,3 +90,8 @@ body {
 .layout-column-right {
     width: 30%
 }
+}
+.text-center {
+    height: 50px;
+    line-height: 50px;
+}

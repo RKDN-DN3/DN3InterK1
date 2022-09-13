@@ -12,6 +12,8 @@
 
         IAnswerRepository Answer { get; }
 
+        IExaminationRepository Examination{ get; }
+
         void Save();
     }
 }
