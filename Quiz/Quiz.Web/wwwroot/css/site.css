@@ -67,6 +67,18 @@ body {
 .table-hover-text-center {
     text-align: center;
 }
+.row {
+    background: aliceblue;
+    }
+    .row > dt {
+        background: deepskyblue;
+        text-align:center;
+    }
+.title-name{
+    text-align:center; 
+    
+}
+}
 
 .layout-2-column{
     display:flex;
