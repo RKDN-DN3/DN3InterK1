@@ -1,0 +1,114 @@
+﻿@model Quiz.Database.ViewModels.QuestionsVM
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Question</h4>
+    <hr />
+    <div class="layout-2-column">
+        <dl class="row layout-column-left">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.question.Content)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.question.Content)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.question.Question_Bank.Name)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.question.Question_Bank.Name)
+            </dd>
+
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.question.Level)
+            </dt>
+            <dd class = "col-sm-10">
+                @{
+                    string Level(String a)
+                    {
+                        return (a == "0") ? "Easy" : ((a == "1") ? "Normal" : "Difficult");
+                    }
+                        @Html.Raw(Level(Model.question.Level))
+                }
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.question.Type)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.question.Type)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.question.Explaint)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.question.Explaint)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.question.CreateDate)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.question.CreateDate)
+            </dd>
+
+            <dt class = "col-sm-2">
+                Image
+            </dt>
+            
+            @{
+                if(@Model.question.ImageUrl == "" || @Model.question.ImageUrl == null )
+                {
+                    <dd class = "col-sm-10">None</dd>
+                }
+                else
+                {
+                    <dd>
+                        <img src="@Url.Content("~/Images/" + @Model.question.ImageUrl)" height="400" width="400"   
+                        asp-append-version="true">
+                    </dd>
+                }
+            }
+
+
+        </dl>
+
+        <div layout-column-right>
+            <fieldset class="form-group">
+                <legend class="mt-4">Answers</legend>
+                @{
+                    foreach(var item in Model.answers)
+                    {
+                        if(item.IsCorrect == "1")
+                        {
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" disabled="">
+                                    <label  for="optionsRadios1"> @item.Content</label>
+                                </div>
+                        }
+                        else
+                        {
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" disabled="">
+                                    <label  for="optionsRadios1"> @item.Content</label>
+                                </div>
+                        }
+
+                    }
+                }
+            </fieldset>
+        </div>
+    </div>
+
+
+
+
+
+</div>
+<div>
+    <a asp-action="Edit" asp-controller="Question" asp-route-id="@Model.question.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -78,3 +78,15 @@ body {
     text-align:center; 
     
 }
+}
+
+.layout-2-column{
+    display:flex;
+
+}
+.layout-column-left{
+    width: 70%
+}
+.layout-column-right {
+    width: 30%
+}

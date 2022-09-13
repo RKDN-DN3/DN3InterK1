@@ -33,7 +33,7 @@
                 
             <div class="form-group">
                 <input type="hidden" asp-for="ExistingImage" />
-                <label asp-for="question.ImageUrl" class="control-label"></label>
+                <label class="control-label">Image</label>
                 <input asp-for="File" name="file" class="custom-file-input custom-file-input-margin" />
                 <span asp-validation-for="question.ImageUrl" class="text-danger"></span>
                 <img class="a" src="@Url.Content("~/Images/" + @Model.ExistingImage)" height="200" width="200"   
