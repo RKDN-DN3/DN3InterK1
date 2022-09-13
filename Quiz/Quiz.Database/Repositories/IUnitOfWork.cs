@@ -10,6 +10,8 @@
 
         IExamHistoryRepository ExamHistory { get; }
 
+        IAnswerRepository Answer { get; }
+
         IExaminationRepository Examination{ get; }
 
         void Save();

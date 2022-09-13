@@ -21,7 +21,7 @@ namespace Quiz.Web.Controllers
         public IActionResult Index()
         {
             QuestionBanksVM questionbanksVM = new QuestionBanksVM();
-            questionbanksVM.questionbanks = _unitoWork.QuestionBank.GetAll().OrderBy(p => p.CreateDate);
+            questionbanksVM.questionbanks = _unitoWork.QuestionBank.GetAll().Where(p=>p.IsDelete =="0").OrderBy(p => p.CreateDate);
             return View(questionbanksVM);
         }
 
@@ -108,8 +108,8 @@ namespace Quiz.Web.Controllers
             {
                 return NotFound();
             }
-
-            _unitoWork.QuestionBank.Delete(questionbank);
+            questionbank.IsDelete = "1";
+            _unitoWork.QuestionBank.Update(questionbank);
             _unitoWork.Save();
             TempData["success"] = "Question delete done!";
             return RedirectToAction("Index");

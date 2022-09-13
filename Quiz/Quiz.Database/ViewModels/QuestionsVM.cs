@@ -15,5 +15,8 @@ namespace Quiz.Database.ViewModels
         public IEnumerable<Question_Bank> question_Banks { get; set; } = new List<Question_Bank>();
 
         public string? ExistingImage { get; set; }
+
+        public IEnumerable<Answer> answers{ get; set; } = new List<Answer>();
+
     }
 }

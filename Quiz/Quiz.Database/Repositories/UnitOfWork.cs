@@ -13,6 +13,8 @@ namespace Quiz.Database.Repositories
 
         public IExamHistoryRepository ExamHistory { get; private set; }
 
+        public IAnswerRepository Answer { get; private set; }
+
         public IExaminationRepository Examination{ get; private set; }
 
         public UnitOfWork(ApplicationDBContext context)
@@ -22,6 +24,7 @@ namespace Quiz.Database.Repositories
             QuestionBank = new QuestionBankRepository(context);
             Account = new AccountRepository(context);
             ExamHistory = new ExamHistoryRepository(context);
+            Answer = new AnswerRepository(context);
             Examination = new ExaminationRepository(context);
         }
 
