@@ -24,6 +24,10 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
 
+    //auto migration
+    //var context = services.GetService<ApplicationDBContext>();
+    //context.Database.Migrate();
+
     SeedData_Examination.Initialize(services);
     SeedData_Examination_Detail.Initialize(services);
 
@@ -33,7 +37,7 @@ using (var scope = app.Services.CreateScope())
     SeedData_Answer.Initialize(services);
     SeedData_List_Question_In_Exam.Initialize(services);
     SeedData_Exam_History.Initialize(services);
-    SeedData_Exam_History_Detail.Initialize(services);
+    //SeedData_Exam_History_Detail.Initialize(services);
 }
 
 // Configure the HTTP request pipeline.
@@ -45,12 +49,12 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(
-Path.Combine("D:/Git/DN3InterK1/Quiz/Quiz.Web/wwwroot/")),
-    RequestPath = "/StaticFiles"
-});
+//app.UseStaticFiles(new StaticFileOptions
+//{
+//    FileProvider = new PhysicalFileProvider(
+//Path.Combine("D:/Git/DN3InterK1/Quiz/Quiz.Web/wwwroot/")),
+//    RequestPath = "/StaticFiles"
+//});
 
 app.UseRouting();
 
