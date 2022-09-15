@@ -17,7 +17,7 @@ namespace Quiz.Web.Controllers
             _logger = logger;
             _unitoWork = unitoWork;
         }
-
+        [HttpGet("Admin/QuestionBank/Index")]
         public IActionResult Index()
         {
             QuestionBanksVM questionbanksVM = new QuestionBanksVM();

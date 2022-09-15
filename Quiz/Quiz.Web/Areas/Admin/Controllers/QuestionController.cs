@@ -23,6 +23,7 @@ namespace Quiz.Web.Controllers
         }
 
         #region Index question
+        [HttpGet("Admin/Question/Index")]
         public IActionResult Index()
         {
             QuestionsVM questionsVM = new QuestionsVM();

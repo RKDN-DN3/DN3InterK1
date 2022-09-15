@@ -8,21 +8,22 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Quiz.Web.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <script defer src="~/js/site.js"></script>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <div class="container-fluid">
-            <a class="navbar-brand" href="#">Quiz App</a>
+            <a class="navbar-brand" href="#">
+                <img src="https://cdn-beani.nitrocdn.com/gpPeLlVGQBQOpWINxMUyIRvBjqPUHhwN/assets/static/optimized/rev-392a2c2/wp-content/uploads/2021/02/quiz-logo.png" width="90px" height="40px"/>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarColor03">
               <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                  <a class="nav-link active" href="#">Home
-                    <span class="visually-hidden">(current)</span>
-                  </a>
+                  <a class="nav-link Home-Page" asp-area="Admin" asp-action="Index" asp-controller="Home">Home</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" asp-area="Admin" asp-action="Index" asp-controller="Question">Question</a>
@@ -33,30 +34,10 @@
                 <li class="nav-item">
                   <a class="nav-link" asp-area="Admin" asp-action="Index" asp-controller="Accounts">Account</a>
                 </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Separated link</a>
-                  </div>
-                </li>
                 <li class="nav-item">
-                  <a class="nav-link" asp-area="User" asp-action="Index" asp-controller="History">History User</a>
-                </li>
-                 <li class="nav-item">
-                  <a class="nav-link" asp-area="User" asp-action="Index" asp-controller="InfoUser">Info User</a>
-                </li>
-                 <li class="nav-item">
-                  <a class="nav-link" asp-area="User" asp-action="Index" asp-controller="Examination">Do Exam</a>
+                  <a class="nav-link" asp-area="Admin" asp-action="" asp-controller="">Examination</a>
                 </li>
               </ul>
-              <form class="d-flex">
-                <input class="form-control me-sm-2" type="text" placeholder="Search">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-              </form>
             </div>
           </div>
         </nav>

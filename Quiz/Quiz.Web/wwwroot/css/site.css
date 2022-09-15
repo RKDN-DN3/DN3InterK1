@@ -72,10 +72,6 @@ body {
     text-align: center;
 }
 
-.row {
-    /*background: aliceblue;*/
-}
-
 .row > dt {
     background: deepskyblue;
     text-align: center;
@@ -83,7 +79,6 @@ body {
 
 .title-name {
     text-align: center;
-}
 }
 
 .layout-2-column {
@@ -96,7 +91,6 @@ body {
 
 .layout-column-right {
     width: 30%
-}
 }
 
 .text-center {
@@ -310,3 +304,4 @@ table.table .avatar {
     vertical-align: middle;
     line-height: 10px;
 }
+/**********************Navbar**********************/

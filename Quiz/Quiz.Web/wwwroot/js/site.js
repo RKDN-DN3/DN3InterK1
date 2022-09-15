@@ -2,3 +2,16 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+const activePage = window.location.pathname;
+if (activePage == "/") {
+    document.querySelector(`.Home-Page`).classList.add(`nav-link-act`);
+}
+else
+{
+    const navLinks = document.querySelectorAll('nav a').
+        forEach(link => {
+            if (link.href.includes(`${activePage}`)) {
+                link.classList.add(`nav-link-act`);
+            }
+        })
+}
