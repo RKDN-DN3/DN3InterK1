@@ -13,7 +13,7 @@ namespace Quiz.Web.Controllers
         {
             _logger = logger;
         }
-        //[HttpGet("Admin/Home/Index")]
+
         public IActionResult Index()
         {
             return View();
