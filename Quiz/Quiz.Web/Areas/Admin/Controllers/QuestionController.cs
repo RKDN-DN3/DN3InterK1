@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Quiz.Database.Repositories;
 using Quiz.Database.ViewModels;
+using Quiz.Utility.Enum;
 using Quiz.Web.Models;
 using System.Diagnostics;
 
@@ -20,14 +22,18 @@ namespace Quiz.Web.Controllers
             _HostingEnvironment = hostingEnvironment;
         }
 
+        #region Index question
         [HttpGet("Admin/Question/Index")]
         public IActionResult Index()
         {
             QuestionsVM questionsVM = new QuestionsVM();
 
-            questionsVM.questions = _unitoWork.Question.GetAll(includeProperties: "Question_Bank").Where(p=>p.IsDelete =="0").OrderBy(p => p.CreateDate);
+            questionsVM.questions = _unitoWork.Question.GetAll(includeProperties: "Question_Bank").Where(p => p.IsDelete == "0").OrderBy(p => p.CreateDate);
             return View(questionsVM);
         }
+        #endregion
+
+        #region Detail question
 
         [HttpGet("Admin/Question/Detail/{id:guid}")]
         public IActionResult Detail(Guid? id)
@@ -51,59 +57,78 @@ namespace Quiz.Web.Controllers
             return View(vM);
         }
 
+        #endregion Detail question
+
+        #region Create question
 
         [HttpGet]
         public IActionResult Create()
         {
-            QuestionsVM vM = new QuestionsVM();
-            vM.question_Banks = _unitoWork.QuestionBank.GetAll();
-
-            return View(vM);
+            QuestionsVM vm = new QuestionsVM();
+            vm.QuestionBanks = GetQuestionBank();
+            return View(vm);
         }
+
+        private List<SelectListItem> GetQuestionBank() => _unitoWork.QuestionBank.GetAll()
+            .OrderBy(a => a.Name)
+            .Select(a => new SelectListItem()
+            {
+                Value = a.Id.ToString(),
+                Text = a.Name
+            })
+                            .ToList();
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create( QuestionsVM vM)
+        public IActionResult Create(QuestionsVM vM)
         {
+            if (!ModelState.IsValid) return Create();
+
             vM.question.ImageUrl = ProcessUploadedFile(vM);
-            vM.question.IsDelete = "0";
             vM.question.Id = Guid.NewGuid();
-            vM.question.CreateDate = DateTime.Now;
+            vM.question.IsDelete = ConstQuiz.IsDelete_None;
+
             _unitoWork.Question.Add(vM.question);
             _unitoWork.Save();
             return RedirectToAction("Index");
         }
 
+        #endregion Create
+
+        #region Edit question
+
         [HttpGet("Admin/Question/Edit/{id:guid}")]
         public IActionResult Edit(Guid? id)
         {
+            if (Guid.Empty == id && !id.HasValue) return Index();
+
             QuestionsVM vM = new QuestionsVM();
-            if (id.HasValue && vM.question != null)
-            {
-                vM.question = _unitoWork.Question.GetT(x => x.Id == id.Value);
-                vM.question_Banks = _unitoWork.QuestionBank.GetAll();
-                if (vM.question.ImageUrl != null)
-                    vM.ExistingImage = vM.question.ImageUrl;
-                else
-                    vM.ExistingImage = null;
-                return View(vM);
-            }
-            else
+            vM.question = _unitoWork.Question.GetT(x => x.Id == id.Value);
+            if (vM.question == null)
             {
                 return NotFound();
             }
 
-            if (id.Value == null) { return View(vM); }
+            vM.QuestionBanks = GetQuestionBank();
+            if (vM.question.ImageUrl != null)
+            {
+                vM.ExistingImage = vM.question.ImageUrl;
+            }
+            else
+            {
+                vM.ExistingImage = String.Empty;
+            }
+            return View(vM);
         }
 
         [HttpPost("Admin/Question/Edit/{id:guid}")]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Guid? id, QuestionsVM vM)
         {
-            if (id != vM.question.Id)
-            {
-                return NotFound();
-            }
-                if (vM.File != null)
+            if (!ModelState.IsValid) return Edit(id);
+
+            if (id != vM.question.Id) return NotFound();
+            if (vM.File != null)
             {
                 vM.question.ImageUrl = ProcessUploadedFile(vM);
             }
@@ -111,7 +136,7 @@ namespace Quiz.Web.Controllers
             {
                 vM.question.ImageUrl = vM.ExistingImage;
             }
-            vM.question.IsDelete = "0";
+            vM.question.IsDelete = ConstQuiz.IsDelete_None;
             vM.question.UpdateDate = DateTime.Now;
             vM.question.UserUpdate = "";
             _unitoWork.Question.Update(vM.question);
@@ -119,6 +144,9 @@ namespace Quiz.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        #endregion Edit question
+
+        #region Delete question
         [HttpPost("Delete/{id:guid}"), ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteData(Guid? id)
@@ -133,19 +161,13 @@ namespace Quiz.Web.Controllers
             _unitoWork.Save();
             TempData["success"] = "Question delete done!";
             return RedirectToAction("Index");
-
-
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        #endregion
 
         private string ProcessUploadedFile(QuestionsVM vM)
         {
-            string uniqueFileName = null;
+            string uniqueFileName = String.Empty;
 
             if (vM.File != null)
             {
@@ -160,7 +182,13 @@ namespace Quiz.Web.Controllers
             return uniqueFileName;
         }
 
-        #region API
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        #region API Example
 
         public IActionResult AllQuestions()
         {
