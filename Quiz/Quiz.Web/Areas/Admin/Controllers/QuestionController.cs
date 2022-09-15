@@ -20,6 +20,7 @@ namespace Quiz.Web.Controllers
             _HostingEnvironment = hostingEnvironment;
         }
 
+        [HttpGet("Admin/Question/Index")]
         public IActionResult Index()
         {
             QuestionsVM questionsVM = new QuestionsVM();

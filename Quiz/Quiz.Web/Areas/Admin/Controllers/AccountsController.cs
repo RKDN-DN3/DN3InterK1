@@ -18,6 +18,7 @@ namespace Quiz.Web.Controllers
             _logger = logger;
             _unitoWork = unitoWork;
         }
+        [HttpGet("Admin/Accounts/Index")]
         public IActionResult Index()
         {
             AccountsVM accountsVM = new AccountsVM();

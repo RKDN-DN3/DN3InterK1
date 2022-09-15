@@ -101,8 +101,8 @@ body {
 }
 
 .nav-item {
-    margin: 0 50px;
-    padding: 0 10px
+    margin: 0 45px;
+    padding: 0 5px
 }
 
 .nav-link:hover {
@@ -111,8 +111,14 @@ body {
     font-weight: bold
 }
 
-a.active {
+.nav-link-act {
     color: rgb(83, 119, 244);
-    background-color: yellow;
     font-weight: bold
+}
+.navbar-top-fix {
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
 }
