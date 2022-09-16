@@ -14,7 +14,7 @@
             <input type="hidden" asp-for="account.IsDelete" value="0" class="form-control" />
             <div class="form-group">
                 <label asp-for="account.Email_User" class="control-label"></label>
-                <input asp-for="account.Email_User" class="form-control" placeholder="Email User"/>
+                <input asp-for="account.Email_User" class="form-control" placeholder="Email User" />
                 <span asp-validation-for="account.Email_User" class="text-danger"></span>
             </div>
 
@@ -64,11 +64,10 @@
                 </div>
 
             </div>
-            
+
         </form>
     </div>
 </div>
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-

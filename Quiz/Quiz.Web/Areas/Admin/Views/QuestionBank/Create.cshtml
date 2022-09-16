@@ -14,7 +14,7 @@
             <input type="hidden" asp-for="questionbank.IsDelete" value="0" class="form-control" />
             <div class="form-group">
                 <label asp-for="questionbank.Name" class="control-label"></label>
-                <input asp-for="questionbank.Name" class="form-control" placeholder="Content"/>
+                <input asp-for="questionbank.Name" class="form-control" placeholder="Content" />
                 <span asp-validation-for="questionbank.Name" class="text-danger"></span>
             </div>
             <br />
@@ -29,13 +29,10 @@
                 </div>
 
             </div>
-            
+
         </form>
     </div>
 </div>
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-
-
-

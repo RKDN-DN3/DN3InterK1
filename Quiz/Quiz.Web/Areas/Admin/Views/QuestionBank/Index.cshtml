@@ -6,8 +6,8 @@
     ViewData["Title"] = "Index";
 }
 
-
-<a class="btn btn-link" asp-action="Create" asp-controller="QuestionBank"><i class="bi bi-plus-square"></i>Create new question bank</a>
+<a class="btn btn-link" asp-action="Create" asp-controller="QuestionBank"><i class="bi bi-plus-square"></i>Create new
+    question bank</a>
 <table class="table table-hover">
     <thead>
         <tr>
@@ -22,30 +22,32 @@
         @{
             string ContentLimitLength(string a)
             {
-                return (a.Length >= 50) ? (a.Substring(0,49)+"...") : a;
+                return (a.Length >= 50) ? (a.Substring(0, 49) + "...") : a;
             }
             int i = 0;
-        @foreach (var item in Model.questionbanks) {
-        <tr style="">
-            <td>@(++i)</td>
-            <td>@ContentLimitLength(@item.Name)</td>
-            <td>@item.CreateDate</td>
-            <td>
-                <form asp-action="Delete" asp-controller="QuestionBank" asp-route-id="@item.Id">
-                    <div class="btn-group btn-group-sm">
-                        <a asp-action="Edit" asp-controller="QuestionBank" asp-route-id="@item.Id" class="btn btn-warning">
-                            <i class="bi bi-pencil-square"></i>
-                        </a>
-                        <button type="submit" class="btn btn-danger"
-                            onclick="return confirm('Are you sure to delete this record?')">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </div>
-                </form>
-            </td>
-        </tr>
+            @foreach (var item in Model.questionbanks)
+            {
+                <tr style="">
+                    <td>@(++i)</td>
+                    <td>@ContentLimitLength(@item.Name)</td>
+                    <td>@item.CreateDate</td>
+                    <td>
+                        <form asp-action="Delete" asp-controller="QuestionBank" asp-route-id="@item.Id">
+                            <div class="btn-group btn-group-sm">
+                                <a asp-action="Edit" asp-controller="QuestionBank" asp-route-id="@item.Id"
+                                class="btn btn-warning">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <button type="submit" class="btn btn-danger"
+                                onclick="return confirm('Are you sure to delete this record?')">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            }
         }
-    }
     </tbody>
-    
+
 </table>
