@@ -4,6 +4,112 @@
     ViewData["Title"] = "Details";
 }
 
+@Html.AntiForgeryToken()
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <div class="card-header py-3">
+                <h5 class="mb-0">Detail Questions</h5>
+            </div>
+            <div class="card-body mx-3">
+                <form enctype="multipart/form-data" asp-controller="Question" asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="question.Id" />
+                    <input type="hidden" asp-for="question.IsDelete" value="0" class="form-control" />
+                    <div class="form-group form-group-select">
+                        <label class="form-label control-label-select">Category</label>
+                        <select class="form-select form-control pt-0" asp-for="question.Id_Question_Bank"
+                            asp-items="Model.QuestionBanks" disabled="" style="background-color: #fff">
+                            <option disabled selected>Select an item</option>
+                        </select>
+                        <span asp-validation-for="question.Id_Question_Bank" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="question.Content" class="form-label control-label"></label>
+                        <input asp-for="question.Content" class="form-control pt-0" readonly/>
+                        <span asp-validation-for="question.Content" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="question.Level" class="form-label control-label"></label>
+                        <select class="form-select form-control pt-0" asp-for="question.Level" disabled="" style="background-color: #fff">
+                            <option class="select_option_fromDB" value="">Select an item</option>
+                            <option class="select_option_fromDB" value="0">Easy</option>
+                            <option class="select_option_fromDB" value="1">Normal</option>
+                            <option class="select_option_fromDB" value="2">Difficult</option>
+                        </select>
+                        <span asp-validation-for="question.Level" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="question.Type" class="form-label control-label"></label>
+                        <input asp-for="question.Type" class="form-control pt-0" readonly/>
+                        <span asp-validation-for="question.Type" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="question.Explaint" class="form-label control-label"></label>
+                        <textarea asp-for="question.Explaint" class="form-control pt-0" readonly></textarea>
+                        <span asp-validation-for="question.Explaint" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="question.CreateDate" class="form-label control-label"></label>
+                        <input asp-for="question.CreateDate" class="form-control pt-0" readonly/>
+                        <span asp-validation-for="question.CreateDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="hidden" asp-for="ExistingImage" />
+                        <label class="form-label control-label">Image</label>
+                        <input asp-for="File" name="file" class="custom-file-input custom-file-input-margin" disabled/>
+                        <span asp-validation-for="question.ImageUrl" class="text-danger"></span>
+                        <img class="a" src="@Url.Content("~/Images/" + @Model.question.ImageUrl)" height="200" width="200"
+                            asp-append-version="true">
+                    </div>
+                    <input type="hidden" asp-for="question.CreateDate" />
+                    <input type="hidden" asp-for="question.UserCreate" />
+                    <div class="row">
+                        <div class="text-center">
+                            <a asp-action="Index" asp-controller="Question" class="btn btn-primary">Back</a>
+                            <a asp-action="Edit" asp-controller="Question" asp-route-id="@Model.question.Id" class="btn btn-secondary">Edit</a>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="card-header py-3">
+                    <h5 class="mb-0">Answer</h5>
+            </div>
+
+            <div class="card-body mx-3">
+                                @{
+                    foreach (var item in Model.answers)
+                    {
+                        if (item.IsCorrect == "1")
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1"
+                            value="option1" checked="" disabled="">
+                                <label for="optionsRadios1"> @item.Content</label>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1"
+                            value="option1" disabled="">
+                                <label for="optionsRadios1"> @item.Content</label>
+                            </div>
+                        }
+
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <h1>Details</h1>
 
 <div>

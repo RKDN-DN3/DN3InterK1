@@ -13,6 +13,7 @@
                 <form enctype="multipart/form-data" asp-controller="Question" asp-action="Edit">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="question.Id" />
+                    <input type="hidden" asp-for="question.IsDelete" value="0" class="form-control" />
                     <div class="form-group form-group-select">
                         <label class="form-label control-label-select">Category</label>
                         <select class="form-select form-control pt-0" asp-for="question.Id_Question_Bank"

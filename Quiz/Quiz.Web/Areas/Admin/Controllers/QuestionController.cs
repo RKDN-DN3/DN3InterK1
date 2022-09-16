@@ -39,16 +39,18 @@ namespace Quiz.Web.Controllers
         public IActionResult Detail(Guid? id)
         {
             QuestionsVM vM = new QuestionsVM();
-            vM.questions = _unitoWork.Question.GetAll(includeProperties: "Question_Bank");
+            //vM.questions = _unitoWork.Question.GetAll(includeProperties: "Question_Bank");
             vM.answers = _unitoWork.Answer.GetAll(includeProperties: "Question").Where(x => x.Question.Id == id.Value && x.IsDelete == "0");
-            foreach (var item in vM.questions)
-            {
-                if (vM.question.Id_Question_Bank == item.Id_Question_Bank)
-                {
-                    vM.question.Question_Bank.Name = item.Question_Bank.Name;
-                }
-            }
             vM.question = _unitoWork.Question.GetT(x => x.Id == id.Value);
+            vM.QuestionBanks = GetQuestionBank();
+            //foreach (var item in vM.questions)
+            //{
+            //    if (vM.question.Id_Question_Bank == item.Id_Question_Bank)
+            //    {
+            //        vM.question.Question_Bank.Name = item.Question_Bank.Name;
+            //    }
+            //}
+
             if (vM.question == null)
             {
                 return NotFound();

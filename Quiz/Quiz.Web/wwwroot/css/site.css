@@ -305,3 +305,21 @@ table.table .avatar {
     line-height: 10px;
 }
 /**********************Navbar**********************/
+.nav-link:hover {
+    color: rgb(83, 119, 244);
+    position: relative;
+    font-weight: bold
+}
+
+.nav-link-act {
+    color: rgb(83, 119, 244);
+    font-weight: bold
+}
+
+.navbar-top-fix {
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+}
