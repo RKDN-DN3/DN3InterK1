@@ -14,7 +14,9 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-position:center;
+
 }
 .form-group {
     margin-bottom: 10px
@@ -67,14 +69,32 @@ body {
 .table-hover-text-center {
     text-align: center;
 }
-.row {
-    background: aliceblue;
-    }
-    .row > dt {
-        background: deepskyblue;
-        text-align:center;
-    }
-.title-name{
-    text-align:center; 
-    
+.title-name {
+    text-align: center;
+}
+.content {
+    display: flex;
+    width: 630px;
+    text-align: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: #ccc 2px 2px 3px,#ccc -2px 2px 3px;
+    margin-bottom: 40px;
+    background-color: #F2F2F2 !important;
+}
+img {
+    margin-right: 50px;
+    width: 160px;
+    height: 175px;
+}
+h1{
+    text-align:center;
+}
+.container-2 {
+    display: flex;
+    justify-content: center;
+}
+.collumns{
+    display:flex;
 }
