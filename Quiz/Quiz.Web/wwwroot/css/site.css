@@ -323,3 +323,15 @@ table.table .avatar {
     width: 100%;
     z-index: 999;
 }
+
+/**********************Row in Table**********************/
+.form-control-view-pass {
+    padding: 0;
+    width: 80px;
+    background-color: transparent;
+    outline: none;
+}
+.tr-line-height {
+    height: 50px;
+    line-height: 50px;
+}

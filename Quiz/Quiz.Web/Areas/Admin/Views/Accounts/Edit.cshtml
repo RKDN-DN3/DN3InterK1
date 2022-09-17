@@ -4,67 +4,72 @@
     ViewData["Title"] = "Edit";
 }
 @Html.AntiForgeryToken()
-<h1>Edit</h1>
 
-<h4>Questions</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit" asp-controller="Accounts" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="account.IsDelete" value="0" class="form-control" />
-            <input type="hidden" asp-for="account.Email_User" />
-            <div class="form-group form-group-select">
-                <label asp-for="account.Authority" class="control-label-select"> </label>
-                <select asp-for="account.Authority">
-                    <option class="select_option" value="">--Please choose an option--</option>
-                    <option class="select_option" value="0">Admin</option>
-                    <option class="select_option" value="1">User</option>
-                </select>
-                <span asp-validation-for="account.Authority" class="text-danger"></span>
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <div class="card-header py-3">
+                <h5 class="mb-0">Edit Account</h5>
             </div>
+            <div class="card-body mx-3">
+                <form enctype="multipart/form-data" asp-controller="Accounts" asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="account.Email_User" />
+                    <input type="hidden" asp-for="account.IsDelete" value="0" class="form-control" />
 
-            <div class="form-group">
-                <label asp-for="account.Email_User" class="control-label"></label>
-                <input asp-for="account.Email_User" class="form-control" placeholder="Email User" disabled>
-                <span asp-validation-for="account.Email_User" class="text-danger"></span>
-            </div>
+                    <div class="form-group form-group-select">
+                        <label class="form-label control-label-select">Authority</label>
+                        <select class="form-select form-control pt-0" asp-for="account.Authority">
+                            <option class="select_option_fromDB" disabled selected>Select an item</option>
+                            <option class="select_option_fromDB" value="0">Admin</option>
+                            <option class="select_option_fromDB" value="1">User</option>
+                        </select>
+                        <span asp-validation-for="account.Authority" class="text-danger"></span>
+                    </div>
 
+                    <div class="form-group">
+                        <label asp-for="account.Email_User" class="form-label control-label"></label>
+                        <input asp-for="account.Email_User" class="form-control pt-0" placeholder="Email User" readonly>
+                        <span asp-validation-for="account.Email_User" class="text-danger"></span>
+                    </div>
 
-            <div class="form-group">
-                <label asp-for="account.Password" class="control-label"></label>
-                <input asp-for="account.Password" class="form-control" placeholder="Password">
-                <span asp-validation-for="account.Password" class="text-danger"></span>
-            </div>
+                    <div class="form-group">
+                        <label asp-for="account.Password" class="form-label control-label"></label>
+                        <input asp-for="account.Password" type="password" class="form-control pt-0" placeholder="Password" value="@Model.account.Password">
+                        <span asp-validation-for="account.Password" class="text-danger"></span>
+                    </div>
 
-            <div class="form-group">
-                <label asp-for="account.Name" class="control-label"></label>
-                <input asp-for="account.Name" class="form-control" placeholder="Name of user" />
-                <span asp-validation-for="account.Name" class="text-danger"></span>
-            </div>
+                    <div class="form-group">
+                        <label asp-for="account.Name" class="form-label control-label"></label>
+                        <input asp-for="account.Name" class="form-control pt-0" placeholder="Name of user" />
+                        <span asp-validation-for="account.Name" class="text-danger"></span>
+                    </div>
 
-            <div class="form-group">
-                <label asp-for="account.DOB" class="control-label"></label>
-                <input asp-for="account.DOB" class="form-control" />
-                <span asp-validation-for="account.DOB" class="text-danger"></span>
-            </div>
+                    <div class="form-group">
+                        <label asp-for="account.DOB" class="form-label control-label"></label>
+                        <input asp-for="account.DOB" class="form-control pt-0" />
+                        <span asp-validation-for="account.DOB" class="text-danger"></span>
+                    </div>
 
-            <div class="form-group">
-                <label asp-for="account.PhoneNumber" class="control-label"></label>
-                <input asp-for="account.PhoneNumber" class="form-control" placeholder="Phone Number" />
-                <span asp-validation-for="account.PhoneNumber" class="text-danger"></span>
+                    <div class="form-group">
+                        <label asp-for="account.PhoneNumber" class="form-label control-label"></label>
+                        <input asp-for="account.PhoneNumber" class="form-control pt-0" placeholder="Phone Number" />
+                        <span asp-validation-for="account.PhoneNumber" class="text-danger"></span>
+                    </div>
+
+                    <input type="hidden" asp-for="account.CreateDate" />
+                    <input type="hidden" asp-for="account.UserCreate" />
+                    <br />
+                    <div class="row">
+                        <div class="text-center">
+                            <a asp-action="Index" asp-controller="Accounts" class="btn btn-primary">Back</a>
+                            <input type="submit" value="Save" class="btn btn-secondary" />
+                        </div>
+                    </div>
+                </form>
             </div>
-            <input type="hidden" asp-for="account.CreateDate" />
-            <input type="hidden" asp-for="account.UserCreate" />
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

@@ -3,14 +3,11 @@
 
 // Write your JavaScript code.
 const activePage = window.location.pathname;
-if (activePage == "/") {
-    document.querySelector(`.Home-Page`).classList.add(`nav-link-act`);
-}
-else
+if (activePage != "/")
 {
     const navLinks = document.querySelectorAll('nav a').
         forEach(link => {
-            if (link.href.includes(`${activePage}`)) {
+            if (link.href.includes(`${activePage.slice(0, 16)}`)) {
                 link.classList.add(`nav-link-act`);
             }
         })
