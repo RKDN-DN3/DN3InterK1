@@ -6,8 +6,8 @@
     ViewData["Title"] = "Index";
 }
 <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="">Home</a></li>
-    <li class="breadcrumb-item"><a href="#">Question</a></li>
+    <li class="breadcrumb-item"><a href="/Admin/Home/Index">Home</a></li>
+    <li class="breadcrumb-item"><a href="">Question</a></li>
 </ol>
 <div class="">
     <div class="table-wrapper">
@@ -73,11 +73,11 @@
                     <th scope="col">Content</th>
                     <th scope="col"></th>
                     <th scope="col">Category</th>
-                    <th scope="col">Level</th>
+                    <th scope="col" style="text-align:center">Level</th>
                     <th scope="col">Type</th>
                     <th scope="col">Explaint</th>
-                    <th scope="col">Date Create</th>
-                    <th scope="col">Action</th>
+                    <th scope="col" style="text-align:center">Date Create</th>
+                    <th scope="col" style="text-align:center">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -93,7 +93,7 @@
                     int i = 0;
                     @foreach (var item in Model.questions)
                     {
-                        <tr>
+                        <tr  class="tr-line-height">
                             <td>@(++i)</td>
                             <td>@ContentLimitLength(@item.Content)</td>
                             <td>
