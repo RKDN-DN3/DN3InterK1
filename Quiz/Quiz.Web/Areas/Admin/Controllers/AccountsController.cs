@@ -2,6 +2,7 @@
 using Quiz.Database.Enum;
 using Quiz.Database.Repositories;
 using Quiz.Database.ViewModels;
+using Quiz.Entities;
 using Quiz.Web.Models;
 using System.Diagnostics;
 
@@ -39,6 +40,40 @@ namespace Quiz.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                vM.accounts = _unitoWork.Account.GetAll();
+                foreach(var account in vM.accounts)
+                {
+                    if(vM.account.Email_User == account.Email_User)
+                    {
+                        if(account.IsDelete == "1")
+                        {
+                            //_unitoWork.Account.Update(vM.account);
+                            //_unitoWork.Save();
+                            //return RedirectToAction("Index");
+
+                            Accounts a = new Accounts();
+                            a = _unitoWork.Account.GetT(x => x.Email_User == account.Email_User);
+                            a.Password = vM.account.Password;
+                            a.Authority = vM.account.Authority;
+                            a.Name = vM.account.Name;
+                            a.DOB = vM.account.DOB;
+                            a.PhoneNumber = vM.account.PhoneNumber;
+                            a.IsDelete = "0";
+                            a.CreateDate = DateTime.Now;
+                            a.UserCreate = vM.account.UserCreate;
+                            a.UpdateDate = vM.account.UpdateDate;
+                            a.UserUpdate = vM.account.UserUpdate;
+                            _unitoWork.Account.Update(a);
+                            _unitoWork.Save();
+                            return RedirectToAction("Index");
+                        }
+                        else if (account.IsDelete == "0")
+                        {
+                            vM.IsExist = "1";
+                            return View(vM);
+                        }
+                    }
+                }
                 _unitoWork.Account.Add(vM.account);
                 _unitoWork.Save();
                 return RedirectToAction("Index");
@@ -69,10 +104,8 @@ namespace Quiz.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(string? id, AccountsVM vM)
         {
-            if (id != vM.account.Email_User)
-            {
-                return NotFound();
-            }
+            if (!ModelState.IsValid) return Edit(id);
+            if (id != vM.account.Email_User)return NotFound();
             string a = vM.account.Password;
             string b = vM.account.Name;
             vM.account.UpdateDate = DateTime.Now;
@@ -111,7 +144,7 @@ namespace Quiz.Web.Controllers
             {
                 return NotFound();
             }
-            vM.account.IsDelete =Convert.ToString(EnumDelFlag.delete);
+            vM.account.IsDelete ="1";
 
             _unitoWork.Account.Update(vM.account);
             _unitoWork.Save();

@@ -13,11 +13,24 @@
                 <form asp-action="Create" asp-controller="Accounts" enctype="multipart/form-data">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="account.IsDelete" value="0" class="form-control" />
-                    <div class="form-group">
-                        <label asp-for="account.Email_User" class="form-label control-label">Email User</label>
-                        <input asp-for="account.Email_User" class="form-control pt-0" placeholder="Email User"/>
-                        <span asp-validation-for="account.Email_User" class="text-danger"></span>
-                    </div>
+                    @{
+                        if (Model.IsExist == "1")
+                        {
+                        <div class="form-group has-danger" id="divInvalid">
+                            <label asp-for="account.Email_User" class="form-label control-label">Email User</label>
+                            <input type="text" class="form-control pt-0 is-invalid" id="inputInvalid"  asp-for="account.Email_User" placeholder="Email User" onchange="Remove_hasdanger_input()">
+                            <span asp-validation-for="account.Email_User" data-valmsg-replace="true" class="text-danger">This Email is existed, please check again.</span>
+                        </div>
+                        }
+                        else
+                        {      
+                        <div class="form-group">
+                            <label asp-for="account.Email_User" class="form-label control-label">Email User</label>
+                            <input asp-for="account.Email_User" class="form-control pt-0" placeholder="Email User"/>
+                            <span asp-validation-for="account.Email_User" class="text-danger"></span>
+                        </div>
+                        }
+                    }
 
                     <div class="form-group">
                         <label asp-for="account.Password" class="form-label control-label"></label>
