@@ -55,7 +55,12 @@ app.UseHttpsRedirection();
 //Path.Combine("D:/Git/DN3InterK1/Quiz/Quiz.Web/wwwroot/")),
 //    RequestPath = "/StaticFiles"
 //});
-
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+Path.Combine("C:/Users/Admin/source/repos/Quiz/Quiz/Quiz.Web/wwwroot/")),
+    RequestPath = "/StaticFiles"
+});
 app.UseRouting();
 
 app.UseHttpsRedirection();
@@ -67,6 +72,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{area=Admin}/{controller=Home}/{action=Index}/{id?}");
+    pattern: "{area=Login}/{controller=Login}/{action=Index}/{id?}");
 
 app.Run();

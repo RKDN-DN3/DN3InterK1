@@ -4,16 +4,19 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="~/js/site.js" asp-append-version="true"></script>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Login";
 }
+@Html.AntiForgeryToken()
 
 <body class="body-login">
     <div class="overlay">
-        <form class="form-login">
+        <form asp-action="Index" asp-controller="Login" enctype="multipart/form-data" class="form-login">
             <div class="con">
+                <input type="hidden" asp-for="account.IsDelete" value="0" class="form-control" />
+                <input type="hidden" asp-for="account.Authority" value="" class="form-control" />
                 <header class="head-form header-login">
                     <h2>LOGIN</h2>
-                    <p>Login here using your username and password</p>
+                    <p>Login here using your email and password</p>
                 </header>
                 <br>
                 <div class="field-set">
@@ -21,30 +24,27 @@
                         <span class="input-item">
                             <i class="fa fa-user-circle"></i>
                         </span>
-                        <input class="form-input" id="txt-input" type="text" placeholder="UserName" required>
+                        <input asp-for="account.Email_User" class="form-input" id="txt-input" type="text" placeholder="Email User" required>
                     </div>
                     <div class="row-input">
                         <span class="input-item">
                             <i class="fa fa-key"></i>
                         </span>
-                        <input class="form-input" type="password" placeholder="Password" id="pwd"  name="Password" required>
+                        <input asp-for="account.Password" class="form-input" type="password" placeholder="Password" id="pwd"  name="Password" required>
                          <span><i class="fa fa-eye" aria-hidden="true"  type="button" id="eye"></i></span>
                     </div>
                     <br>
                     <div>
-                        <button class="log-in"> Log In </button>
+                        <input type="submit" value="Login" class="log-in btn-form-login"/>
                     </div>
                 </div>
-  
                 <div class="other">
-                  <button class="btn submits frgt-pass">Forgot Password</button>
-                  <button class="btn submits sign-up">Sign Up 
+                  <button class="btn submits frgt-pass btn-form-login">Forgot Password</button>
+                  <button class="btn submits sign-up btn-form-login">Sign Up 
                   <i class="fa fa-user-plus" aria-hidden="true"></i>
                   </button>
                 </div>
             </div>
         </form>
     </div>
-
-
 </body>
