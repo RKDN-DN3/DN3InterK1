@@ -37,7 +37,7 @@ namespace Quiz.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(QuestionBanksVM vM)
         {
-
+            if (!ModelState.IsValid) return Create();
             vM.questionbank.Id = Guid.NewGuid();
             _unitoWork.QuestionBank.Add(vM.questionbank);
             _unitoWork.Save();
@@ -67,10 +67,8 @@ namespace Quiz.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Guid? id, QuestionBanksVM vM)
         {
-            if (id != vM.questionbank.Id)
-            {
-                return NotFound();
-            }
+            if (!ModelState.IsValid) return Edit(id);
+            if (id != vM.questionbank.Id) return NotFound();
             string a = vM.questionbank.Name;
             vM.questionbank.UpdateDate = DateTime.Now;
             _unitoWork.QuestionBank.Update(vM.questionbank);

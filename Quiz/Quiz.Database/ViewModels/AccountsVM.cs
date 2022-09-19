@@ -10,5 +10,7 @@ namespace Quiz.Database.ViewModels
         public Accounts account { get; set; } = new Accounts();
 
         public IEnumerable<Accounts> accounts { get; set; } = new List<Accounts>();
+
+        public String? IsExist { get; set; }
     }
 }
