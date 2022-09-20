@@ -1,6 +1,7 @@
 ﻿@model Quiz.Database.ViewModels.LoginVM;
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 <link rel="stylesheet" href="~/StaticFiles/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/StaticFiles/css/materia.css" asp-append-version="true" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="~/js/site.js" asp-append-version="true"></script>
 @{
@@ -31,18 +32,29 @@
                         <input asp-for="Password" class="form-input" type="password" placeholder="Password" id="pwd"  name="Password" required>
                          <span><i class="fa fa-eye" aria-hidden="true"  type="button" id="eye"></i></span>
                     </div>
-                    <div class="row-input">
-                        <input asp-for="Password" class="form-input" type="password" placeholder="Password" id="pwd"  name="Password" required>
-                         <span><i class="fa fa-eye" aria-hidden="true"  type="button" id="eye"></i></span>
-                    </div>
+                    @{
+                        if(Model.FlagCheckEmail == "0")
+                        {
+                            <div style="font-size:13px; margin-top:5px;">
+                                 <span asp-validation-for="Email_User" data-valmsg-replace="true" class="text-danger">This Email is not existed, please check again.</span>
+                            </div>
+                        }
+                        if(Model.FlagCheckPW == "0")
+                        {
+                            <div style="font-size:13px; margin-top:5px;">
+                                 <span asp-validation-for="Password" data-valmsg-replace="true" class="text-danger">Password is incorrect, please check again.</span>
+                            </div>
+                        }
+                    }
+
                     <br>
                     <div>
-                        <input type="submit" value="Login" class="log-in btn-form-login"/>
+                        <button type="submit" class="log-in btn-form-login">Login</button>
                     </div>
                 </div>
                 <div class="other">
-                  <button class="btn submits frgt-pass btn-form-login">Forgot Password</button>
-                  <button class="btn submits sign-up btn-form-login">Sign Up 
+                  <button class="submits frgt-pass btn-form-login">Forgot Password</button>
+                  <button class="submits sign-up btn-form-login">Sign Up 
                   <i class="fa fa-user-plus" aria-hidden="true"></i>
                   </button>
                 </div>
@@ -50,3 +62,7 @@
         </form>
     </div>
 </body>
+
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -48,14 +48,14 @@ namespace Quiz.Web.Controllers
                     else
                     {
                         //sai pw
-                        vM.FlagCheckPW = "1";
+                        vM.FlagCheckPW = "0";
                         return View(vM);
                     }
                 }   
                 else
                 {
                     //email khong ton tai
-                    vM.FlagCheckEmail = "1";
+                    vM.FlagCheckEmail = "0";
                     return View(vM);
                 }    
                 //_unitoWork.Account.Add(vM.account);

@@ -12,6 +12,14 @@ if (activePage != "/")
             }
         })
 }
+
+function Remove_hasdanger_input() 
+{
+    let a = document.getElementById('inputInvalid');
+    let b = document.getElementById('divInvalid');
+    b.classList.remove('has-danger');
+    a.classList.remove(`is-invalid`);
+}
 function show() {
     var p = document.getElementById('pwd');
     p.setAttribute('type', 'text');
