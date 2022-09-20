@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Quiz.Database.Repositories;
 using Quiz.Database.ViewModels;
+using Quiz.Entities;
 using Quiz.Web.Controllers;
 
 namespace Quiz.Web.Controllers
@@ -19,24 +20,49 @@ namespace Quiz.Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            AccountsVM vM = new AccountsVM();
-            vM.accounts = _unitoWork.Account.GetAll().Where(p => p.IsDelete == "0");
+            LoginVM vM = new LoginVM();
             return View(vM);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Index(AccountsVM vM)
+        public IActionResult Index(LoginVM vM)
         {
-            if (!ModelState.IsValid) return Index();
+            if (ModelState.IsValid)
+            {
+                Accounts acc = _unitoWork.Account.GetT(x => x.Email_User == vM.Email_User && x.IsDelete =="0");
+                if(acc != null)
+                {
+                    if(acc.Password == vM.Password)
+                    {
+                        if (acc.Authority == "0")
+                        {
+                            return Redirect("/Admin/Home/Index"); //HomePageAdmin
+                        }
+                        else if (acc.Authority == "1")
+                        {
+                            return Redirect("/User/Home/Index"); //HomePageUser
 
-            //vM.question.ImageUrl = ProcessUploadedFile(vM);
-            //vM.question.Id = Guid.NewGuid();
-            //vM.question.IsDelete = ConstQuiz.IsDelete_None;
-
-            //_unitoWork.Question.Add(vM.question);
-            _unitoWork.Save();
-            return RedirectToAction("Index");
+                        }
+                    }
+                    else
+                    {
+                        //sai pw
+                        vM.FlagCheckPW = "1";
+                        return View(vM);
+                    }
+                }   
+                else
+                {
+                    //email khong ton tai
+                    vM.FlagCheckEmail = "1";
+                    return View(vM);
+                }    
+                //_unitoWork.Account.Add(vM.account);
+                //_unitoWork.Save();
+                //return RedirectToAction("Index");
+            }
+            return BadRequest(ModelState);
         }
     }
 }
