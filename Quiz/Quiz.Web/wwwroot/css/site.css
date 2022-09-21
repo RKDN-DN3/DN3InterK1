@@ -354,9 +354,6 @@ table.table .avatar {
     background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
     background-attachment: fixed;
     background-repeat: no-repeat;
-    font-family: 'Vibur', cursive;
-    /*   the main font */
-    font-family: 'Abel', sans-serif;
     opacity: .95;
     /* background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%); */
 }
@@ -446,7 +443,6 @@ input[class="form-input"] {
     margin-top: 2%;
     padding: 15px;
     font-size: 16px;
-    font-family: 'Abel', sans-serif;
     color: #5E6472;
     outline: none;
     border: none;

@@ -21,6 +21,23 @@ namespace Quiz.Web.Controllers
         public IActionResult Index()
         {
             LoginVM vM = new LoginVM();
+            try
+            {
+                // Verification.  
+                if (this.User.Identity.IsAuthenticated)
+                {
+                    // Home Page.  
+                    return this.Redirect("/Admin/Home/Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Info  
+                Console.Write(ex);
+            }
+
+            // Info.  
+            //return this.Page();
             return View(vM);
         }
 
@@ -30,6 +47,10 @@ namespace Quiz.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Initialization.  
+                //var loginInfo = await this._unitoWork.
+                //    _unitoWork.LoginByUsernamePasswordMethodAsync(this.LoginModel.Username, this.LoginModel.Password);
+
                 Accounts acc = _unitoWork.Account.GetT(x => x.Email_User == vM.Email_User && x.IsDelete =="0");
                 if(acc != null)
                 {
@@ -58,9 +79,6 @@ namespace Quiz.Web.Controllers
                     vM.FlagCheckEmail = "0";
                     return View(vM);
                 }    
-                //_unitoWork.Account.Add(vM.account);
-                //_unitoWork.Save();
-                //return RedirectToAction("Index");
             }
             return BadRequest(ModelState);
         }

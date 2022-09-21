@@ -1,14 +1,20 @@
 ﻿@model Quiz.Database.ViewModels.LoginVM;
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-<link rel="stylesheet" href="~/StaticFiles/css/site.css" asp-append-version="true" />
-<link rel="stylesheet" href="~/StaticFiles/css/materia.css" asp-append-version="true" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="~/js/site.js" asp-append-version="true"></script>
+
 @{
     ViewData["Title"] = "Login";
 }
 @Html.AntiForgeryToken()
-
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Quiz.Web</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/StaticFiles/css/materia.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Quiz.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</head>
 <body class="body-login">
     <div class="overlay">
         <form asp-action="Index" asp-controller="Login" enctype="multipart/form-data" class="form-login">
@@ -23,26 +29,35 @@
                         <span class="input-item">
                             <i class="fa fa-user-circle"></i>
                         </span>
-                        <input asp-for="Email_User" class="form-input" id="txt-input" type="text" placeholder="Email User" required>
+                        <input asp-for="Email_User" class="form-input" id="txt-input" type="text" placeholder="Email User" required onchange="Removelabel()">
                     </div>
                     <div class="row-input">
                         <span class="input-item">
                             <i class="fa fa-key"></i>
                         </span>
-                        <input asp-for="Password" class="form-input" type="password" placeholder="Password" id="pwd"  name="Password" required>
-                         <span><i class="fa fa-eye" aria-hidden="true"  type="button" id="eye"></i></span>
+                        <input asp-for="Password" class="form-input" type="password" placeholder="Password" id="pwd"  name="Password" required onchange="Removelabel()">
+                         <span><i class="fa fa-eye" aria-hidden="true"  type="button" id="eye" onclick="ShowPW()"></i></span>
                     </div>
                     @{
                         if(Model.FlagCheckEmail == "0")
                         {
                             <div style="font-size:13px; margin-top:5px;">
-                                 <span asp-validation-for="Email_User" data-valmsg-replace="true" class="text-danger">This Email is not existed, please check again.</span>
+                                 <span asp-validation-for="Email_User" data-valmsg-replace="true" 
+                                 class="text-danger" id="span_text_danger">This Email is not existed, please check again.</span>
                             </div>
                         }
                         if(Model.FlagCheckPW == "0")
                         {
                             <div style="font-size:13px; margin-top:5px;">
-                                 <span asp-validation-for="Password" data-valmsg-replace="true" class="text-danger">Password is incorrect, please check again.</span>
+                                 <span asp-validation-for="Password" data-valmsg-replace="true" 
+                                 class="text-danger" id="span_text_danger">Password is incorrect, please check again.</span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div style="font-size:13px; margin-top:5px;">
+                                 <span asp-validation-for="Password" data-valmsg-replace="true" 
+                                 class="text-danger"></span>
                             </div>
                         }
                     }

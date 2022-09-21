@@ -20,6 +20,8 @@ function Remove_hasdanger_input()
     b.classList.remove('has-danger');
     a.classList.remove(`is-invalid`);
 }
+
+//**************************Button eye show Password**************************
 function show() {
     var p = document.getElementById('pwd');
     p.setAttribute('type', 'text');
@@ -31,8 +33,8 @@ function hide() {
 }
 
 var pwShown = 0;
-
-document.getElementById('eye').addEventListener('click', function () {
+function ShowPW()
+{
     if (pwShown == 0) {
         console.log("0");
         pwShown = 1;
@@ -42,5 +44,9 @@ document.getElementById('eye').addEventListener('click', function () {
         pwShown = 0;
         hide();
     }
-}, false);
-
+}
+//**************************Label notif error**************************
+function Removelabel()
+{
+    document.getElementById('span_text_danger').innerHTML="";
+}
