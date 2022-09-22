@@ -6,6 +6,8 @@ using Quiz.Database.Migrations;
 using Quiz.Database.Models;
 using Quiz.Database.Repositories;
 using Quiz.Web.Models;
+using Auth0.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,14 +19,14 @@ builder.Services.AddAuthentication(options =>
     options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 }).AddCookie(options =>
 {
-    options.LoginPath = new PathString("/");
+    options.LoginPath = new PathString("/Login/Login/index");
     options.ExpireTimeSpan = TimeSpan.FromMinutes(5.0);
 });
 //Authorization settings.  
 builder.Services.AddMvc().AddRazorPagesOptions(options =>
 {
-    options.Conventions.AuthorizeFolder("/");
-    options.Conventions.AllowAnonymousToPage("/");
+    options.Conventions.AuthorizeFolder("/Login");
+    options.Conventions.AllowAnonymousToPage("/Login/Login/index");
 });
 
 
@@ -69,18 +71,18 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-//app.UseStaticFiles(new StaticFileOptions
-//{
-//    FileProvider = new PhysicalFileProvider(
-//Path.Combine("D:/Git/DN3InterK1/Quiz/Quiz.Web/wwwroot/")),
-//    RequestPath = "/StaticFiles"
-//});
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
-Path.Combine("C:/Users/Admin/source/repos/Quiz/Quiz/Quiz.Web/wwwroot/")),
+Path.Combine("D:/Git/DN3InterK1/Quiz/Quiz.Web/wwwroot/")),
     RequestPath = "/StaticFiles"
 });
+//app.UseStaticFiles(new StaticFileOptions
+//{
+//    FileProvider = new PhysicalFileProvider(
+//Path.Combine("C:/Users/Admin/source/repos/Quiz/Quiz/Quiz.Web/wwwroot/")),
+//    RequestPath = "/StaticFiles"
+//});
 app.UseRouting();
 
 app.UseHttpsRedirection();
