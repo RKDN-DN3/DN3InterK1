@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Quiz.Database.Data;
@@ -7,6 +8,25 @@ using Quiz.Database.Repositories;
 using Quiz.Web.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//Authorization settings.  
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+}).AddCookie(options =>
+{
+    options.LoginPath = new PathString("/");
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(5.0);
+});
+//Authorization settings.  
+builder.Services.AddMvc().AddRazorPagesOptions(options =>
+{
+    options.Conventions.AuthorizeFolder("/");
+    options.Conventions.AllowAnonymousToPage("/");
+});
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -68,6 +88,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
