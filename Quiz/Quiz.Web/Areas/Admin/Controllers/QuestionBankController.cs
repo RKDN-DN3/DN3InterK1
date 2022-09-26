@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Quiz.Database.Repositories;
 using Quiz.Database.ViewModels;
 using Quiz.Web.Models;
@@ -18,6 +19,7 @@ namespace Quiz.Web.Controllers
             _unitoWork = unitoWork;
         }
         [HttpGet("Admin/QuestionBank/Index")]
+        [Authorize]
         public IActionResult Index()
         {
             QuestionBanksVM questionbanksVM = new QuestionBanksVM();

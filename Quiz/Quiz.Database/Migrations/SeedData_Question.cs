@@ -26,7 +26,7 @@ namespace Quiz.Web.Models
                         Type = "Lập trình C#",
                         Explaint = "kiểu dữ liệu demical",
                         IsDelete = "0",
-                        ImageUrl = ""
+                        ImageUrl = "c_Sharp.jpg?v=Cg50rg97lA-0UeKFRFHn_d4RA7ywmdDyY6mI0KgXl2o"
                     },
 
                     new Entities.Question
@@ -38,7 +38,7 @@ namespace Quiz.Web.Models
                         Type = "Lập trình Asp.net",
                         Explaint = "Search mô hình MVC",
                         IsDelete = "0",
-                        ImageUrl = ""
+                        ImageUrl = "c_Sharp.jpg?v=Cg50rg97lA-0UeKFRFHn_d4RA7ywmdDyY6mI0KgXl2o"
                     },
 
                     new Entities.Question
@@ -50,7 +50,7 @@ namespace Quiz.Web.Models
                         Type = "Toán logic",
                         Explaint = "Bấm máy đi",
                         IsDelete = "0",
-                        ImageUrl = ""
+                        ImageUrl = "c_Sharp.jpg?v=Cg50rg97lA-0UeKFRFHn_d4RA7ywmdDyY6mI0KgXl2o"
                     },
 
                         new Entities.Question
@@ -62,7 +62,7 @@ namespace Quiz.Web.Models
                             Type = "Kiến thức chung",
                             Explaint = "Có thể nghiên cứu trên mạng",
                             IsDelete = "0",
-                            ImageUrl = ""
+                            ImageUrl = "c_Sharp.jpg?v=Cg50rg97lA-0UeKFRFHn_d4RA7ywmdDyY6mI0KgXl2o"
                         },
 
                         new Entities.Question
@@ -74,7 +74,7 @@ namespace Quiz.Web.Models
                             Type = "Di truyền gen",
                             Explaint = "Sinh học",
                             IsDelete = "0",
-                            ImageUrl = ""
+                            ImageUrl = "c_Sharp.jpg?v=Cg50rg97lA-0UeKFRFHn_d4RA7ywmdDyY6mI0KgXl2o"
                         },
 
                         new Entities.Question
@@ -86,7 +86,7 @@ namespace Quiz.Web.Models
                             Type = "Toán logic",
                             Explaint = "Có thể nghiên cứu trên mạng",
                             IsDelete = "0",
-                            ImageUrl = ""
+                            ImageUrl = "c_Sharp.jpg?v=Cg50rg97lA-0UeKFRFHn_d4RA7ywmdDyY6mI0KgXl2o"
                         },
 
                         new Entities.Question
@@ -98,7 +98,7 @@ namespace Quiz.Web.Models
                             Type = "Toán logic",
                             Explaint = "1 gói mè ~ 1$",
                             IsDelete = "0",
-                            ImageUrl = ""
+                            ImageUrl = "c_Sharp.jpg?v=Cg50rg97lA-0UeKFRFHn_d4RA7ywmdDyY6mI0KgXl2o"
                         },
 
                         new Entities.Question
@@ -110,7 +110,7 @@ namespace Quiz.Web.Models
                             Type = "Vật lý đại cương ",
                             Explaint = "Bấm máy",
                             IsDelete = "0",
-                            ImageUrl = ""
+                            ImageUrl = "c_Sharp.jpg?v=Cg50rg97lA-0UeKFRFHn_d4RA7ywmdDyY6mI0KgXl2o"
                         }
                     );
                 context.SaveChanges();

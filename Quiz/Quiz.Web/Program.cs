@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Quiz.Database.Data;
@@ -5,8 +6,29 @@ using Quiz.Database.Migrations;
 using Quiz.Database.Models;
 using Quiz.Database.Repositories;
 using Quiz.Web.Models;
+using Auth0.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//Authorization settings.  
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+}).AddCookie(options =>
+{
+    options.LoginPath = new PathString("/Login/Login/index");
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(5.0);
+});
+//Authorization settings.  
+builder.Services.AddMvc().AddRazorPagesOptions(options =>
+{
+    options.Conventions.AuthorizeFolder("/Login");
+    options.Conventions.AllowAnonymousToPage("/Login/Login/index");
+});
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -63,10 +85,11 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{area=Admin}/{controller=Home}/{action=Index}/{id?}");
+    pattern: "{area=Login}/{controller=Login}/{action=Index}/{id?}");
 
 app.Run();

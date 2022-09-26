@@ -20,3 +20,33 @@ function Remove_hasdanger_input()
     b.classList.remove('has-danger');
     a.classList.remove(`is-invalid`);
 }
+
+//**************************Button eye show Password**************************
+function show() {
+    var p = document.getElementById('pwd');
+    p.setAttribute('type', 'text');
+}
+
+function hide() {
+    var p = document.getElementById('pwd');
+    p.setAttribute('type', 'password');
+}
+
+var pwShown = 0;
+function ShowPW()
+{
+    if (pwShown == 0) {
+        console.log("0");
+        pwShown = 1;
+        show();
+    } else {
+        console.log("1");
+        pwShown = 0;
+        hide();
+    }
+}
+//**************************Label notif error**************************
+function Removelabel()
+{
+    document.getElementById('span_text_danger').innerHTML="";
+}
