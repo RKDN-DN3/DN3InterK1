@@ -74,15 +74,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
-Path.Combine("D:/Git/DN3InterK1/Quiz/Quiz.Web/wwwroot/")),
+Path.Combine("D:/RK/DN3GIT/DN3InterK1/Quiz/Quiz.Web/wwwroot/")),
     RequestPath = "/StaticFiles"
 });
-//app.UseStaticFiles(new StaticFileOptions
-//{
-//    FileProvider = new PhysicalFileProvider(
-//Path.Combine("C:/Users/Admin/source/repos/Quiz/Quiz/Quiz.Web/wwwroot/")),
-//    RequestPath = "/StaticFiles"
-//});
+
 app.UseRouting();
 
 app.UseHttpsRedirection();
