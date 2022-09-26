@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Quiz.Database.Repositories;
 using Quiz.Database.ViewModels;
 using Quiz.Entities;
@@ -11,12 +13,43 @@ namespace Quiz.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private IUnitOfWork _unitoWork;
+        //private UserManager<TUser> userManager;
 
         public LoginController(IUnitOfWork unitoWork, ILogger<HomeController> logger)
         {
             _logger = logger;
             _unitoWork = unitoWork;
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ForgotPassword()
+        {
+            ForgotPWVM vM = new ForgotPWVM();
+            return View(vM);
+        }
+        //[HttpPost]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> ForgotPassword(ForgotPWVM vM)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var user = await userManager.FindByEmailAsync(vM.Email);
+        //        if(user == null && await userManager.IsEmailConfirmedAsync(user))
+        //        {
+        //            var token = await userManager.GeneratePasswordResetTokenAsync(user);
+
+        //            var PasswordResetLink = Url.Action("Reset Password", "Login", new { email = vM.Email, token = token },
+        //            Request.Scheme);
+
+        //            _logger.Log(LogLevel.Warning, PasswordResetLink);
+
+        //            return View("ForgotPasswordConfirm");
+        //        }
+        //        return View("ForgotPasswordConfirm");
+        //    }
+        //    return BadRequest(ModelState);
+        //}
         [HttpGet]
         public IActionResult Index()
         {
@@ -82,5 +115,6 @@ namespace Quiz.Web.Controllers
             }
             return BadRequest(ModelState);
         }
+
     }
 }

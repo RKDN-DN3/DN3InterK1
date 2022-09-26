@@ -17,7 +17,7 @@
 </head>
 <body class="body-login">
     <div class="overlay">
-        <form asp-action="Index" asp-controller="Login" enctype="multipart/form-data" class="form-login">
+        <form asp-action="Index" asp-controller="Login" class="form-login">
             <div class="con">
                 <header class="head-form header-login">
                     <h2>LOGIN</h2>
@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="other">
-                  <button class="submits frgt-pass btn-form-login">Forgot Password</button>
+                  <a class="submits frgt-pass btn-form-login" asp-action="ForgotPassword" asp-controller="Login" asp-area="Login">Forgot Password</a>
                   <button class="submits sign-up btn-form-login">Sign Up 
                   <i class="fa fa-user-plus" aria-hidden="true"></i>
                   </button>
