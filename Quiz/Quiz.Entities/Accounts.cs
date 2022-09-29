@@ -2,7 +2,7 @@
 
 namespace Quiz.Entities
 {
-    public class Accounts : BaseEntity
+    public class Accounts
     {
         [Key]
         [StringLength(100)]
@@ -30,7 +30,5 @@ namespace Quiz.Entities
         [StringLength(100)]
         [Display(Name = "Phone Number")]
         public string? PhoneNumber { get; set; }
-
-        public virtual ICollection<Exam_History>? Exam_Historys { get; set; }
     }
 }
