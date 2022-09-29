@@ -5,6 +5,7 @@
 @{
     ViewData["Title"] = "Index";
 }
+@Html.AntiForgeryToken()
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/Admin/Home/Index">Home</a></li>
     <li class="breadcrumb-item"><a href="">Question</a></li>
@@ -17,12 +18,14 @@
                     <h2>Manage Questions</h2>
                 </div>
                 <div class="col-sm-8">
+                    <input type="hidden" asp-for="Search_Level" value="" class="form-control" />
                     <a class="btn btn-primary" asp-action="Create" asp-controller="Question"><i
                             class="bi bi-plus-circle"></i> Add new</a>
                     <a class="btn btn-secondary"><i class="bi bi-filetype-csv"></i><span>Export to CSV</span></a>
                 </div>
             </div>
         </div>
+        <form asp-action="Index" asp-controller="Question" >
         <div class="table-filter">
             <div class="row">
                 <div class="col-sm-3">
@@ -40,32 +43,31 @@
                 <div class="col-sm-9">
 
                     <div class="filter-group">
-                        <input type="text" class="form-control px-0 py-1" placeholder="Search">
-                        <button type="button" class="btn btn-sm btn-primary"><i class="bi bi-search"></i></button>
+                        <input type="text" class="form-control px-0 py-1" asp-for="Search_Content" placeholder="Search" onClick="this.select();">
+                        <button type="submit" class="btn btn-sm btn-primary"><i class="bi bi-search"></i></button>
+                        
                     </div>
                     <div class="filter-group">
                         <label>Category</label>
-                        <select class="form-control">
-                            <option>Any</option>
-                            <option>Delivered</option>
-                            <option>Shipped</option>
-                            <option>Pending</option>
-                            <option>Cancelled</option>
+                        <select class="form-control" asp-for="Search_Category"
+                        asp-items="Model.QuestionBanks" style="width:200px">
+                            <option class="select_option_fromDB" value=null>All</option>
                         </select>
                     </div>
                     <div class="filter-group">
                         <label>Level</label>
-                        <select class="form-control">
-                            <option>All</option>
+                        <select  asp-for="Search_Level" class="form-control">
+                            <option class="select_option_fromDB" value="">All</option>
                             <option class="select_option_fromDB" value="0">Easy</option>
                             <option class="select_option_fromDB" value="1">Normal</option>
-                            <option class="select_option_fromDB" value="1">Difficult</option>
+                            <option class="select_option_fromDB" value="2">Difficult</option>
                         </select>
                     </div>
                     <span class="filter-icon"><i class="bi bi-funnel"></i></span>
                 </div>
             </div>
         </div>
+        </form>
         <table class="table table-hover">
             <thead>
                 <tr>

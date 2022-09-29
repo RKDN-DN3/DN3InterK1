@@ -1,4 +1,4 @@
-﻿using Fluent.Infrastructure.FluentModel;
+﻿//using Fluent.Infrastructure.FluentModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,13 +14,13 @@ namespace Quiz.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private IUnitOfWork _unitoWork;
-        private readonly UserManager<ApplicationUser> _userManager;
+        //private readonly UserManager<ApplicationUser> _userManager;
 
-        public LoginController(IUnitOfWork unitoWork, ILogger<HomeController> logger, UserManager<ApplicationUser> userManager)
+        public LoginController(IUnitOfWork unitoWork, ILogger<HomeController> logger)
         {
             _logger = logger;
             _unitoWork = unitoWork;
-            _userManager = userManager;
+            //_userManager = userManager;
         }
 
         [HttpGet]
@@ -31,28 +31,28 @@ namespace Quiz.Web.Controllers
             return View(vM);
         }
 
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<IActionResult> ForgotPassword(ForgotPWVM vM)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = await _userManager.FindByEmailAsync(vM.Email);
-                if (user == null && await _userManager.IsEmailConfirmedAsync(user))
-                {
-                    var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+        //[HttpPost]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> ForgotPassword(ForgotPWVM vM)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var user = await _userManager.FindByEmailAsync(vM.Email);
+        //        if (user == null && await _userManager.IsEmailConfirmedAsync(user))
+        //        {
+        //            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
 
-                    var PasswordResetLink = Url.Action("Reset Password", "Login", new { email = vM.Email, token = token },
-                    Request.Scheme);
+        //            var PasswordResetLink = Url.Action("Reset Password", "Login", new { email = vM.Email, token = token },
+        //            Request.Scheme);
 
-                    _logger.Log(LogLevel.Warning, PasswordResetLink);
+        //            _logger.Log(LogLevel.Warning, PasswordResetLink);
 
-                    return View("ForgotPasswordConfirm");
-                }
-                return View("ForgotPasswordConfirm");
-            }
-            return BadRequest(ModelState);
-        }
+        //            return View("ForgotPasswordConfirm");
+        //        }
+        //        return View("ForgotPasswordConfirm");
+        //    }
+        //    return BadRequest(ModelState);
+        //}
 
         [HttpGet]
         public IActionResult Index()

@@ -24,48 +24,40 @@
                 </div>
             </div>
         </div>
-        <div class="table-filter">
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="show-entries">
-                        <span>Show</span>
-                        <select class="form-control">
-                            <option>5</option>
-                            <option>10</option>
-                            <option>15</option>
-                            <option>20</option>
-                        </select>
-                        <span>entries</span>
+        <form asp-action="Index" asp-controller="Accounts" >
+            <div class="table-filter">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="show-entries">
+                            <span>Show</span>
+                            <select class="form-control">
+                                <option>5</option>
+                                <option>10</option>
+                                <option>15</option>
+                                <option>20</option>
+                            </select>
+                            <span>entries</span>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-9">
+                    <div class="col-sm-9">
 
-                    <div class="filter-group">
-                        <input type="text" class="form-control px-0 py-1" placeholder="Search">
-                        <button type="button" class="btn btn-sm btn-primary"><i class="bi bi-search"></i></button>
+                        <div class="filter-group">
+                            <input type="text" class="form-control px-0 py-1" asp-for="Search_Content" placeholder="Search" onClick="this.select();">
+                            <button type="submit" class="btn btn-sm btn-primary"><i class="bi bi-search"></i></button>
+                        </div>
+                        <div class="filter-group">
+                            <label>Authority</label>
+                            <select asp-for="Search_Author" class="form-control">
+                                <option class="select_option_fromDB" value="">All</option>
+                                <option class="select_option_fromDB" value="0">Admin</option>
+                                <option class="select_option_fromDB" value="1">User</option>
+                            </select>
+                        </div>
+                        <span class="filter-icon"><i class="bi bi-funnel"></i></span>
                     </div>
-                    <div class="filter-group">
-                        <label>Category</label>
-                        <select class="form-control">
-                            <option>Any</option>
-                            <option>Delivered</option>
-                            <option>Shipped</option>
-                            <option>Pending</option>
-                            <option>Cancelled</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>Authority</label>
-                        <select class="form-control">
-                            <option>All</option>
-                            <option class="select_option_fromDB" value="0">Admin</option>
-                            <option class="select_option_fromDB" value="1">User</option>
-                        </select>
-                    </div>
-                    <span class="filter-icon"><i class="bi bi-funnel"></i></span>
                 </div>
             </div>
-        </div>
+        </form>
         <table class="table table-hover">
             <thead>
                 <tr class="table-hover-text-center">

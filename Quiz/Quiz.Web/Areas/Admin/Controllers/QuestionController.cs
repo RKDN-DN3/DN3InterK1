@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿//using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Quiz.Database.Repositories;
 using Quiz.Database.ViewModels;
@@ -9,6 +10,9 @@ using System.Diagnostics;
 namespace Quiz.Web.Controllers
 {
     [Area("Admin")]
+    //[Authorize]
+    //[ApiController]
+    //[Route("api/[controller]")]
     public class QuestionController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -23,12 +27,28 @@ namespace Quiz.Web.Controllers
         }
 
         #region Index question
-        [HttpGet("Admin/Question/Index")]
+        [HttpGet("/Admin/Question/Index")]
         public IActionResult Index()
         {
             QuestionsVM questionsVM = new QuestionsVM();
-
+            questionsVM.QuestionBanks = GetQuestionBank();
             questionsVM.questions = _unitoWork.Question.GetAll(includeProperties: "Question_Bank").Where(p => p.IsDelete == "0").OrderBy(p => p.CreateDate);
+            return View(questionsVM);
+        }
+        [HttpPost("/Admin/Question/Index")]
+        [ValidateAntiForgeryToken]
+        public IActionResult Index(QuestionsVM questionsVM)
+        {
+            questionsVM.QuestionBanks = GetQuestionBank();
+            questionsVM.questions = _unitoWork.Question.GetAll(includeProperties: "Question_Bank").Where(p => p.IsDelete == "0").OrderBy(p => p.CreateDate);
+            
+            if (questionsVM.Search_Level != "" && questionsVM.Search_Level != null)
+                questionsVM.questions = questionsVM.questions.Where(p => p.Level == questionsVM.Search_Level ).OrderBy(p => p.CreateDate);
+            if (questionsVM.Search_Category != null)
+                questionsVM.questions = questionsVM.questions.Where(p => p.Id_Question_Bank == questionsVM.Search_Category).OrderBy(p => p.CreateDate);
+            if(questionsVM.Search_Content != "" && questionsVM.Search_Content != null)
+                questionsVM.questions = questionsVM.questions.Where(p=>p.Content.Contains(questionsVM.Search_Content)).OrderBy(p => p.CreateDate);
+            
             return View(questionsVM);
         }
         #endregion
@@ -191,5 +211,7 @@ namespace Quiz.Web.Controllers
         }
 
         #endregion API
+
+
     }
 }

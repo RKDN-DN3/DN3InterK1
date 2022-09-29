@@ -10,5 +10,7 @@ namespace Quiz.Database.ViewModels
         public Question_Bank questionbank { get; set; } = new Question_Bank();
 
         public IEnumerable<Question_Bank> questionbanks { get; set; } = new List<Question_Bank>();
+
+        public string? Search_Content { get; set; }
     }
 }

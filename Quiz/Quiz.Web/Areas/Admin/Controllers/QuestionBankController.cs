@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Quiz.Database.Repositories;
 using Quiz.Database.ViewModels;
 using Quiz.Web.Models;
@@ -18,15 +17,25 @@ namespace Quiz.Web.Controllers
             _logger = logger;
             _unitoWork = unitoWork;
         }
-        [HttpGet("Admin/QuestionBank/Index")]
-        [Authorize]
+        [HttpGet("/Admin/QuestionBank/Index")]
+        //[Authorize]
         public IActionResult Index()
         {
             QuestionBanksVM questionbanksVM = new QuestionBanksVM();
             questionbanksVM.questionbanks = _unitoWork.QuestionBank.GetAll().Where(p=>p.IsDelete =="0").OrderBy(p => p.CreateDate);
             return View(questionbanksVM);
         }
+        [HttpPost("/Admin/QuestionBank/Index")]
+        [ValidateAntiForgeryToken]
+        public IActionResult Index(QuestionBanksVM questionbanksVM)
+        {
+            questionbanksVM.questionbanks = _unitoWork.QuestionBank.GetAll().Where(p => p.IsDelete == "0").OrderBy(p => p.CreateDate);
 
+            if (questionbanksVM.Search_Content != "" && questionbanksVM.Search_Content != null)
+                questionbanksVM.questionbanks = questionbanksVM.questionbanks.Where(p => p.Name.Contains(questionbanksVM.Search_Content)).OrderBy(p => p.CreateDate);
+
+            return View(questionbanksVM);
+        }
 
 
         [HttpGet]
