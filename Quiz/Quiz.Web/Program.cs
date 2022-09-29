@@ -1,12 +1,9 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
-using Microsoft.IdentityModel.Tokens;
 using Quiz.Database.Data;
 using Quiz.Database.Repositories;
 using Quiz.Entities;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +17,11 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 // Add Identity
 builder.Services.AddDefaultIdentity<ApplicationUser>()
     .AddEntityFrameworkStores<ApplicationDBContext>()
-    .AddDefaultTokenProviders();
+    .AddDefaultTokenProviders().AddDefaultUI();
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = $"/Login";
+});
 builder.Services.AddRazorPages();
 
 builder.Services.AddControllersWithViews();
