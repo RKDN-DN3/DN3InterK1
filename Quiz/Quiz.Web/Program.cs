@@ -71,10 +71,11 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+string startupPath = Environment.CurrentDirectory;
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
-Path.Combine("D:/RK/DN3GIT/DN3InterK1/Quiz/Quiz.Web/wwwroot/")),
+Path.Combine(startupPath+ "/wwwroot/")),
     RequestPath = "/StaticFiles"
 });
 
