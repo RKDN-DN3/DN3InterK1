@@ -3,7 +3,7 @@ using Quiz.Entities;
 
 namespace Quiz.Database.Repositories
 {
-    public class AccountRepository : Repository<Accounts>, IAccountRepository
+    public class AccountRepository : Repository<ApplicationUser>, IAccountRepository
     {
         private readonly ApplicationDBContext _context;
 

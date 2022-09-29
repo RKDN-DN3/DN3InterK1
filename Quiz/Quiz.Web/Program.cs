@@ -1,20 +1,29 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.IdentityModel.Tokens;
 using Quiz.Database.Data;
 using Quiz.Database.Repositories;
+using Quiz.Entities;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-
+// Add DB context
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("QuizConnect"), b => b.MigrationsAssembly("Quiz.Database"));
 });
-
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+// Add Identity
+builder.Services.AddDefaultIdentity<ApplicationUser>()
+    .AddEntityFrameworkStores<ApplicationDBContext>()
+    .AddDefaultTokenProviders();
+builder.Services.AddRazorPages();
+
+builder.Services.AddControllersWithViews();
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
@@ -36,7 +45,7 @@ string startupPath = Environment.CurrentDirectory;
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
-Path.Combine(startupPath+ "/wwwroot/")),
+Path.Combine(startupPath + "/wwwroot/")),
     RequestPath = "/StaticFiles"
 });
 

@@ -2,12 +2,12 @@
 
 namespace Quiz.Database.Repositories
 {
-    public interface IAccountRepository : IRepository<Accounts>
+    public interface IAccountRepository : IRepository<ApplicationUser>
     {
-        void Add(Accounts account);
+        void Add(ApplicationUser account);
 
-        void Update(Accounts account);
+        void Update(ApplicationUser account);
 
-        void Delete(Accounts account);
+        void Delete(ApplicationUser account);
     }
 }
