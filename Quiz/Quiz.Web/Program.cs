@@ -8,30 +8,32 @@ using Quiz.Database.Repositories;
 using Quiz.Web.Models;
 using Auth0.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+//using Fluent.Infrastructure.FluentModel;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//Authorization settings.  
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-}).AddCookie(options =>
-{
-    options.LoginPath = new PathString("/Login/Login/index");
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(5.0);
-});
-//Authorization settings.  
-builder.Services.AddMvc().AddRazorPagesOptions(options =>
-{
-    options.Conventions.AuthorizeFolder("/Login");
-    options.Conventions.AllowAnonymousToPage("/Login/Login/index");
-});
+////Authorization settings.  
+//builder.Services.AddAuthentication(options =>
+//{
+//    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+//    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+//    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+//}).AddCookie(options =>
+//{
+//    options.LoginPath = new PathString("/Login/Login/index");
+//    options.ExpireTimeSpan = TimeSpan.FromMinutes(5.0);
+//});
+////Authorization settings.  
+//builder.Services.AddMvc().AddRazorPagesOptions(options =>
+//{
+//    options.Conventions.AuthorizeFolder("/Login");
+//    options.Conventions.AllowAnonymousToPage("/Login/Login/index");
+//});
 
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
+//// Add services to the container.
+//builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
 {
@@ -39,6 +41,17 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 });
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+//// Add Identity
+//builder.Services.AddDefaultIdentity<ApplicationUser>()
+//    .AddEntityFrameworkStores<ApplicationDBContext>()
+//    .AddDefaultTokenProviders().AddDefaultUI();
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = $"/Login";
+});
+builder.Services.AddRazorPages();
+
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 

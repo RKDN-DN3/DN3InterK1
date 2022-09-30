@@ -17,5 +17,10 @@ namespace Quiz.Database.ViewModels
 
         public IEnumerable<Answer> answers{ get; set; } = new List<Answer>();
 
+        public string? Search_Level { get; set; }
+
+        public Guid? Search_Category { get; set; }
+
+        public string? Search_Content { get; set; }
     }
 }

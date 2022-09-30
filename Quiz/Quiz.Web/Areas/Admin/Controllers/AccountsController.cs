@@ -19,14 +19,26 @@ namespace Quiz.Web.Controllers
             _logger = logger;
             _unitoWork = unitoWork;
         }
-        [HttpGet("Admin/Accounts/Index")]
+        [HttpGet("/Admin/Accounts/Index")]
         public IActionResult Index()
         {
             AccountsVM accountsVM = new AccountsVM();
-            accountsVM.accounts = _unitoWork.Account.GetAll().Where(p=>p.IsDelete == "0");
+            accountsVM.accounts = _unitoWork.Account.GetAll().Where(p=>p.IsDelete == "0").OrderBy(p => p.CreateDate);
             return View(accountsVM);
-        }        
+        }
+        [HttpPost("/Admin/Accounts/Index")]
+        [ValidateAntiForgeryToken]
+        public IActionResult Index(AccountsVM accountsVM)
+        {
+            accountsVM.accounts = _unitoWork.Account.GetAll().Where(p => p.IsDelete == "0").OrderBy(p => p.CreateDate);
 
+            if (accountsVM.Search_Author != "" && accountsVM.Search_Author != null)
+                accountsVM.accounts = accountsVM.accounts.Where(p => p.Authority == accountsVM.Search_Author).OrderBy(p => p.CreateDate);
+            if (accountsVM.Search_Content != "" && accountsVM.Search_Content != null)
+                accountsVM.accounts = accountsVM.accounts.Where(p => p.Email_User.Contains(accountsVM.Search_Content)).OrderBy(p => p.CreateDate);
+
+            return View(accountsVM);
+        }
         [HttpGet]
         public IActionResult Create()
         {
@@ -133,7 +145,7 @@ namespace Quiz.Web.Controllers
             }
         }
 
-        [HttpPost ]
+        [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteData(string? id)

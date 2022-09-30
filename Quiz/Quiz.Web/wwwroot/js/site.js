@@ -9,6 +9,7 @@ if (activePage != "/")
         forEach(link => {
             if (link.href.includes(`${activePage.slice(0, 16)}`)) {
                 link.classList.add(`nav-link-act`);
+                console.log(activePage.slice(0, 16));
             }
         })
 }

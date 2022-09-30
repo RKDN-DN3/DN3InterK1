@@ -14,7 +14,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <div class="container-fluid">
-            <a class="navbar-brand" asp-area="Admin" asp-action="Index" asp-controller="Home">
+            <a class="navbar-brand" asp-area="User" asp-action="Index" asp-controller="Home">
                 <img src="@Url.Content("~/Images/quiz-logo.png")" style="height:40px;"/>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,16 +23,13 @@
             <div class="collapse navbar-collapse" id="navbarColor03">
               <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                  <a class="nav-link" asp-area="Admin" asp-action="Index" asp-controller="Question">Question</a>
+                  <a class="nav-link" asp-area="User" asp-action="Index" asp-controller="Examination">Examination</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" asp-area="Admin" asp-action="Index" asp-controller="QuestionBank">Category</a>
+                  <a class="nav-link" asp-area="User" asp-action="Index" asp-controller="History">History</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" asp-area="Admin" asp-action="Index" asp-controller="Accounts">Account</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" asp-area="Admin" asp-action="Index" asp-controller="Home">Examination</a>
+                  <a class="nav-link" asp-area="User" asp-action="Index" asp-controller="InfoUser">Info</a>
                 </li>
               </ul>
             </div>

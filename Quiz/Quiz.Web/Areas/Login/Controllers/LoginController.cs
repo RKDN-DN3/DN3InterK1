@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿//using Fluent.Infrastructure.FluentModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Quiz.Database.Repositories;
@@ -13,12 +14,13 @@ namespace Quiz.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private IUnitOfWork _unitoWork;
-        //private UserManager<TUser> userManager;
+        //private readonly UserManager<ApplicationUser> _userManager;
 
         public LoginController(IUnitOfWork unitoWork, ILogger<HomeController> logger)
         {
             _logger = logger;
             _unitoWork = unitoWork;
+            //_userManager = userManager;
         }
 
         [HttpGet]
@@ -28,16 +30,17 @@ namespace Quiz.Web.Controllers
             ForgotPWVM vM = new ForgotPWVM();
             return View(vM);
         }
+
         //[HttpPost]
         //[AllowAnonymous]
         //public async Task<IActionResult> ForgotPassword(ForgotPWVM vM)
         //{
         //    if (ModelState.IsValid)
         //    {
-        //        var user = await userManager.FindByEmailAsync(vM.Email);
-        //        if(user == null && await userManager.IsEmailConfirmedAsync(user))
+        //        var user = await _userManager.FindByEmailAsync(vM.Email);
+        //        if (user == null && await _userManager.IsEmailConfirmedAsync(user))
         //        {
-        //            var token = await userManager.GeneratePasswordResetTokenAsync(user);
+        //            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
 
         //            var PasswordResetLink = Url.Action("Reset Password", "Login", new { email = vM.Email, token = token },
         //            Request.Scheme);
@@ -50,6 +53,7 @@ namespace Quiz.Web.Controllers
         //    }
         //    return BadRequest(ModelState);
         //}
+
         [HttpGet]
         public IActionResult Index()
         {
